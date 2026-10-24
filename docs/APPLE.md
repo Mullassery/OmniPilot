@@ -113,6 +113,8 @@ target/release/omnipilot run \
 ```
 
 Add `--junit reports/ios.xml` to any task command to write a JUnit XML report.
+Completed tasks persist `traces/<task_id>/task.json`; use `omnipilot tasks` and
+`omnipilot report --task <id>` to list and render them later.
 
 The host launches `xcodebuild` with the `OmniPilotAdapter` scheme. If no
 `--device` is supplied, the default destination is

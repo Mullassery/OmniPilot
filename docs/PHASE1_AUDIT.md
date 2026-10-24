@@ -37,8 +37,8 @@
 ## Current verification status
 
 - `cargo check --workspace --all-targets`: passed.
-- `cargo test --workspace`: 24 tests passed (3 policy, 7 engine flow, 5 protocol
-  flow, 1 schema, 3 iOS adapter, 1 MCP, 4 CLI).
+- `cargo test --workspace`: 26 tests passed (3 policy, 8 engine flow, 5 protocol
+  flow, 1 schema, 3 iOS adapter, 1 MCP, 5 CLI).
 - `cargo clippy --workspace --all-targets -- -D warnings`: passed.
 - `cargo build --release --workspace`: passed.
 - `target/release/omnipilot demo`: completed and verified.
@@ -54,3 +54,5 @@
   iPhone 17e.
 - JUnit smoke: a verified mock task produced valid XML with one passing testcase;
   a failing task produced `failures="1"` and exited non-zero.
+- Report smoke: the mock task persisted `task.json`; `tasks` listed it and
+  `report` rendered Markdown, JUnit, and JSON successfully.
