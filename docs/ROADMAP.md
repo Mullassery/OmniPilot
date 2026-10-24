@@ -33,7 +33,7 @@
 - [x] Simulator boot/shutdown lifecycle (`ios-boot`, `ios-shutdown`).
 - [ ] Physical-device runner.
 - [x] MCP wiring for the iOS simulator adapter (`mcp --ios --ios-device <udid>`).
-- [ ] macOS packaging/install instructions for the CLI and MCP server.
+- [x] macOS packaging/install instructions for the CLI and MCP server (`docs/INSTALL_MACOS.md`).
 
 ## Phase 3: Android
 
@@ -45,11 +45,12 @@
 
 ## Phase 4: ergonomics and scale
 
-- [ ] MCP client examples and tool documentation.
+- [x] MCP client examples and tool documentation (`docs/MCP.md`, `examples/mcp/client.py`).
 - [ ] Natural-language planner that emits typed plans for approval.
 - [x] JUnit XML output for CLI task runs.
+- [x] Persisted task records and Markdown/JUnit/JSON report export.
 - [ ] XCTest/JUnit runner integrations and CI.
-- [ ] Evidence viewer and report export.
+- [ ] Interactive evidence viewer.
 - [ ] CI for Rust, Apple, and Android.
 - [ ] Packaged releases and signed binaries.
 
