@@ -112,6 +112,8 @@ target/release/omnipilot run \
   --assert-text 'Dark mode is On'
 ```
 
+Add `--junit reports/ios.xml` to any task command to write a JUnit XML report.
+
 The host launches `xcodebuild` with the `OmniPilotAdapter` scheme. If no
 `--device` is supplied, the default destination is
 `platform=iOS Simulator,name=iPhone 17`. Override the whole destination with

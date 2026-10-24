@@ -15,7 +15,7 @@ retry policy, budgets, assertions, and final task status.
 | `omnipilot-engine` | Policy gate, executor, verification, retries, cancellation, traces, evidence stores. |
 | `omnipilot-mock` | Deterministic in-process adapter used by tests, the demo, and protocol conformance. |
 | `omnipilot-ios` | Launches the XCUITest adapter process, connects over loopback, and implements `DeviceAdapter`. |
-| `omnipilot-cli` | `omnipilot` binary: doctor, devices, ios-devices, ios-demo, run, demo, protocol schema, mcp. |
+| `omnipilot-cli` | `omnipilot` binary: doctor, devices, iOS lifecycle, run, demo, protocol schema, mcp, JUnit reports. |
 | `omnipilot-mcp` | MCP stdio server exposing device and task tools; mock by default, optional iOS adapter. |
 
 ## Execution flow

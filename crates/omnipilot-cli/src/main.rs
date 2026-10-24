@@ -71,6 +71,13 @@ enum Command {
     Mcp(McpArgs),
 }
 
+#[derive(Debug, Args, Clone)]
+struct ReportArgs {
+    /// Write a JUnit XML report for this task.
+    #[arg(long = "junit", value_name = "PATH")]
+    junit: Option<PathBuf>,
+}
+
 #[derive(Debug, Args)]
 struct RunArgs {
     #[arg(long)]
@@ -109,6 +116,9 @@ struct RunArgs {
 
     #[command(flatten)]
     ios: IosArgs,
+
+    #[command(flatten)]
+    report: ReportArgs,
 }
 
 #[derive(Debug, Args, Clone)]
@@ -189,12 +199,18 @@ struct IosDemoArgs {
 
     #[command(flatten)]
     ios: IosArgs,
+
+    #[command(flatten)]
+    report: ReportArgs,
 }
 
 #[derive(Debug, Args)]
 struct DemoArgs {
     #[arg(long, default_value_t = 120)]
     timeout_secs: u64,
+
+    #[command(flatten)]
+    report: ReportArgs,
 }
 
 #[derive(Debug, Subcommand)]
@@ -300,7 +316,7 @@ async fn demo(args: DemoArgs, json: bool) -> Result<()> {
     let mut spec = MockAdapter::demo_task();
     spec.budgets.max_duration_ms = args.timeout_secs.saturating_mul(1000);
     let result = runtime.run_task(spec).await;
-    print_result(&result, json)?;
+    print_result(&result, json, args.report.junit.as_deref())?;
     exit_for_result(&result)
 }
 
@@ -358,7 +374,7 @@ async fn run(args: RunArgs, json: bool) -> Result<()> {
         Platform::Android => unreachable!("Android is rejected above"),
     };
 
-    print_result(&result, json)?;
+    print_result(&result, json, args.report.junit.as_deref())?;
     exit_for_result(&result)
 }
 
@@ -369,7 +385,7 @@ async fn ios_demo(args: IosDemoArgs, json: bool) -> Result<()> {
     spec.budgets.max_duration_ms = args.timeout_secs.saturating_mul(1000);
     let result = runtime.run_task(spec).await;
     let _ = adapter.shutdown().await;
-    print_result(&result, json)?;
+    print_result(&result, json, args.report.junit.as_deref())?;
     exit_for_result(&result)
 }
 
@@ -590,7 +606,10 @@ async fn ios_devices(json: bool) -> Result<()> {
     Ok(())
 }
 
-fn print_result(result: &TaskResult, json: bool) -> Result<()> {
+fn print_result(result: &TaskResult, json: bool, junit: Option<&Path>) -> Result<()> {
+    if let Some(path) = junit {
+        write_junit(path, result)?;
+    }
     if json {
         println!("{}", serde_json::to_string_pretty(result)?);
         return Ok(());
@@ -622,6 +641,121 @@ fn print_result(result: &TaskResult, json: bool) -> Result<()> {
     println!("evidence:  {} item(s)", result.evidence.len());
     println!("duration:  {} ms", result.metrics.duration_ms);
     Ok(())
+}
+
+fn write_junit(path: &Path, result: &TaskResult) -> Result<()> {
+    let xml = junit_xml(result);
+    if let Some(parent) = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+    {
+        std::fs::create_dir_all(parent)
+            .with_context(|| format!("failed to create {}", parent.display()))?;
+    }
+    std::fs::write(path, xml)
+        .with_context(|| format!("failed to write JUnit report to {}", path.display()))
+}
+
+fn junit_xml(result: &TaskResult) -> String {
+    let duration = result.metrics.duration_ms as f64 / 1000.0;
+    let failures = u32::from(!result.verified);
+    let status = result.status.to_string();
+    let mut out = String::new();
+    out.push_str("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+    out.push_str(&format!(
+        "<testsuites name=\"OmniPilot\" tests=\"1\" failures=\"{failures}\" errors=\"0\" time=\"{duration:.3}\">\n"
+    ));
+    out.push_str(&format!(
+        "  <testsuite name=\"omnipilot\" tests=\"1\" failures=\"{failures}\" errors=\"0\" time=\"{duration:.3}\" timestamp=\"{}\">\n",
+        escape_xml(&result.started_at.to_rfc3339())
+    ));
+    out.push_str(&format!(
+        "    <testcase name=\"{}\" classname=\"omnipilot.task\" time=\"{duration:.3}\">\n",
+        escape_xml(&result.goal)
+    ));
+    out.push_str("      <properties>\n");
+    out.push_str(&format!(
+        "        <property name=\"task_id\" value=\"{}\"/>\n",
+        escape_xml(&result.task_id.to_string())
+    ));
+    out.push_str(&format!(
+        "        <property name=\"status\" value=\"{}\"/>\n",
+        escape_xml(&status)
+    ));
+    out.push_str(&format!(
+        "        <property name=\"verified\" value=\"{}\"/>\n",
+        result.verified
+    ));
+    out.push_str(&format!(
+        "        <property name=\"evidence_count\" value=\"{}\"/>\n",
+        result.evidence.len()
+    ));
+    out.push_str("      </properties>\n");
+
+    if !result.verified {
+        let detail = junit_failure_detail(result);
+        out.push_str(&format!(
+            "      <failure message=\"{}\" type=\"{}\">{}</failure>\n",
+            escape_xml(&result.summary),
+            escape_xml(&status),
+            escape_xml(&detail)
+        ));
+    }
+
+    out.push_str("      <system-out>\n");
+    out.push_str(&format!("status: {}\n", escape_xml(&status)));
+    out.push_str(&format!("summary: {}\n", escape_xml(&result.summary)));
+    for step in &result.steps {
+        out.push_str(&format!(
+            "step {} {} {}: {}\n",
+            step.index + 1,
+            step.action.name(),
+            format!("{:?}", step.status).to_lowercase(),
+            escape_xml(&step.message)
+        ));
+    }
+    for assertion in &result.assertions {
+        out.push_str(&format!(
+            "assert {}: {}\n",
+            if assertion.passed { "PASS" } else { "FAIL" },
+            escape_xml(&assertion.message)
+        ));
+    }
+    for limitation in &result.limitations {
+        out.push_str(&format!("note: {}\n", escape_xml(limitation)));
+    }
+    out.push_str("      </system-out>\n");
+    out.push_str("    </testcase>\n");
+    out.push_str("  </testsuite>\n");
+    out.push_str("</testsuites>\n");
+    out
+}
+
+fn junit_failure_detail(result: &TaskResult) -> String {
+    let mut lines: Vec<String> = result
+        .assertions
+        .iter()
+        .filter(|assertion| !assertion.passed)
+        .map(|assertion| assertion.message.clone())
+        .collect();
+    lines.extend(result.limitations.iter().cloned());
+    if let Some(error) = &result.error {
+        lines.push(error.message.clone());
+    }
+    if lines.is_empty() {
+        result.summary.clone()
+    } else {
+        lines.join("\n")
+    }
+}
+
+fn escape_xml(value: &str) -> String {
+    value
+        .replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
+        .replace('\'', "&apos;")
 }
 
 fn exit_for_result(result: &TaskResult) -> Result<()> {
@@ -852,5 +986,37 @@ mod tests {
         assert_eq!(simulator_status("Booted"), "ready");
         assert_eq!(simulator_status("Shutdown"), "shutdown");
         assert_eq!(simulator_status("Booting"), "unavailable");
+    }
+
+    #[test]
+    fn escapes_xml_special_characters() {
+        assert_eq!(
+            escape_xml("<a & \"b\">'"),
+            "&lt;a &amp; &quot;b&quot;&gt;&apos;"
+        );
+    }
+
+    #[tokio::test]
+    async fn junit_report_marks_verified_mock_task_as_passing() {
+        let runtime = mock_runtime();
+        let result = runtime.run_task(MockAdapter::demo_task()).await;
+        let xml = junit_xml(&result);
+        assert!(xml.contains("failures=\"0\""));
+        assert!(xml.contains("<testcase"));
+        assert!(!xml.contains("<failure"));
+    }
+
+    #[tokio::test]
+    async fn junit_report_includes_failed_assertion() {
+        let runtime = mock_runtime();
+        let mut spec = MockAdapter::demo_task();
+        spec.success_criteria = vec![Assertion::TextPresent {
+            text: "not on screen".to_string(),
+        }];
+        let result = runtime.run_task(spec).await;
+        let xml = junit_xml(&result);
+        assert!(xml.contains("failures=\"1\""));
+        assert!(xml.contains("<failure"));
+        assert!(xml.contains("not present"));
     }
 }

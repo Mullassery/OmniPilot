@@ -305,12 +305,36 @@ target/release/omnipilot ios-devices
 target/release/omnipilot ios-boot --device <simulator-udid>
 target/release/omnipilot ios-shutdown --device <simulator-udid>
 target/release/omnipilot ios-demo
+
+# JUnit XML for CI
+target/release/omnipilot demo --junit reports/demo.xml
 ```
 
 Requirements: Rust 1.90+ and macOS for the Apple tooling. Xcode 26+ is required
 for the iOS demo, UI tests, and XCUITest adapter. The host falls back to
 `/Applications/Xcode.app/Contents/Developer` when `xcode-select` points at
 Command Line Tools.
+
+## JUnit reports
+
+Task-running commands accept `--junit <path>`:
+
+```bash
+target/release/omnipilot demo --junit reports/demo.xml
+target/release/omnipilot run --platform ios \
+  --device <simulator-udid> \
+  --goal 'Open Settings and enable dark mode' \
+  --app com.omnipilot.demo \
+  --step '{"type":"launch_app","app_id":"com.omnipilot.demo"}' \
+  --step '{"type":"tap","target":{"kind":"element","selector":{"kind":"identifier","value":"home.settings"}}}' \
+  --step '{"type":"tap","target":{"kind":"element","selector":{"kind":"identifier","value":"settings.dark_mode"}}}' \
+  --assert-text 'Dark mode is On' \
+  --junit reports/ios.xml
+```
+
+The report contains one testcase per task. A task that is not completed and
+verified is recorded as a failure, and the CLI still exits non-zero so CI catches
+it. Missing parent directories are created automatically.
 
 ## MCP
 
@@ -428,6 +452,7 @@ traces/                    Runtime evidence and event logs (gitignored)
 - [x] End-to-end iOS task with fresh observation and evidence.
 - [x] MCP wiring for the iOS simulator adapter.
 - [x] Simulator boot/shutdown lifecycle (`ios-boot`, `ios-shutdown`).
+- [x] JUnit XML report output for CLI tasks.
 - [ ] Physical-device runner.
 - [ ] Android UI Automator adapter.
 - [ ] Natural-language planner with reviewable plans.
