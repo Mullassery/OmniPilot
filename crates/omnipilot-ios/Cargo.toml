@@ -1,0 +1,17 @@
+[package]
+name = "omnipilot-ios"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "XCUITest-backed iOS adapter for OmniPilot"
+
+[dependencies]
+async-trait.workspace = true
+omnipilot-core = { path = "../omnipilot-core" }
+omnipilot-protocol = { path = "../omnipilot-protocol" }
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+uuid.workspace = true

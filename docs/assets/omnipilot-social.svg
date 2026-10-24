@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="OmniPilot — AI agents can tap. OmniPilot can prove it worked.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080D1A"/>
+      <stop offset="0.55" stop-color="#101A33"/>
+      <stop offset="1" stop-color="#0A1226"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="0.5" stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.15" r="0.8">
+      <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity="0.04"/>
+    </pattern>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <circle cx="160" cy="80" r="360" fill="url(#glow)"/>
+  <circle cx="1140" cy="590" r="250" fill="#60A5FA" opacity="0.09" filter="url(#blur)"/>
+
+  <g font-family="'SF Pro Text','Segoe UI',system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" letter-spacing="2.4">
+    <rect x="96" y="74" width="170" height="38" rx="19" fill="#5EEAD4" fill-opacity="0.1" stroke="#5EEAD4" stroke-opacity="0.3"/>
+    <text x="181" y="98" text-anchor="middle" fill="#99F6E4">OPEN SOURCE / ALPHA</text>
+  </g>
+
+  <g transform="translate(96 190)">
+    <rect width="176" height="176" rx="44" fill="#0D1730" stroke="url(#accent)" stroke-width="3"/>
+    <circle cx="88" cy="88" r="50" fill="none" stroke="url(#accent)" stroke-width="3"/>
+    <circle cx="88" cy="88" r="15" fill="#5EEAD4"/>
+    <path d="M88 18V50M88 126V158M18 88H50M126 88H158" stroke="#60A5FA" stroke-width="3" stroke-linecap="round"/>
+    <path d="M123 53L140 36" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="145" cy="31" r="8" fill="#A78BFA"/>
+  </g>
+
+  <text x="318" y="274" fill="#F8FAFC" font-family="'SF Pro Display','Segoe UI',system-ui,-apple-system,sans-serif" font-size="98" font-weight="700" letter-spacing="-3">OmniPilot</text>
+
+  <text x="322" y="344" fill="#E2E8F0" font-family="'SF Pro Display','Segoe UI',system-ui,-apple-system,sans-serif" font-size="34" font-weight="600">AI agents can tap. OmniPilot can prove it worked.</text>
+
+  <text x="322" y="392" fill="#94A3B8" font-family="'SF Pro Text','Segoe UI',system-ui,-apple-system,sans-serif" font-size="23" font-weight="400">Verification-first mobile automation for iOS and Android.</text>
+
+  <g font-family="'SF Pro Text','Segoe UI',system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" letter-spacing="1.4">
+    <rect x="322" y="432" width="100" height="36" rx="18" fill="#5EEAD4" fill-opacity="0.1" stroke="#5EEAD4" stroke-opacity="0.3"/>
+    <text x="372" y="455" text-anchor="middle" fill="#99F6E4">RUST</text>
+    <rect x="434" y="432" width="142" height="36" rx="18" fill="#60A5FA" fill-opacity="0.1" stroke="#60A5FA" stroke-opacity="0.3"/>
+    <text x="505" y="455" text-anchor="middle" fill="#BFDBFE">MCP-NATIVE</text>
+    <rect x="588" y="432" width="130" height="36" rx="18" fill="#A78BFA" fill-opacity="0.1" stroke="#A78BFA" stroke-opacity="0.3"/>
+    <text x="653" y="455" text-anchor="middle" fill="#DDD6FE">XCUITEST</text>
+    <rect x="730" y="432" width="148" height="36" rx="18" fill="#F8FAFC" fill-opacity="0.07" stroke="#F8FAFC" stroke-opacity="0.2"/>
+    <text x="804" y="455" text-anchor="middle" fill="#E2E8F0">LOCAL-FIRST</text>
+  </g>
+
+  <line x1="96" y1="548" x2="1184" y2="548" stroke="#FFFFFF" stroke-opacity="0.1"/>
+  <text x="96" y="590" fill="#94A3B8" font-family="'SF Mono','Cascadia Code',monospace" font-size="17">github.com/Mullassery/OmniPilot</text>
+  <text x="1184" y="590" text-anchor="end" fill="#5EEAD4" font-family="'SF Mono','Cascadia Code',monospace" font-size="17">verified: true</text>
+</svg>

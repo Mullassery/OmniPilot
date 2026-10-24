@@ -84,7 +84,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Artemis Runtime & Telemetry
+# Rust
+target/
+
+# OmniPilot Runtime & Telemetry
 traces/
 scratch/
 .artemis_paused

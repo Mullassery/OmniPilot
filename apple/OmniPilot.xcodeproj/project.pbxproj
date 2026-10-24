@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2DE01BF067524CD9A5E4E38D /* OmniPilotDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBCD2D5622B7251B8C28AAC /* OmniPilotDemoApp.swift */; };
+		32AE1A4ED9B3357BC28D9CCE /* DemoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5777BD460393C2B2D619409 /* DemoRootView.swift */; };
+		43226BB9E3CFA6423AFF096F /* OmniPilotAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F662B7E003A2F37F787E97 /* OmniPilotAdapterTests.swift */; };
+		574CBBD80BC3B3665EE2F2EC /* AdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DCFF8E2984D65265A58018 /* AdapterProtocol.swift */; };
+		82C17FB111F9BB45E15EB650 /* AdapterDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6C6920070A7F8B83729EE /* AdapterDevice.swift */; };
+		BE58A992D31BA71F8295D75B /* AdapterServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47FA713B8AEAE86BCC4F119 /* AdapterServer.swift */; };
+		F3BE84C4072042E7597DC629 /* OmniPilotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1199D551E2B65FE591EC8F9 /* OmniPilotUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1D0EBA9C5E0CCE29E5AB369F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D492BADB9031806024C12112 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7BFD44C6673B5EB50FFC369;
+			remoteInfo = OmniPilotDemo;
+		};
+		29B3A8A0BDD179C095E1C208 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D492BADB9031806024C12112 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7BFD44C6673B5EB50FFC369;
+			remoteInfo = OmniPilotDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		020D7C5FCBFB07A7C672201F /* OmniPilotDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OmniPilotDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AD272C467A0A92001980891 /* OmniPilotAdapterTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = OmniPilotAdapterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27DCFF8E2984D65265A58018 /* AdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterProtocol.swift; sourceTree = "<group>"; };
+		3410DCCE32768675916E4E27 /* OmniPilotUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = OmniPilotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F662B7E003A2F37F787E97 /* OmniPilotAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniPilotAdapterTests.swift; sourceTree = "<group>"; };
+		BEF6C6920070A7F8B83729EE /* AdapterDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDevice.swift; sourceTree = "<group>"; };
+		C5777BD460393C2B2D619409 /* DemoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRootView.swift; sourceTree = "<group>"; };
+		D47FA713B8AEAE86BCC4F119 /* AdapterServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterServer.swift; sourceTree = "<group>"; };
+		DCBCD2D5622B7251B8C28AAC /* OmniPilotDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniPilotDemoApp.swift; sourceTree = "<group>"; };
+		E1199D551E2B65FE591EC8F9 /* OmniPilotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniPilotUITests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		044D7D1D92E9A9CFCC00496B = {
+			isa = PBXGroup;
+			children = (
+				181D89106FA5AD204E9DDBAA /* OmniPilotAdapterTests */,
+				63C94F4945A313D7BFA181EB /* OmniPilotDemo */,
+				22259D7A03124FC633D4D866 /* OmniPilotUITests */,
+				10DD2019634F9A32FCF3042C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		10DD2019634F9A32FCF3042C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0AD272C467A0A92001980891 /* OmniPilotAdapterTests.xctest */,
+				020D7C5FCBFB07A7C672201F /* OmniPilotDemo.app */,
+				3410DCCE32768675916E4E27 /* OmniPilotUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		181D89106FA5AD204E9DDBAA /* OmniPilotAdapterTests */ = {
+			isa = PBXGroup;
+			children = (
+				BEF6C6920070A7F8B83729EE /* AdapterDevice.swift */,
+				27DCFF8E2984D65265A58018 /* AdapterProtocol.swift */,
+				D47FA713B8AEAE86BCC4F119 /* AdapterServer.swift */,
+				77F662B7E003A2F37F787E97 /* OmniPilotAdapterTests.swift */,
+			);
+			path = OmniPilotAdapterTests;
+			sourceTree = "<group>";
+		};
+		22259D7A03124FC633D4D866 /* OmniPilotUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E1199D551E2B65FE591EC8F9 /* OmniPilotUITests.swift */,
+			);
+			path = OmniPilotUITests;
+			sourceTree = "<group>";
+		};
+		63C94F4945A313D7BFA181EB /* OmniPilotDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C5777BD460393C2B2D619409 /* DemoRootView.swift */,
+				DCBCD2D5622B7251B8C28AAC /* OmniPilotDemoApp.swift */,
+			);
+			path = OmniPilotDemo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F3D08244F0CC7A751215437 /* OmniPilotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB55FB39BA97A7C556274608 /* Build configuration list for PBXNativeTarget "OmniPilotUITests" */;
+			buildPhases = (
+				B9B111279F47D022E5F64493 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				690D8037045744782893A679 /* PBXTargetDependency */,
+			);
+			name = OmniPilotUITests;
+			packageProductDependencies = (
+			);
+			productName = OmniPilotUITests;
+			productReference = 3410DCCE32768675916E4E27 /* OmniPilotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		90400EDDB4868B298F970841 /* OmniPilotAdapterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D4570CF3EC3C356207CA85C /* Build configuration list for PBXNativeTarget "OmniPilotAdapterTests" */;
+			buildPhases = (
+				D60BEECB0F2AE6149688F1CB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23393CB39516FD1C3950417C /* PBXTargetDependency */,
+			);
+			name = OmniPilotAdapterTests;
+			packageProductDependencies = (
+			);
+			productName = OmniPilotAdapterTests;
+			productReference = 0AD272C467A0A92001980891 /* OmniPilotAdapterTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		B7BFD44C6673B5EB50FFC369 /* OmniPilotDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13A1C9FED97830F1CC65FCBC /* Build configuration list for PBXNativeTarget "OmniPilotDemo" */;
+			buildPhases = (
+				FA3507B5EF7E672DCF21DF0C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OmniPilotDemo;
+			packageProductDependencies = (
+			);
+			productName = OmniPilotDemo;
+			productReference = 020D7C5FCBFB07A7C672201F /* OmniPilotDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D492BADB9031806024C12112 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1F3D08244F0CC7A751215437 = {
+						TestTargetID = B7BFD44C6673B5EB50FFC369;
+					};
+					90400EDDB4868B298F970841 = {
+						TestTargetID = B7BFD44C6673B5EB50FFC369;
+					};
+				};
+			};
+			buildConfigurationList = 10AFFFD431499CAFD3E65DBD /* Build configuration list for PBXProject "OmniPilot" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 044D7D1D92E9A9CFCC00496B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 10DD2019634F9A32FCF3042C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B7BFD44C6673B5EB50FFC369 /* OmniPilotDemo */,
+				1F3D08244F0CC7A751215437 /* OmniPilotUITests */,
+				90400EDDB4868B298F970841 /* OmniPilotAdapterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B9B111279F47D022E5F64493 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3BE84C4072042E7597DC629 /* OmniPilotUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D60BEECB0F2AE6149688F1CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82C17FB111F9BB45E15EB650 /* AdapterDevice.swift in Sources */,
+				574CBBD80BC3B3665EE2F2EC /* AdapterProtocol.swift in Sources */,
+				BE58A992D31BA71F8295D75B /* AdapterServer.swift in Sources */,
+				43226BB9E3CFA6423AFF096F /* OmniPilotAdapterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA3507B5EF7E672DCF21DF0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32AE1A4ED9B3357BC28D9CCE /* DemoRootView.swift in Sources */,
+				2DE01BF067524CD9A5E4E38D /* OmniPilotDemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23393CB39516FD1C3950417C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7BFD44C6673B5EB50FFC369 /* OmniPilotDemo */;
+			targetProxy = 29B3A8A0BDD179C095E1C208 /* PBXContainerItemProxy */;
+		};
+		690D8037045744782893A679 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7BFD44C6673B5EB50FFC369 /* OmniPilotDemo */;
+			targetProxy = 1D0EBA9C5E0CCE29E5AB369F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3F05480CBA2A02D9955095B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OmniPilotDemo;
+			};
+			name = Release;
+		};
+		51F1D117B0C8697B36012604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo;
+				PRODUCT_NAME = OmniPilotDemo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		635CD4841DCA0F9696978D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OmniPilotDemo;
+			};
+			name = Debug;
+		};
+		77BFA00FD85037B1CF94EE7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo.adaptertests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OmniPilotDemo;
+			};
+			name = Debug;
+		};
+		D00FDB42D20C2E93215EF7C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo;
+				PRODUCT_NAME = OmniPilotDemo;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D9630565AC29FE91400B75FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E77CC12713419FD8C06476BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.omnipilot.demo.adaptertests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OmniPilotDemo;
+			};
+			name = Release;
+		};
+		FCB5A7449D1C5A5A951C97E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		10AFFFD431499CAFD3E65DBD /* Build configuration list for PBXProject "OmniPilot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCB5A7449D1C5A5A951C97E8 /* Debug */,
+				D9630565AC29FE91400B75FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		13A1C9FED97830F1CC65FCBC /* Build configuration list for PBXNativeTarget "OmniPilotDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51F1D117B0C8697B36012604 /* Debug */,
+				D00FDB42D20C2E93215EF7C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6D4570CF3EC3C356207CA85C /* Build configuration list for PBXNativeTarget "OmniPilotAdapterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77BFA00FD85037B1CF94EE7A /* Debug */,
+				E77CC12713419FD8C06476BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CB55FB39BA97A7C556274608 /* Build configuration list for PBXNativeTarget "OmniPilotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				635CD4841DCA0F9696978D22 /* Debug */,
+				3F05480CBA2A02D9955095B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D492BADB9031806024C12112 /* Project object */;
+}

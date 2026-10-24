@@ -1,0 +1,21 @@
+[package]
+name = "omnipilot-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Task execution, policy, verification, evidence, and traces for OmniPilot"
+
+[dependencies]
+base64.workspace = true
+chrono.workspace = true
+hex.workspace = true
+omnipilot-core = { path = "../omnipilot-core" }
+omnipilot-protocol = { path = "../omnipilot-protocol" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+tracing.workspace = true
+uuid.workspace = true

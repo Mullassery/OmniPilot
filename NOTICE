@@ -1,0 +1,21 @@
+OmniPilot
+Copyright 2026 OmniPilot contributors
+
+This product includes software derived from Google ARTEMIS:
+  https://github.com/google/artemis
+  Copyright 2026 Google LLC
+  Licensed under the Apache License, Version 2.0.
+
+This product includes software and architectural methodologies developed by
+Minitap, Inc.:
+  https://github.com/minitap-ai/mobile-use
+  Copyright 2025-2026 Minitap, Inc.
+
+The upstream ARTEMIS README files are preserved under docs/upstream/ for
+provenance. See docs/UPSTREAM.md for the upstream commit and scope of the
+derivation.
+
+OmniPilot is an independent project and is not endorsed by Google LLC or
+Minitap, Inc.
+
+This NOTICE is a legal and provenance record. It is not product branding.

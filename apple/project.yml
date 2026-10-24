@@ -1,0 +1,63 @@
+name: OmniPilot
+options:
+  bundleIdPrefix: com.omnipilot
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  OmniPilotDemo:
+    type: application
+    platform: iOS
+    sources:
+      - path: OmniPilotDemo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.omnipilot.demo
+        PRODUCT_NAME: OmniPilotDemo
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+    scheme:
+      testTargets:
+        - OmniPilotUITests
+      gatherCoverageData: false
+  OmniPilotUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: OmniPilotUITests
+    dependencies:
+      - target: OmniPilotDemo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.omnipilot.demo.uitests
+        TEST_TARGET_NAME: OmniPilotDemo
+        GENERATE_INFOPLIST_FILE: YES
+  OmniPilotAdapterTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: OmniPilotAdapterTests
+    dependencies:
+      - target: OmniPilotDemo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.omnipilot.demo.adaptertests
+        TEST_TARGET_NAME: OmniPilotDemo
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  OmniPilotAdapter:
+    build:
+      targets:
+        OmniPilotDemo: all
+        OmniPilotAdapterTests: [test]
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - OmniPilotAdapterTests
