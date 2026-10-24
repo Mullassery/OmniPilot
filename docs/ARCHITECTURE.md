@@ -15,7 +15,7 @@ retry policy, budgets, assertions, and final task status.
 | `omnipilot-engine` | Policy gate, executor, verification, retries, cancellation, traces, evidence stores. |
 | `omnipilot-mock` | Deterministic in-process adapter used by tests, the demo, and protocol conformance. |
 | `omnipilot-ios` | Launches the XCUITest adapter process, connects over loopback, and implements `DeviceAdapter`. |
-| `omnipilot-cli` | `omnipilot` binary: doctor, devices, iOS lifecycle, run, demo, tasks, report, protocol schema, mcp. |
+| `omnipilot-cli` | `omnipilot` binary: doctor, devices, iOS lifecycle, run, demo, protocol schema, mcp, JUnit reports. |
 | `omnipilot-mcp` | MCP stdio server exposing device and task tools; mock by default, optional iOS adapter. |
 
 ## Execution flow
@@ -29,7 +29,7 @@ retry policy, budgets, assertions, and final task status.
    - Retry retryable failures within the step and task budgets.
 4. Capture a fresh final observation after the last step.
 5. Evaluate every success criterion against that final observation.
-6. Persist evidence, task record, and events.
+6. Persist evidence and events.
 7. Return `Completed`, `Failed`, `Blocked`, `Cancelled`, or `TimedOut`.
 
 A task is `verified` only when at least one success criterion exists, every

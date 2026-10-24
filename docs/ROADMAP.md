@@ -48,9 +48,8 @@
 - [ ] MCP client examples and tool documentation.
 - [ ] Natural-language planner that emits typed plans for approval.
 - [x] JUnit XML output for CLI task runs.
-- [x] Persisted task records and Markdown/JUnit/JSON report export.
 - [ ] XCTest/JUnit runner integrations and CI.
-- [ ] Interactive evidence viewer.
+- [ ] Evidence viewer and report export.
 - [ ] CI for Rust, Apple, and Android.
 - [ ] Packaged releases and signed binaries.
 

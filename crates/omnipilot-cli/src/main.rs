@@ -13,12 +13,12 @@
 // limitations under the License.
 
 use anyhow::{bail, Context, Result};
-use clap::{Args, Parser, Subcommand, ValueEnum};
+use clap::{Args, Parser, Subcommand};
 use omnipilot_core::{
-    Action, Assertion, DeviceId, Platform, RiskLevel, Selector, Target, TaskId, TaskResult,
-    TaskSpec, TaskStatus, PROTOCOL_VERSION,
+    Action, Assertion, DeviceId, Platform, RiskLevel, Selector, Target, TaskResult, TaskSpec,
+    TaskStatus, PROTOCOL_VERSION,
 };
-use omnipilot_engine::{Policy, Runtime, RuntimeConfig, TaskRecord};
+use omnipilot_engine::{Policy, Runtime, RuntimeConfig};
 use omnipilot_ios::{IosAdapter, IosAdapterConfig};
 use omnipilot_mock::{MockAdapter, DEMO_APP, DEMO_DEVICE_ID};
 use omnipilot_protocol::{protocol_schema, DeviceAdapter};
@@ -62,10 +62,6 @@ enum Command {
     Run(RunArgs),
     /// Run the built-in mock scenario through the real engine.
     Demo(DemoArgs),
-    /// List persisted task records under the evidence root.
-    Tasks(TasksArgs),
-    /// Render a persisted task record.
-    Report(TaskReportArgs),
     /// Inspect the protocol and task schemas.
     Protocol {
         #[command(subcommand)]
@@ -217,35 +213,6 @@ struct DemoArgs {
     report: ReportArgs,
 }
 
-#[derive(Debug, Args)]
-struct TasksArgs {
-    /// Maximum number of records to list.
-    #[arg(long, default_value_t = 20)]
-    limit: usize,
-}
-
-#[derive(Debug, Args)]
-struct TaskReportArgs {
-    /// Task ID from `omnipilot tasks`.
-    #[arg(long)]
-    task: String,
-
-    /// Report format.
-    #[arg(long, value_enum, default_value_t = TaskReportFormat::Markdown)]
-    format: TaskReportFormat,
-
-    /// Write the report to a file instead of stdout.
-    #[arg(long)]
-    output: Option<PathBuf>,
-}
-
-#[derive(Debug, Clone, Copy, ValueEnum)]
-enum TaskReportFormat {
-    Markdown,
-    Junit,
-    Json,
-}
-
 #[derive(Debug, Subcommand)]
 enum ProtocolCommand {
     /// Print the versioned JSON Schema bundle.
@@ -287,8 +254,6 @@ async fn main() -> Result<()> {
         Command::IosDemo(args) => ios_demo(args, cli.json).await,
         Command::Run(args) => run(args, cli.json).await,
         Command::Demo(args) => demo(args, cli.json).await,
-        Command::Tasks(args) => tasks(args, cli.json),
-        Command::Report(args) => report(args, cli.json),
         Command::Protocol { command } => match command {
             ProtocolCommand::Schema => protocol_schema_command(cli.json),
         },
@@ -302,15 +267,12 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-fn evidence_root() -> PathBuf {
-    std::env::var("OMNIPILOT_TRACES")
-        .map(PathBuf::from)
-        .unwrap_or_else(|_| PathBuf::from("traces"))
-}
-
 fn runtime_config() -> RuntimeConfig {
+    let evidence_root = std::env::var("OMNIPILOT_TRACES")
+        .map(PathBuf::from)
+        .unwrap_or_else(|_| PathBuf::from("traces"));
     RuntimeConfig {
-        evidence_root: evidence_root(),
+        evidence_root,
         policy: Policy::default(),
     }
 }
@@ -642,256 +604,6 @@ async fn ios_devices(json: bool) -> Result<()> {
         }
     }
     Ok(())
-}
-
-#[derive(Debug, Serialize)]
-struct TaskRow {
-    task_id: String,
-    status: TaskStatus,
-    verified: bool,
-    goal: String,
-    updated_at: String,
-    evidence_count: usize,
-}
-
-impl From<&TaskRecord> for TaskRow {
-    fn from(record: &TaskRecord) -> Self {
-        Self {
-            task_id: record.task_id.to_string(),
-            status: record.status,
-            verified: record
-                .result
-                .as_ref()
-                .map(|result| result.verified)
-                .unwrap_or(false),
-            goal: record.spec.goal.clone(),
-            updated_at: record.updated_at.to_rfc3339(),
-            evidence_count: record
-                .result
-                .as_ref()
-                .map(|result| result.evidence.len())
-                .unwrap_or(0),
-        }
-    }
-}
-
-fn load_task_records() -> Result<Vec<TaskRecord>> {
-    let root = evidence_root();
-    let entries = match std::fs::read_dir(&root) {
-        Ok(entries) => entries,
-        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(Vec::new()),
-        Err(error) => {
-            return Err(error).with_context(|| format!("failed to read {}", root.display()));
-        }
-    };
-
-    let mut records = Vec::new();
-    for entry in entries {
-        let entry = entry.with_context(|| format!("failed to read {}", root.display()))?;
-        let path = entry.path().join("task.json");
-        if !path.is_file() {
-            continue;
-        }
-        let bytes = match std::fs::read(&path) {
-            Ok(bytes) => bytes,
-            Err(error) => {
-                eprintln!("warning: skipping {}: {error}", path.display());
-                continue;
-            }
-        };
-        match serde_json::from_slice::<TaskRecord>(&bytes) {
-            Ok(record) => records.push(record),
-            Err(error) => eprintln!("warning: skipping {}: {error}", path.display()),
-        }
-    }
-    records.sort_by_key(|record| std::cmp::Reverse(record.updated_at));
-    Ok(records)
-}
-
-fn load_task_record(raw: &str) -> Result<TaskRecord> {
-    let task_id: TaskId = raw
-        .parse()
-        .with_context(|| format!("invalid task id: {raw}"))?;
-    let path = evidence_root().join(task_id.to_string()).join("task.json");
-    let bytes = std::fs::read(&path)
-        .with_context(|| format!("task {task_id} was not found at {}", path.display()))?;
-    serde_json::from_slice(&bytes)
-        .with_context(|| format!("invalid task record at {}", path.display()))
-}
-
-fn tasks(args: TasksArgs, json: bool) -> Result<()> {
-    let mut records = load_task_records()?;
-    records.truncate(args.limit.max(1));
-
-    if json {
-        let rows: Vec<TaskRow> = records.iter().map(TaskRow::from).collect();
-        println!("{}", serde_json::to_string_pretty(&rows)?);
-    } else {
-        for record in records {
-            let row = TaskRow::from(&record);
-            println!(
-                "{}\t{}\tverified={}\t{}\t{}",
-                row.task_id, row.status, row.verified, row.evidence_count, row.goal
-            );
-        }
-    }
-    Ok(())
-}
-
-fn report(args: TaskReportArgs, json: bool) -> Result<()> {
-    let record = load_task_record(&args.task)?;
-    let format = if json {
-        TaskReportFormat::Json
-    } else {
-        args.format
-    };
-    let content = match format {
-        TaskReportFormat::Json => format!("{}\n", serde_json::to_string_pretty(&record)?),
-        TaskReportFormat::Junit => {
-            let result = record
-                .result
-                .as_ref()
-                .ok_or_else(|| anyhow::anyhow!("task {} has no result yet", record.task_id))?;
-            junit_xml(result)
-        }
-        TaskReportFormat::Markdown => markdown_report(&record)?,
-    };
-    write_report(args.output.as_deref(), &content)
-}
-
-fn write_report(output: Option<&Path>, content: &str) -> Result<()> {
-    if let Some(path) = output {
-        if let Some(parent) = path
-            .parent()
-            .filter(|parent| !parent.as_os_str().is_empty())
-        {
-            std::fs::create_dir_all(parent)
-                .with_context(|| format!("failed to create {}", parent.display()))?;
-        }
-        std::fs::write(path, content)
-            .with_context(|| format!("failed to write report to {}", path.display()))?;
-    } else {
-        print!("{content}");
-        if !content.ends_with('\n') {
-            println!();
-        }
-    }
-    Ok(())
-}
-
-fn markdown_report(record: &TaskRecord) -> Result<String> {
-    let mut out = String::new();
-    out.push_str("# OmniPilot task report\n\n");
-    out.push_str(&format!("- **Task:** `{}`\n", record.task_id));
-    out.push_str(&format!("- **Status:** `{}`\n", record.status));
-    out.push_str(&format!(
-        "- **Platform:** `{}`\n",
-        record.spec.platform.as_str()
-    ));
-    out.push_str(&format!(
-        "- **Device:** `{}`\n",
-        record
-            .spec
-            .device_id
-            .as_ref()
-            .map(|device| device.to_string())
-            .unwrap_or_else(|| "default".to_string())
-    ));
-    out.push_str(&format!(
-        "- **Created:** {}\n",
-        record.created_at.to_rfc3339()
-    ));
-    out.push_str(&format!(
-        "- **Updated:** {}\n",
-        record.updated_at.to_rfc3339()
-    ));
-    if let Some(trace_uri) = &record.trace_uri {
-        out.push_str(&format!("- **Trace:** `{trace_uri}`\n"));
-    }
-    out.push_str("\n## Goal\n\n");
-    out.push_str(&record.spec.goal);
-    out.push_str("\n\n");
-
-    let Some(result) = &record.result else {
-        out.push_str("No result was recorded for this task.\n");
-        return Ok(out);
-    };
-
-    out.push_str("## Summary\n\n");
-    out.push_str(&format!("- **Verified:** {}\n", result.verified));
-    out.push_str(&format!(
-        "- **Evidence:** {} item(s)\n",
-        result.evidence.len()
-    ));
-    out.push_str(&format!(
-        "- **Duration:** {} ms\n",
-        result.metrics.duration_ms
-    ));
-    out.push_str(&format!("\n{}\n\n", result.summary));
-
-    if !result.steps.is_empty() {
-        out.push_str("## Steps\n\n");
-        out.push_str("| # | Action | Status | Message |\n");
-        out.push_str("| --- | --- | --- | --- |\n");
-        for step in &result.steps {
-            out.push_str(&format!(
-                "| {} | `{}` | {} | {} |\n",
-                step.index + 1,
-                step.action.name(),
-                format!("{:?}", step.status).to_lowercase(),
-                markdown_cell(&step.message)
-            ));
-        }
-        out.push('\n');
-    }
-
-    if !result.assertions.is_empty() {
-        out.push_str("## Assertions\n\n");
-        out.push_str("| Result | Message |\n");
-        out.push_str("| --- | --- |\n");
-        for assertion in &result.assertions {
-            out.push_str(&format!(
-                "| {} | {} |\n",
-                if assertion.passed { "PASS" } else { "FAIL" },
-                markdown_cell(&assertion.message)
-            ));
-        }
-        out.push('\n');
-    }
-
-    if !result.evidence.is_empty() {
-        out.push_str("## Evidence\n\n");
-        out.push_str("| Kind | URI | Bytes |\n");
-        out.push_str("| --- | --- | --- |\n");
-        for evidence in &result.evidence {
-            out.push_str(&format!(
-                "| {} | `{}` | {} |\n",
-                format!("{:?}", evidence.kind).to_lowercase(),
-                markdown_cell(&evidence.uri),
-                evidence.bytes
-            ));
-        }
-        out.push('\n');
-    }
-
-    if !result.limitations.is_empty() {
-        out.push_str("## Limitations\n\n");
-        for limitation in &result.limitations {
-            out.push_str(&format!("- {limitation}\n"));
-        }
-        out.push('\n');
-    }
-
-    if let Some(error) = &result.error {
-        out.push_str("## Error\n\n");
-        out.push_str(&format!("`{}`: {}\n", error.code.as_str(), error.message));
-    }
-
-    Ok(out)
-}
-
-fn markdown_cell(value: &str) -> String {
-    value.replace('|', "\\|").replace('\n', " ")
 }
 
 fn print_result(result: &TaskResult, json: bool, junit: Option<&Path>) -> Result<()> {
@@ -1292,26 +1004,6 @@ mod tests {
         assert!(xml.contains("failures=\"0\""));
         assert!(xml.contains("<testcase"));
         assert!(!xml.contains("<failure"));
-    }
-
-    #[tokio::test]
-    async fn markdown_report_includes_steps_and_evidence() {
-        let root = std::env::temp_dir().join(format!("omnipilot-report-{}", TaskId::new()));
-        let runtime = Runtime::new(
-            vec![Arc::new(MockAdapter::new())],
-            RuntimeConfig {
-                evidence_root: root.clone(),
-                policy: Policy::default(),
-            },
-        );
-        let result = runtime.run_task(MockAdapter::demo_task()).await;
-        let record = runtime.task(&result.task_id).expect("task record");
-        let report = markdown_report(&record).expect("markdown report");
-        assert!(report.contains("# OmniPilot task report"));
-        assert!(report.contains("**Verified:** true"));
-        assert!(report.contains("## Steps"));
-        assert!(report.contains("## Evidence"));
-        std::fs::remove_dir_all(&root).expect("temporary report directory was removed");
     }
 
     #[tokio::test]

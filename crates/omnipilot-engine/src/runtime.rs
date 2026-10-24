@@ -302,55 +302,29 @@ impl Runtime {
     }
 
     fn insert_record(&self, record: TaskRecord) {
-        self.persist_record(&record);
         if let Ok(mut tasks) = self.tasks.lock() {
             tasks.insert(record.task_id, record);
         }
     }
 
     fn set_record_status(&self, task_id: TaskId, status: TaskStatus) {
-        let record = self.tasks.lock().ok().and_then(|mut tasks| {
-            let record = tasks.get_mut(&task_id)?;
-            record.status = status;
-            record.updated_at = Utc::now();
-            Some(record.clone())
-        });
-        if let Some(record) = record {
-            self.persist_record(&record);
+        if let Ok(mut tasks) = self.tasks.lock() {
+            if let Some(record) = tasks.get_mut(&task_id) {
+                record.status = status;
+                record.updated_at = Utc::now();
+            }
         }
     }
 
     fn update_record(&self, result: &TaskResult, trace_uri: Option<String>) {
-        let record = self.tasks.lock().ok().and_then(|mut tasks| {
-            let record = tasks.get_mut(&result.task_id)?;
-            record.status = result.status;
-            record.result = Some(result.clone());
-            record.updated_at = Utc::now();
-            if trace_uri.is_some() {
-                record.trace_uri = trace_uri;
-            }
-            Some(record.clone())
-        });
-        if let Some(record) = record {
-            self.persist_record(&record);
-        }
-    }
-
-    fn persist_record(&self, record: &TaskRecord) {
-        let task_dir = self.task_dir(&record.task_id);
-        if let Err(error) = std::fs::create_dir_all(&task_dir) {
-            tracing::warn!(%error, task_id = %record.task_id, "could not create task directory");
-            return;
-        }
-        let path = task_dir.join("task.json");
-        match serde_json::to_vec_pretty(record) {
-            Ok(bytes) => {
-                if let Err(error) = std::fs::write(&path, bytes) {
-                    tracing::warn!(%error, path = %path.display(), "could not persist task record");
+        if let Ok(mut tasks) = self.tasks.lock() {
+            if let Some(record) = tasks.get_mut(&result.task_id) {
+                record.status = result.status;
+                record.result = Some(result.clone());
+                record.updated_at = Utc::now();
+                if trace_uri.is_some() {
+                    record.trace_uri = trace_uri;
                 }
-            }
-            Err(error) => {
-                tracing::warn!(%error, task_id = %record.task_id, "could not serialize task record");
             }
         }
     }

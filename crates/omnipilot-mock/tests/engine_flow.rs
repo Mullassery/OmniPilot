@@ -16,8 +16,7 @@ use omnipilot_core::{
     Action, Assertion, ErrorCode, Selector, Target, TaskId, TaskSpec, TaskStatus,
 };
 use omnipilot_engine::{
-    ExecutionContext, Executor, MemoryEvidenceStore, MemoryTracer, Policy, PolicyConfig, Runtime,
-    RuntimeConfig, TaskRecord,
+    ExecutionContext, Executor, MemoryEvidenceStore, MemoryTracer, Policy, PolicyConfig,
 };
 use omnipilot_mock::{MockAdapter, DEMO_APP};
 use std::sync::Arc;
@@ -162,30 +161,4 @@ async fn cancellation_produces_cancelled() {
     cancel.cancel();
     let result = task.await.expect("task join");
     assert_eq!(result.status, TaskStatus::Cancelled);
-}
-
-#[tokio::test]
-async fn persists_task_record_under_evidence_root() {
-    let root = std::env::temp_dir().join(format!("omnipilot-task-{}", TaskId::new()));
-    let runtime = Runtime::new(
-        vec![Arc::new(MockAdapter::new())],
-        RuntimeConfig {
-            evidence_root: root.clone(),
-            policy: Policy::default(),
-        },
-    );
-
-    let result = runtime.run_task(MockAdapter::demo_task()).await;
-    assert!(result.verified);
-
-    let path = root.join(result.task_id.to_string()).join("task.json");
-    let bytes = std::fs::read(&path).expect("task record was persisted");
-    let record: TaskRecord = serde_json::from_slice(&bytes).expect("task record is valid JSON");
-    assert_eq!(record.status, TaskStatus::Completed);
-    assert_eq!(
-        record.result.as_ref().map(|result| result.task_id),
-        Some(result.task_id)
-    );
-
-    std::fs::remove_dir_all(&root).expect("temporary task directory was removed");
 }

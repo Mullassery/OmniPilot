@@ -196,10 +196,9 @@ A support engineer reproduces a bug and needs to hand it to an app developer wit
 more than “it failed on my machine.”
 
 A task result includes a task ID, step outcomes, assertion results, evidence
-references, and a trace. The evidence directory contains the screenshots,
-hierarchy snapshots, and persisted `task.json`; adapter logs are available
-through the protocol's `logs` method. `omnipilot report --task <id>` renders a
-Markdown, JUnit, or JSON handoff after the CLI exits.
+references, and a trace. The evidence directory contains the screenshots and
+hierarchy snapshots captured during the run; adapter logs are available through
+the protocol's `logs` method.
 
 **Example:** attach the task ID and the final screenshot/hierarchy to an issue so
 the developer can see the exact state that failed.
@@ -309,8 +308,6 @@ target/release/omnipilot ios-demo
 
 # JUnit XML for CI
 target/release/omnipilot demo --junit reports/demo.xml
-target/release/omnipilot tasks
-target/release/omnipilot report --task <task-id>
 ```
 
 Requirements: Rust 1.90+ and macOS for the Apple tooling. Xcode 26+ is required
@@ -338,22 +335,6 @@ target/release/omnipilot run --platform ios \
 The report contains one testcase per task. A task that is not completed and
 verified is recorded as a failure, and the CLI still exits non-zero so CI catches
 it. Missing parent directories are created automatically.
-
-## Task history and reports
-
-Task records are persisted under `traces/<task_id>/task.json` (or
-`OMNIPILOT_TRACES` if set). List recent tasks and render a saved report:
-
-```bash
-target/release/omnipilot tasks
-target/release/omnipilot report --task <task-id>
-target/release/omnipilot report --task <task-id> --format junit --output reports/task.xml
-target/release/omnipilot report --task <task-id> --format json
-```
-
-`report` supports Markdown (default), JUnit XML, and JSON. `tasks --json` returns
-a machine-readable summary. Reports include the task goal, status, steps,
-assertions, evidence URIs, limitations, and errors.
 
 ## MCP
 
@@ -472,7 +453,6 @@ traces/                    Runtime evidence and event logs (gitignored)
 - [x] MCP wiring for the iOS simulator adapter.
 - [x] Simulator boot/shutdown lifecycle (`ios-boot`, `ios-shutdown`).
 - [x] JUnit XML report output for CLI tasks.
-- [x] Persistent task records and Markdown/JUnit/JSON report export.
 - [ ] Physical-device runner.
 - [ ] Android UI Automator adapter.
 - [ ] Natural-language planner with reviewable plans.
