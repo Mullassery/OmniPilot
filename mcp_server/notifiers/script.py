@@ -76,13 +76,24 @@ class ScriptNotifier(BaseNotifier):
                 .replace("{event_type}", str(event_type))
                 .replace("{trace_id}", str(trace_id))
             )
-            subprocess.run(
-                cmd,
-                shell=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                timeout=10,
-            )
+            import shlex
+            try:
+                argv = shlex.split(cmd)
+                subprocess.run(
+                    argv,
+                    shell=False,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=10,
+                )
+            except Exception:
+                subprocess.run(
+                    cmd,
+                    shell=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=10,
+                )
             logger.info(f"Custom script notification command executed: {cmd[:60]}...")
             return True
         except Exception as e:
