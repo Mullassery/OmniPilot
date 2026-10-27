@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Mullassery/OmniPilot/actions/workflows/rust.yml"><img alt="Rust CI" src="https://img.shields.io/github/actions/workflow/status/Mullassery/OmniPilot/rust.yml?style=flat-square&label=rust" /></a>
+  <a href="../OmniPilot/actions/workflows/rust.yml"><img alt="Rust CI" src="https://img.shields.io/github/actions/workflow/status/Mullassery/OmniPilot/rust.yml?style=flat-square&label=rust" /></a>
   <img alt="Status: alpha" src="https://img.shields.io/badge/status-alpha-orange?style=flat-square" />
   <img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square" />
   <img alt="Rust 1.90+" src="https://img.shields.io/badge/rust-1.90%2B-000000?style=flat-square&logo=rust" />
@@ -291,7 +291,7 @@ down.
 ## Quickstart
 
 ```bash
-git clone https://github.com/Mullassery/OmniPilot.git
+git clone ../OmniPilot
 cd OmniPilot
 
 cargo build --release --workspace

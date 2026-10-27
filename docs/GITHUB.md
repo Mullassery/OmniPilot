@@ -87,7 +87,7 @@ Short version:
 > The mock demo is verified end to end. iOS now has a long-lived XCUITest
 > adapter: the host launches the runner, drives a real simulator app, and proves
 > the result with fresh hierarchy and screenshot evidence. Android is next.
-> Follow the build: https://github.com/Mullassery/OmniPilot
+> Follow the build: ../OmniPilot
 
 ## Apply with GitHub CLI
 
