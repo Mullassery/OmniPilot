@@ -20,12 +20,12 @@
   <img alt="Rust 1.90+" src="https://img.shields.io/badge/rust-1.90%2B-000000?style=flat-square&logo=rust" />
   <img alt="MCP native" src="https://img.shields.io/badge/MCP-native-8A2BE2?style=flat-square" />
   <img alt="iOS: XCUITest" src="https://img.shields.io/badge/iOS-XCUITest-000000?style=flat-square&logo=apple" />
-  <img alt="Android: planned" src="https://img.shields.io/badge/Android-planned-3DDC84?style=flat-square&logo=android" />
+  <img alt="Android: in progress" src="https://img.shields.io/badge/Android-planned-3DDC84?style=flat-square&logo=android" />
 </p>
 
 > **Alpha, built in public.** The Rust engine, CLI, MCP server, and verified mock
 > demo work today. The iOS demo app, XCUITest harness, and long-lived iOS adapter
-> pass on an iPhone 17 simulator. The Android adapter, physical-device runner,
+> pass on an iPhone 17 simulator. The Android adapter (ADB/UIAutomator) is in progress; physical-device runner,
 > and planner are the next milestones. This README is honest about that line.
 
 ## Why OmniPilot?
@@ -187,7 +187,7 @@ retry logic, cancellation, and evidence store.
 **Example:** build an Android UI Automator adapter that speaks the same NDJSON
 protocol, then reuse the existing engine and task schema.
 
-**Today:** mock and iOS are working; Android is planned and still needs the JDK,
+**Today:** mock and iOS are working; Android adapter scaffolding is in progress (ADB/UIAutomator). Needs the JDK,
 Android SDK, `adb`, and an emulator.
 
 ### 8. Evidence-rich bug reports

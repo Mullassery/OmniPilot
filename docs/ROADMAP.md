@@ -1,65 +1,52 @@
 # Roadmap: OmniPilot
 
-> Generated via competitive intelligence audit. Replace/update existing roadmap based on actual codebase state and market analysis.
+> Living roadmap based on the current codebase and alpha state.
 
-## Current State Assessment
-- **Type:** See README for details
-- **Maturity:** Active development
-- **Focus:** Leverages existing architecture and capabilities
+## Current State
+- **Rust core**: Engine, protocol, runtime, CLI, MCP server, evidence store, reporting.
+- **iOS**: XCUITest-based adapter + long-lived adapter working on simulator; physical device in progress.
+- **Android**: ADB/UIAutomator driver (Python) + Rust adapter scaffolding added; integration/testing ongoing.
+- **Python package**: Orchestrator/UI/CLI (`omnipilot`), MCP tools, rebranded from Artemis.
+- **Local-first**: No cloud dependency required.
 
-## Competitive Landscape Analysis
-- Identify best-in-class competitors in category
-- Focus on differentiation (local-first, performance, privacy, or specialized features)
+## Priorities
 
-## Critical Gaps to Fill
-1. **Documentation** - Improve getting started, API docs, examples
-2. **Testing** - Strengthen test coverage, add integration tests
-3. **Distribution/Packaging** - Better installation, cross-platform support
-4. **Ecosystem Integration** - Add common integrations for the domain
+### Now (0-30 days)
+| Item | Priority | Status | Notes |
+|---|---|---|---|
+| Android Rust adapter integration | P0 | In Progress | Wire `omnipilot-android` into CLI/runtime; align with core models. |
+| Android CLI path & tests | P0 | In Progress | Validate `--platform android` flows, ADB discovery. |
+| PyPI release | P0 | Ready | Bump version to 1.1.0, publish package. |
+| Docs polish | P0 | In Progress | Update README/ROADMAP to reflect Android progress. |
 
-## Roadmap by Timeline
+### Next (30-90 days)
+| Item | Priority | Status | Notes |
+|---|---|---|---|
+| Android UIAutomator v2 backend | P0 | Planned | Implement real ADB/UIAutomator actions (tap/swipe/input/keys/app launch). |
+| Emulator/device detection | P0 | Planned | Robust `adb` discovery, serial selection, health checks. |
+| Evidence capture for Android | P0 | Planned | Screenshots/hierarchy capture via ADB/UIAutomator. |
+| Android conformance tests | P0 | Planned | Add adapter conformance tests mirroring iOS/mock. |
+| Physical iOS device support | P1 | Planned | Code signing/device provisioning flows. |
 
-### Short-term (0-30 days) - Quick Wins
-| Item | Priority | Effort | Impact | Description |
-|---|---|---|---|---|
-| Documentation polish | P0 | S | High | Update README, QUICKSTART, add examples |
-| Test coverage gaps | P0 | M | High | Cover critical paths |
-| CI hardening | P0 | S | High | Ensure passing checks, security scans |
+### Later (90+ days)
+| Item | Priority | Status | Notes |
+|---|---|---|---|
+| Natural-language planning | P1 | Planned | Safer planner with verification loops. |
+| CI matrix (macOS/Linux/Windows) | P1 | Planned | Rust + Python tests, packaging, artifacts. |
+| Packaged releases | P1 | Planned | CLI binaries, PyPI, install scripts. |
+| MCP server hardening | P2 | Planned | Better schemas, auth, examples. |
+| Plugin/extension model | P2 | Planned | Community adapters. |
 
-### Medium-term (30-90 days) - Core Improvements
-| Item | Priority | Effort | Impact | Description |
-|---|---|---|---|---|
-| Key integrations | P0 | M | High | Top integrations for category |
-| Performance optimization | P1 | M | High | Profile and optimize |
-| API/UX improvements | P1 | M | High | Better interfaces and error handling |
-
-### Long-term (90+ days) - Strategic
-| Item | Priority | Effort | Impact | Description |
-|---|---|---|---|---|
-| Differentiating features | P2 | L | High | Features competitors lack |
-| Ecosystem expansion | P2 | L | High | Plugins/extensions |
-| Scale/reliability | P2 | L | High | Production hardening |
-
-## Prioritized Feature List
-| Feature | Effort | Impact | Priority | Rationale |
-|---|---|---|---|---|
-| Core stability | S | 10 | P0 | Foundation |
-| Docs/examples | S | 9 | P0 | Adoption |
-| Key integration | M | 9 | P0 | Competitive parity/gap fill |
-| Differentiator | L | 9 | P1 | Competitive advantage |
+## Milestones
+- **M1: Android alpha** - CLI can run basic tasks on emulator via ADB/UIAutomator with evidence.
+- **M2: Cross-platform parity** - Android reaches core conformance for observe/act/assert.
+- **M3: Beta release** - Stable CLI/PyPI, CI, docs, and packaging.
 
 ## Success Metrics
-| Metric | 30-day Target | 90-day Target |
-|---|---|---|
-| Test coverage | >70% | >85% |
-| Docs complete | Core guides | Full reference |
-| CI passing | 100% | 100% |
-| Usage/adoption | Baseline tracked | Growth trend |
+| Metric | Target |
+|---|---|
+| Android adapter conformance | Pass core protocol tests |
+| Test coverage (Rust) | >70% on core/engine/protocol |
+| PyPI installs | Tracked |
+| CI passing | 100% on main |
 
-## Technical Debt
-- Tests, dependencies, code quality, docs debt as applicable
-
-## Next Steps
-1. Address P0 items first
-2. Create GitHub issues/milestones
-3. Review and iterate quarterly
