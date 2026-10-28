@@ -13,7 +13,7 @@ import re
 
 import pytest
 
-from artemis.runtime.helper_manager import (
+from omnipilot.runtime.helper_manager import (
     BUNDLED_APK_PATH,
     BUNDLED_MANIFEST_PATH,
     HELPER_PACKAGE_DIR,

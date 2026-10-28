@@ -15,7 +15,7 @@
 import json
 from pathlib import Path
 
-from artemis.utils.plan_grammar import (
+from omnipilot.utils.plan_grammar import (
     CONTINUOUS_LOOP_TAG,
     PLAN_GRAMMAR_SPEC,
     check_items_changed,
@@ -266,7 +266,7 @@ def test_prompts_carry_the_single_sourced_grammar():
 
 
 def test_finding_lines_are_invisible_to_the_machine_channel():
-    from artemis.utils.plan_grammar import apply_finding_lines
+    from omnipilot.utils.plan_grammar import apply_finding_lines
 
     plan = "- [x] G1\n  - verify: V1\n- [ ] G2\n"
     key = subgoal_hash("G1")
@@ -287,7 +287,7 @@ def test_finding_lines_are_invisible_to_the_machine_channel():
 
 
 def test_apply_finding_lines_projection_is_idempotent_and_anchored():
-    from artemis.utils.plan_grammar import apply_finding_lines, strip_finding_lines
+    from omnipilot.utils.plan_grammar import apply_finding_lines, strip_finding_lines
 
     plan = "- [x] G1\n  - verify: V1\n- [/] G2\n"
     findings = {subgoal_hash("G1"): "headline one"}
@@ -304,7 +304,7 @@ def test_apply_finding_lines_projection_is_idempotent_and_anchored():
 
 
 def test_apply_finding_lines_drops_entries_for_missing_subgoals():
-    from artemis.utils.plan_grammar import apply_finding_lines
+    from omnipilot.utils.plan_grammar import apply_finding_lines
 
     plan = "- [x] G1 (rephrased)\n"
     projected = apply_finding_lines(plan, {subgoal_hash("G1"): "stale headline"})

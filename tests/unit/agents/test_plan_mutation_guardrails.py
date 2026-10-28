@@ -16,13 +16,13 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.context import ArtemisContext, ExecutionSetup
-from artemis.graph.graph import (
+from omnipilot.context import ArtemisContext, ExecutionSetup
+from omnipilot.graph.graph import (
     check_plan_mutation_rejections,
     check_unintended_rewrite,
     wrap_note_tool,
 )
-from artemis.graph.state import State
+from omnipilot.graph.state import State
 
 CONTINUOUS_PLAN = (
     "- [x] Open app\n"
@@ -278,8 +278,8 @@ async def test_guard_holds_with_planner_validation_disabled_and_checks_off(tmp_p
 async def test_planner_node_writes_are_not_guarded():
     """The Planner keeps revision authority over check standards: its node is
     wired with the UNWRAPPED note tools, so the guard never applies to it."""
-    from artemis.context import DeviceContext, DevicePlatform
-    from artemis.graph.graph import get_graph
+    from omnipilot.context import DeviceContext, DevicePlatform
+    from omnipilot.graph.graph import get_graph
 
     device = DeviceContext(
         host_platform="LINUX",

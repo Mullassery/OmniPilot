@@ -29,7 +29,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
-from artemis.utils.video import (
+from omnipilot.utils.video import (
     get_ffmpeg_path,
     get_ffprobe_path,
     is_ffmpeg_drawtext_supported,

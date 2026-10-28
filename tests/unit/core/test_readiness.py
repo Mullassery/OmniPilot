@@ -18,16 +18,16 @@ import asyncio
 import time
 from unittest.mock import AsyncMock
 
-from artemis.core.diagnostics import readiness
-from artemis.core.diagnostics.probes.host_probe import IntegrationHostProbe
-from artemis.core.diagnostics.readiness import (
+from omnipilot.core.diagnostics import readiness
+from omnipilot.core.diagnostics.probes.host_probe import IntegrationHostProbe
+from omnipilot.core.diagnostics.readiness import (
     CHECK_ORDER,
     adb_keys_corrupted,
     base_verdict,
     collect_readiness,
     sort_by_fix_order,
 )
-from artemis.core.diagnostics.schema import (
+from omnipilot.core.diagnostics.schema import (
     ProbeCategory,
     ProbeResult,
     ProbeStatus,

@@ -24,9 +24,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.core.diagnostics.emulator_manager import EmulatorLaunchStage
-from artemis.core.diagnostics.probes.host_probe import IntegrationHostProbe
-from artemis.core.diagnostics.schema import (
+from omnipilot.core.diagnostics.emulator_manager import EmulatorLaunchStage
+from omnipilot.core.diagnostics.probes.host_probe import IntegrationHostProbe
+from omnipilot.core.diagnostics.schema import (
     DeviceInfo,
     ProbeAction,
     ProbeCategory,
@@ -34,8 +34,8 @@ from artemis.core.diagnostics.schema import (
     ProbeStatus,
     SystemReadinessReport,
 )
-from artemis.runtime import trace_store
-from artemis.runtime.device_lock import DeviceLockOwner
+from omnipilot.runtime import trace_store
+from omnipilot.runtime.device_lock import DeviceLockOwner
 from mcp_server.tools import diagnose
 from mcp_server.tools.diagnose import mobile_diagnose
 
@@ -377,7 +377,7 @@ def _helper_healthy(serial: str = "pixel-1") -> dict:
 
 
 def _provision_ok():
-    from artemis.runtime.helper_manager import ProvisionResult
+    from omnipilot.runtime.helper_manager import ProvisionResult
 
     return ProvisionResult(
         ok=True, action="installed", installed_version=2, bundled_version=2, enabled=True
@@ -1271,7 +1271,7 @@ def test_attempt_fix_leaves_healthy_helper_alone(temp_trace_env):
 
 
 def test_disabled_helper_step_includes_the_manual_path(temp_trace_env):
-    from artemis.runtime.helper_manager import MANUAL_ENABLE_PATH
+    from omnipilot.runtime.helper_manager import MANUAL_ENABLE_PATH
 
     status = {**_helper_healthy(), "enabled": False, "reachable": False}
     result = _run(_healthy_probes(), helper_status=status)

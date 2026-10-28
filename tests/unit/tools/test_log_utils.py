@@ -14,8 +14,8 @@
 
 from datetime import datetime
 from unittest.mock import Mock, patch
-from artemis.context import ArtemisContext
-from artemis.tools.mobile.log_utils import fetch_and_filter_logs
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.mobile.log_utils import fetch_and_filter_logs
 import pytest
 
 

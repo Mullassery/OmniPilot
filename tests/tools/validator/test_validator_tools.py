@@ -15,8 +15,8 @@
 import base64
 from pathlib import Path
 
-from artemis.agents.validator.categories import ValidationErrorCategory
-from artemis.agents.validator.validator import ValidatorNode
+from omnipilot.agents.validator.categories import ValidationErrorCategory
+from omnipilot.agents.validator.validator import ValidatorNode
 import pytest
 
 

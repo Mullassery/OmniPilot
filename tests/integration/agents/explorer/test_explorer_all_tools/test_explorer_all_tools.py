@@ -19,7 +19,7 @@ from pathlib import Path
 import shutil
 import sys
 from unittest.mock import AsyncMock, MagicMock, patch
-from artemis.agents.explorer.explorer import Explorer
+from omnipilot.agents.explorer.explorer import Explorer
 from tests.integration.agents.explorer.test_explorer_all_tools.helpers import (
     create_mock_context,
     create_mock_state,
@@ -99,7 +99,7 @@ async def test_explorer_all_tools_sequential_mocked():
         shutil.rmtree(outputs_dir)
     outputs_dir.mkdir(parents=True, exist_ok=True)
 
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     settings.TRACES_PATH = outputs_dir
 

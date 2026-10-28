@@ -21,8 +21,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from artemis.core.tool_failure import is_tool_failure
-from artemis.tools.history import (
+from omnipilot.core.tool_failure import is_tool_failure
+from omnipilot.tools.history import (
     GetStepScreenshotTool,
     ReplayStepsTool,
     SearchHistoryTool,

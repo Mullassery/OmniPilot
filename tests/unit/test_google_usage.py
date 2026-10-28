@@ -16,7 +16,7 @@
 
 from types import SimpleNamespace
 
-from artemis.llm.google import normalize_usage, usage_from_message
+from omnipilot.llm.google import normalize_usage, usage_from_message
 from langchain_core.messages import AIMessage
 
 

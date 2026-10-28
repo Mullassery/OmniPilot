@@ -14,8 +14,8 @@
 
 from unittest.mock import Mock, patch
 
-from artemis.agents.planner.planner import PlannerNode
-from artemis.context import DevicePlatform, ArtemisContext
+from omnipilot.agents.planner.planner import PlannerNode
+from omnipilot.context import DevicePlatform, ArtemisContext
 import pytest
 
 
@@ -89,7 +89,7 @@ async def test_planner_initial_plan(mock_context):
 def test_validate_plan_format_single_sourced_status_alphabet():
     """Regression: the Planner's format gate is single-sourced from
     plan_grammar — a legal in-progress '[/]' line must never be rejected."""
-    from artemis.agents.planner.planner import validate_plan_format
+    from omnipilot.agents.planner.planner import validate_plan_format
 
     valid, err = validate_plan_format(
         "- [x] Done milestone\n- [/] In-progress milestone\n  - [ ] Sub\n- [!] Blocked\n"
@@ -97,7 +97,7 @@ def test_validate_plan_format_single_sourced_status_alphabet():
     assert valid is True and err == ""
 
     # Every grammar status char is accepted; unknown ones are still rejected.
-    from artemis.utils.plan_grammar import STATUS_CHARS
+    from omnipilot.utils.plan_grammar import STATUS_CHARS
 
     for c in STATUS_CHARS:
         ok, _ = validate_plan_format(f"- [{c}] Milestone\n")

@@ -27,10 +27,10 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 from langchain_core.messages import AIMessage
 import pytest
 
-from artemis.agents.validator.categories import ValidationErrorCategory
-from artemis.agents.validator.validator import ValidatorNode
-from artemis.context import ArtemisContext
-from artemis.mcp.action_types import ActionCode, ActionResult
+from omnipilot.agents.validator.categories import ValidationErrorCategory
+from omnipilot.agents.validator.validator import ValidatorNode
+from omnipilot.context import ArtemisContext
+from omnipilot.mcp.action_types import ActionCode, ActionResult
 
 
 class DummyState:

@@ -23,7 +23,7 @@ import threading
 import uuid
 import pytest
 
-from artemis.runtime import trace_store
+from omnipilot.runtime import trace_store
 
 
 @pytest.fixture

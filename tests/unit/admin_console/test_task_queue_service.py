@@ -24,8 +24,8 @@ import pytest
 from apps.admin_console.core.state import state
 from apps.admin_console.routers.tasks import get_status
 from apps.admin_console.services.task_queue_service import TaskQueueService, task_queue_service
-from artemis.runtime.device_lock import DeviceLockOwner
-from artemis.runtime.adb_endpoint import AdbEndpoint
+from omnipilot.runtime.device_lock import DeviceLockOwner
+from omnipilot.runtime.adb_endpoint import AdbEndpoint
 
 
 @pytest.fixture(autouse=True)
@@ -713,7 +713,7 @@ async def test_wait_for_worker_process_watchdog_handles_reaped_process():
 def test_darwin_terminate_process_tree_preserves_direct_child_for_asyncio():
     """Verify darwin terminate_process_tree does not pass direct children to psutil.wait_procs."""
     import os
-    from artemis.platform.darwin import DarwinPlatformProcess
+    from omnipilot.platform.darwin import DarwinPlatformProcess
 
     process = DarwinPlatformProcess()
     current_pid = os.getpid()

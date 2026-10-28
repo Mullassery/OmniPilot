@@ -21,7 +21,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from apps.admin_console.server import app
-from artemis.core.diagnostics.emulator_manager import EmulatorManager
+from omnipilot.core.diagnostics.emulator_manager import EmulatorManager
 
 
 def test_emulator_uses_posix_session_isolation(monkeypatch):

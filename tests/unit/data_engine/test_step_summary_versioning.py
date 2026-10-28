@@ -16,8 +16,8 @@
 
 from unittest.mock import MagicMock
 
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
 
 
 def _make_engine(tmp_path):

@@ -15,10 +15,10 @@
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.base import ArtemisTool
-from artemis.tools.scratchpad import (
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.scratchpad import (
     UpdateNote,
     UpdateNoteArgs,
     UpdateNoteTool,
@@ -27,7 +27,7 @@ from artemis.tools.scratchpad import (
     update_note,
     update_note_wrapper,
 )
-from artemis.utils.notes import save_note_content
+from omnipilot.utils.notes import save_note_content
 from langchain_core.messages import ToolMessage
 import pytest
 

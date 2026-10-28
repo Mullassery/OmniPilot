@@ -18,7 +18,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from artemis.agents.explorer.geometry import (
+from omnipilot.agents.explorer.geometry import (
     FALLBACK_SCREEN_SIZE,
     NORMALIZED_MAX,
     is_valid_norm_point,

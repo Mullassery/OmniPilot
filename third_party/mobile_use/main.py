@@ -27,9 +27,9 @@ from typing import Annotated
 
 import typer
 
-from artemis import Agent, Builders
-from artemis.config import initialize_llm_config, settings
-from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+from omnipilot import Agent, Builders
+from omnipilot.config import initialize_llm_config, settings
+from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 from third_party.mobile_use.sdk.types.task import AgentProfile
 from third_party.mobile_use.utils.video import check_ffmpeg_available
 

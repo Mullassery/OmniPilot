@@ -22,11 +22,11 @@ from google.genai import types
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 import pytest
 
-from artemis.agents.explorer.explorer import Explorer
-from artemis.agents.explorer.tiers import EXPLORER_TIERS, PERCEPTION_TOOLS, get_tier
-from artemis.config import settings
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
+from omnipilot.agents.explorer.explorer import Explorer
+from omnipilot.agents.explorer.tiers import EXPLORER_TIERS, PERCEPTION_TOOLS, get_tier
+from omnipilot.config import settings
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
 
 EXPLORER = "artemis.agents.explorer.explorer"
 RUN_SETUP = "artemis.agents.explorer.run_setup"

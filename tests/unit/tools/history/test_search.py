@@ -30,17 +30,17 @@ from unittest.mock import MagicMock
 import pytest
 from PIL import Image
 
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import is_tool_failure
-from artemis.data_engine.engine import DataEngine
-from artemis.tools.history import (
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import is_tool_failure
+from omnipilot.data_engine.engine import DataEngine
+from omnipilot.tools.history import (
     SearchHistoryTool,
     search_history,
     search_history_available,
     search_history_text,
 )
-from artemis.tools.history.search import result_search_text
-from artemis.utils.notes import save_note_content
+from omnipilot.tools.history.search import result_search_text
+from omnipilot.utils.notes import save_note_content
 
 
 def _jpeg(color: str) -> bytes:
@@ -445,7 +445,7 @@ def test_action_matches_keep_target_provenance(engine):
     """The action haystack is the shared ledger rendering, so an excerpt shows a
     self-described coordinate target with its marker and an observed index
     target without one."""
-    from artemis.utils.task_tree import SELF_DESCRIBED_MARKER
+    from omnipilot.utils.task_tree import SELF_DESCRIBED_MARKER
 
     engine.record_step(
         summary="Started playback.",

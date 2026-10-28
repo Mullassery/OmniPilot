@@ -17,8 +17,8 @@
 import pytest
 from pydantic import ValidationError
 
-from artemis.graph.state import State
-from artemis.graph.visibility import (
+from omnipilot.graph.state import State
+from omnipilot.graph.visibility import (
     NODE_VISIBILITY,
     StateView,
     VisibilityError,

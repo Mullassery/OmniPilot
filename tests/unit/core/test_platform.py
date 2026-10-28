@@ -17,7 +17,7 @@
 from pathlib import Path
 from unittest.mock import patch
 
-from artemis.platform import (
+from omnipilot.platform import (
     DarwinPlatform,
     LinuxPlatform,
     OSType,

@@ -22,15 +22,15 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.operator.prompts import (
     FeedbackPromptComponent,
     PromptBuilder,
     TemplatePromptComponent,
     render_transcript_static_system,
 )
-from artemis.agents.planner.planner import build_planner_system_blocks
-from artemis.context import ArtemisContext, ExecutionSetup
-from artemis.graph.state import State
+from omnipilot.agents.planner.planner import build_planner_system_blocks
+from omnipilot.context import ArtemisContext, ExecutionSetup
+from omnipilot.graph.state import State
 
 PLANNER_JSON = Path(__file__).resolve().parents[3] / "artemis/agents/planner/planner.json"
 OPERATOR_JSON = Path(__file__).resolve().parents[3] / "artemis/agents/operator/operator.json"

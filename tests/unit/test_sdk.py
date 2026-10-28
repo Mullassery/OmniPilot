@@ -16,11 +16,11 @@ from typing import Any
 
 import pytest
 
-import artemis
-from artemis import ArtemisClient, ConcurrencyMode, Task, TaskResult
-from artemis_client import ArtemisClient as ThinArtemisClient
-from artemis_client import TaskResult as ThinTaskResult
-from artemis_client.errors import NotFoundError
+import omnipilot
+from omnipilot import ArtemisClient, ConcurrencyMode, Task, TaskResult
+from omnipilot_client import ArtemisClient as ThinArtemisClient
+from omnipilot_client import TaskResult as ThinTaskResult
+from omnipilot_client.errors import NotFoundError
 
 
 class FakeTransport:

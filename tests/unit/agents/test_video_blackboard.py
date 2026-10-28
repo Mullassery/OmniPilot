@@ -17,12 +17,12 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.video_analyzer.blackboard import (
+from omnipilot.agents.video_analyzer.blackboard import (
     VideoBlackboard,
     get_video_blackboard,
 )
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer, _invoke_with_retry
-from artemis.context import ArtemisContext
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer, _invoke_with_retry
+from omnipilot.context import ArtemisContext
 
 
 def test_blackboard_persists_segments_observations_and_evidence(tmp_path):
@@ -253,7 +253,7 @@ def test_blackboard_metrics_include_structured_failures(tmp_path):
 def test_session_deletion_removes_video_blackboard_rows(tmp_path):
     from uuid import uuid4
 
-    from artemis.data_engine.engine import DataEngine
+    from omnipilot.data_engine.engine import DataEngine
 
     ctx = MagicMock(spec=ArtemisContext)
     ctx.execution_setup = MagicMock(traces_path=str(tmp_path / "traces"))

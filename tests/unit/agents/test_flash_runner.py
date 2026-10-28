@@ -20,13 +20,13 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from langchain_core.messages import HumanMessage, ToolMessage
 
-from artemis.agents.explorer.constants import ASK_EXPLORER_DESCRIPTION
-from artemis.agents.flash.runner import FlashRunner
-from artemis.agents.validator.tool_declarations import (
+from omnipilot.agents.explorer.constants import ASK_EXPLORER_DESCRIPTION
+from omnipilot.agents.flash.runner import FlashRunner
+from omnipilot.agents.validator.tool_declarations import (
     ASK_EXPLORER_TOOL,
     ToolExecutionResult,
 )
-from artemis.context import ArtemisContext
+from omnipilot.context import ArtemisContext
 
 
 @pytest.fixture
@@ -302,7 +302,7 @@ def _record(runner, name, args, metadata=None):
 def test_record_action_step_stamps_the_normalized_coordinate_space(mock_context):
     """Flash stores the model's own 0–1000 target verbatim, marked as
     normalized, so the agent-friendly view never re-normalizes it."""
-    from artemis.utils.coordinates import (
+    from omnipilot.utils.coordinates import (
         COORDINATE_SPACE_KEY,
         COORDINATE_SPACE_NORMALIZED,
         normalize_any_structure,
@@ -321,7 +321,7 @@ def test_flash_records_render_in_the_ledger_with_their_arguments(mock_context):
     """The band-③ phrase reads the tool arguments Flash keeps under ``args``:
     app launches name the package, key presses the key, inputs the text,
     direction swipes the direction — never ``'None'``."""
-    from artemis.utils.task_tree import format_actions_clean
+    from omnipilot.utils.task_tree import format_actions_clean
 
     with patch("artemis.controllers.unified_controller.get_driver"):
         runner = FlashRunner(mock_context, goal="g")
@@ -354,7 +354,7 @@ def test_flash_records_the_executors_target_semantics(mock_context):
     and shaped by the executor into ``metadata.target_semantics``) is the only
     target semantics on record: top level, the shape Pro records, rendered as the
     action's label. Nothing is inferred when the executor hands back nothing."""
-    from artemis.utils.task_tree import format_actions_clean
+    from omnipilot.utils.task_tree import format_actions_clean
 
     with patch("artemis.controllers.unified_controller.get_driver"):
         runner = FlashRunner(mock_context, goal="g")
@@ -393,7 +393,7 @@ def test_flash_records_an_index_target_as_the_resolved_point_with_observed_seman
     """An element index is not a coordinate: the record carries the normalized
     point the executor resolved it to, plus the element's observed fields in
     the shape Pro records (never a self-described label)."""
-    from artemis.utils.task_tree import format_actions_clean
+    from omnipilot.utils.task_tree import format_actions_clean
 
     with patch("artemis.controllers.unified_controller.get_driver"):
         runner = FlashRunner(mock_context, goal="g")
@@ -435,8 +435,8 @@ async def test_visual_lens_receives_the_recorded_action_shape(mock_context):
     """The lens gets the recorded action minus its verb (what the Pro
     summarizer hands it), so ``manage_app``'s own ``action`` argument can no
     longer overwrite the action name in the rendered phrase."""
-    from artemis.agents.flash.runner import _TurnRecord
-    from artemis.agents.flash.summarizer import VisualStepSummarizer
+    from omnipilot.agents.flash.runner import _TurnRecord
+    from omnipilot.agents.flash.summarizer import VisualStepSummarizer
 
     with patch("artemis.controllers.unified_controller.get_driver"):
         runner = FlashRunner(mock_context, goal="g")

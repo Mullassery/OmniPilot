@@ -16,9 +16,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.sdk.agent import Agent
-from artemis.context import DeviceContext, DevicePlatform
-from artemis.runtime.device_lock import DeviceBusyError
+from omnipilot.sdk.agent import Agent
+from omnipilot.context import DeviceContext, DevicePlatform
+from omnipilot.runtime.device_lock import DeviceBusyError
 from third_party.mobile_use.sdk.types.exceptions import AgentError
 
 
@@ -54,7 +54,7 @@ async def test_device_context_uses_adb_size_without_starting_ui_client():
     agent._adb_client.device.return_value.window_size.return_value = (1080, 2424)
     agent._ui_adb_client = MagicMock()
 
-    from artemis.context import DevicePlatform
+    from omnipilot.context import DevicePlatform
 
     context = await agent._get_device_context("device-123", DevicePlatform.ANDROID)
 

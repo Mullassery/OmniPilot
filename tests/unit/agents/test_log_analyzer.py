@@ -21,9 +21,9 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, Tool
 from langchain_core.tools import StructuredTool
 import pytest
 
-from artemis.agents.log_analyzer.log_analyzer import LogAnalyzerNode
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
+from omnipilot.agents.log_analyzer.log_analyzer import LogAnalyzerNode
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
 
 _STATUS_CASES = [
     pytest.param(ToolFailure("Error searching logs: device gone"), "error", id="tool_failure"),

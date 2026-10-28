@@ -20,9 +20,9 @@ import uuid
 
 import pytest
 
-from artemis.data_engine.context_vars import CURRENT_NODE_NAME, CURRENT_TRACE_ID
-from artemis.data_engine.trace import detached_trace
-from artemis.memory.step_memory import StepLens, StepMemoryService
+from omnipilot.data_engine.context_vars import CURRENT_NODE_NAME, CURRENT_TRACE_ID
+from omnipilot.data_engine.trace import detached_trace
+from omnipilot.memory.step_memory import StepLens, StepMemoryService
 
 
 class _ScriptedService(StepMemoryService):

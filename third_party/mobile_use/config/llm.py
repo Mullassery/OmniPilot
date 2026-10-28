@@ -27,9 +27,9 @@ import google.auth
 from google.auth.exceptions import DefaultCredentialsError
 from pydantic import BaseModel, ValidationError
 
-from artemis.config.constants import AgentNode, LLMProvider, LLMUtilsNode
-from artemis.config.settings import settings
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.config.constants import AgentNode, LLMProvider, LLMUtilsNode
+from omnipilot.config.settings import settings
+from omnipilot.utils.cython_compat import CyFunctionDetector
 from third_party.mobile_use.utils.file import load_jsonc
 from third_party.mobile_use.utils.logger import get_logger
 

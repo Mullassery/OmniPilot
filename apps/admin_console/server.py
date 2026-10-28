@@ -49,7 +49,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, HTMLResponse
 import uvicorn
 
-from artemis.runtime import (
+from omnipilot.runtime import (
     DeviceExecutionLock,
     clear_server_info,
     device_pool,
@@ -58,7 +58,7 @@ from artemis.runtime import (
     write_server_info,
 )
 
-from artemis.config import (
+from omnipilot.config import (
     DB_PATH,
     IMAGES_DIR,
     REPLAY_BASE_DIR,
@@ -68,7 +68,7 @@ from artemis.config import (
     WORKSPACE_ROOT,
     init_ls_address,
 )
-from artemis.resources import get_bundled_showcase_dist
+from omnipilot.resources import get_bundled_showcase_dist
 
 try:
     from admin_console.core.security import SameOriginBoundaryMiddleware

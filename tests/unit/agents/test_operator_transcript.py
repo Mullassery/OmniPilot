@@ -32,19 +32,19 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from artemis.agents.operator.operator import OperatorNode
-from artemis.agents.operator.prompts import load_operator_prompts
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.operator.operator import OperatorNode
+from omnipilot.agents.operator.prompts import load_operator_prompts
+from omnipilot.agents.operator.prompts import (
     PLAN_HISTORY_STATIC_POINTER,
     PLAN_HISTORY_TEMPLATE_SECTION,
     PromptBuilder,
     TemplatePromptComponent,
     render_transcript_static_system,
 )
-from artemis.config.agent import MemoryTranscriptConfig
-from artemis.context import ArtemisContext
-from artemis.memory.step_memory import StepMemoryService
-from artemis.memory.transcript import (
+from omnipilot.config.agent import MemoryTranscriptConfig
+from omnipilot.context import ArtemisContext
+from omnipilot.memory.step_memory import StepMemoryService
+from omnipilot.memory.transcript import (
     EPHEMERAL_BLOCKS_KEY,
     EXECUTION_RESULT_MARKER,
     PLAN_RECITATION_MARKER,
@@ -233,7 +233,7 @@ async def test_transcript_tail_marks_per_turn_notices_ephemeral():
     """The hand-built tail carries the builder's ephemeral indices: per-turn
     notices are deleted by the scrub edge; header, plan recitation and the
     observation itself are not."""
-    from artemis.agents.operator.prompts import USER_GUIDANCE_MARKER
+    from omnipilot.agents.operator.prompts import USER_GUIDANCE_MARKER
 
     ctx = _transcript_ctx()
     captured: list = []

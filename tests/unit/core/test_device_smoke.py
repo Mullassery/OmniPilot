@@ -21,9 +21,9 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from artemis.core.diagnostics import smoke_test_device
-from artemis.core.diagnostics import device_smoke
-from artemis.runtime.device_lock import DeviceExecutionLock, DeviceLockOwner
+from omnipilot.core.diagnostics import smoke_test_device
+from omnipilot.core.diagnostics import device_smoke
+from omnipilot.runtime.device_lock import DeviceExecutionLock, DeviceLockOwner
 
 SERIAL = "59100DLCR0033X"
 FAKE_JPEG = b"\xff\xd8\xff" + bytes(range(256)) * 8 + b"\xff\xd9"

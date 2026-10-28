@@ -30,7 +30,7 @@ from httpx import ASGITransport, AsyncClient
 from pydantic import SecretStr
 
 from apps.admin_console.server import app
-from artemis.config import TRACES_PATH, WORKSPACE_ROOT
+from omnipilot.config import TRACES_PATH, WORKSPACE_ROOT
 
 
 def _client(**transport_kwargs) -> AsyncClient:
@@ -46,7 +46,7 @@ def _client(**transport_kwargs) -> AsyncClient:
 
 @pytest.mark.asyncio
 async def test_credentials_endpoint_never_returns_key_material(monkeypatch):
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     honeytoken = f"sk-honeytoken-{py_secrets.token_hex(16)}"
     monkeypatch.setattr(type(settings), "get_api_key", lambda self, provider: SecretStr(honeytoken))

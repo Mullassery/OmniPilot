@@ -14,8 +14,8 @@
 
 import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
-from artemis.context import ArtemisContext
-from artemis.tools.command_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.command_tool import (
     get_adb_task_registry,
     get_manage_task_tool,
     get_run_adb_command_tool,
@@ -260,7 +260,7 @@ async def test_run_command_kill(mock_exec, mock_ctx):
     assert task_id not in registry.background
 
     # Refusals (unknown or already-finished task) are reported structurally.
-    from artemis.core.tool_failure import is_tool_failure
+    from omnipilot.core.tool_failure import is_tool_failure
 
     again = await manage_task.ainvoke({"Action": "kill", "TaskId": task_id})
     assert is_tool_failure(again)
@@ -387,7 +387,7 @@ async def test_analyze_task_output_tool(mock_get_llm, mock_ctx):
     mock_get_llm.return_value = mock_llm
 
     # Set up finished tasks logs cache manually
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.command_tool import (
         _FINISHED_TASKS_LOGS,
         _register_finished_task,
         get_analyze_task_output_tool,
@@ -418,8 +418,8 @@ async def test_analyze_task_output_tool(mock_get_llm, mock_ctx):
 
 def test_run_adb_command_tool_subclass():
     """Verify RunAdbCommandTool is a subclass of ArtemisTool."""
-    from artemis.tools.base import ArtemisTool
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.base import ArtemisTool
+    from omnipilot.tools.command_tool import (
         RunAdbCommand,
         RunAdbCommandArgs,
         RunAdbCommandTool,
@@ -444,8 +444,8 @@ def test_run_adb_command_tool_subclass():
 @pytest.mark.asyncio
 async def test_run_adb_command_tool_mock_driver_execute():
     """Verify RunAdbCommandTool.execute dispatches to MockDeviceDriver when ctx is None."""
-    from artemis.drivers.mock.mock_driver import MockDeviceDriver
-    from artemis.tools.command_tool import RunAdbCommandTool
+    from omnipilot.drivers.mock.mock_driver import MockDeviceDriver
+    from omnipilot.tools.command_tool import RunAdbCommandTool
 
     driver = MockDeviceDriver(width=1080, height=2400)
     tool_inst = RunAdbCommandTool()
@@ -461,8 +461,8 @@ async def test_run_adb_command_tool_mock_driver_execute():
 
 def test_manage_task_tool_subclass():
     """Verify ManageTaskTool is a subclass of ArtemisTool."""
-    from artemis.tools.base import ArtemisTool
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.base import ArtemisTool
+    from omnipilot.tools.command_tool import (
         ManageTask,
         ManageTaskArgs,
         ManageTaskTool,
@@ -487,7 +487,7 @@ def test_manage_task_tool_subclass():
 @pytest.mark.asyncio
 async def test_manage_task_tool_direct_execute(mock_ctx):
     """Verify direct ManageTaskTool.execute execution."""
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.command_tool import (
         BackgroundTask,
         manage_task,
     )
@@ -523,8 +523,8 @@ async def test_manage_task_tool_direct_execute(mock_ctx):
 
 def test_analyze_task_output_tool_subclass():
     """Verify AnalyzeTaskOutputTool is a subclass of ArtemisTool."""
-    from artemis.tools.base import ArtemisTool
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.base import ArtemisTool
+    from omnipilot.tools.command_tool import (
         AnalyzeTaskOutput,
         AnalyzeTaskOutputArgs,
         AnalyzeTaskOutputTool,
@@ -551,7 +551,7 @@ def test_analyze_task_output_tool_subclass():
 @patch("artemis.agents.log_analyzer.output_analyzer.get_llm")
 async def test_analyze_task_output_tool_direct_execute(mock_get_llm, mock_ctx):
     """Verify direct AnalyzeTaskOutputTool.execute execution."""
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.command_tool import (
         _FINISHED_TASKS_LOGS,
         _register_finished_task,
         analyze_task_output,
@@ -588,8 +588,8 @@ async def test_analyze_task_output_tool_direct_execute(mock_get_llm, mock_ctx):
 
 def test_run_short_adb_command_tool_subclass():
     """Verify RunShortAdbCommandTool is a subclass of ArtemisTool."""
-    from artemis.tools.base import ArtemisTool
-    from artemis.tools.command_tool import (
+    from omnipilot.tools.base import ArtemisTool
+    from omnipilot.tools.command_tool import (
         RunShortAdbCommand,
         RunShortAdbCommandArgs,
         RunShortAdbCommandTool,
@@ -614,8 +614,8 @@ def test_run_short_adb_command_tool_subclass():
 @pytest.mark.asyncio
 async def test_run_short_adb_command_tool_mock_driver_execute():
     """Verify RunShortAdbCommandTool.execute dispatches to MockDeviceDriver when ctx is None."""
-    from artemis.drivers.mock.mock_driver import MockDeviceDriver
-    from artemis.tools.command_tool import RunShortAdbCommandTool
+    from omnipilot.drivers.mock.mock_driver import MockDeviceDriver
+    from omnipilot.tools.command_tool import RunShortAdbCommandTool
 
     driver = MockDeviceDriver(width=1080, height=2400)
     tool_inst = RunShortAdbCommandTool()
@@ -660,7 +660,7 @@ async def test_persistent_reports_script_exit_code(mock_exec, mock_ctx):
 def test_build_phone_script_quotes_env_and_cwd():
     import shlex
 
-    from artemis.tools.command_tool import _build_phone_script
+    from omnipilot.tools.command_tool import _build_phone_script
 
     script = _build_phone_script("echo hi", "/sdcard/my dir", {"FOO": "it's"}, True)
     assert script.startswith("cd '/sdcard/my dir'\n")
@@ -706,7 +706,7 @@ async def test_send_input_rejected_for_non_interactive_task(mock_exec, mock_ctx)
 @pytest.mark.asyncio
 @patch("asyncio.create_subprocess_exec")
 async def test_shutdown_kills_background_tasks_and_records_them(mock_exec, mock_ctx):
-    from artemis.tools.command_tool import shutdown_adb_background_tasks
+    from omnipilot.tools.command_tool import shutdown_adb_background_tasks
 
     mock_exec.return_value = MockProcess(output_bytes=b"", exit_code=0, delay=5.0)
     run_command = get_run_adb_command_tool(mock_ctx)
@@ -728,7 +728,7 @@ async def test_shutdown_kills_background_tasks_and_records_them(mock_exec, mock_
 
 
 def test_registry_is_per_context_and_notifications_do_not_leak():
-    from artemis.tools.command_tool import _register_finished_task
+    from omnipilot.tools.command_tool import _register_finished_task
 
     ctx_a = MagicMock(spec=ArtemisContext)
     ctx_b = MagicMock(spec=ArtemisContext)

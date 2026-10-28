@@ -16,7 +16,7 @@ import json
 from unittest.mock import MagicMock, patch
 import pytest
 
-from artemis.runtime.daemon_client import (
+from omnipilot.runtime.daemon_client import (
     ensure_daemon_running,
     is_daemon_running,
     is_standalone_forced,
@@ -164,7 +164,7 @@ def test_submit_task_to_daemon_pro_tuning_defaults_to_null():
 
 
 def test_submit_batch_to_daemon_forwards_pro_tuning_knobs():
-    from artemis.runtime.daemon_client import submit_batch_to_daemon
+    from omnipilot.runtime.daemon_client import submit_batch_to_daemon
 
     mock_resp = _daemon_ok_response(
         b'{"status": "queued", "tasks": [{"session_id": "a"}, {"session_id": "b"}]}'
@@ -184,7 +184,7 @@ def test_submit_batch_to_daemon_forwards_pro_tuning_knobs():
 
 
 def test_stop_task_on_daemon():
-    from artemis.runtime.daemon_client import stop_task_on_daemon
+    from omnipilot.runtime.daemon_client import stop_task_on_daemon
 
     mock_resp = MagicMock()
     mock_resp.status = 200

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from artemis.tools.image_processor_tool import get_ask_image_processor_tool
+from omnipilot.tools.image_processor_tool import get_ask_image_processor_tool
 import pytest
 
 

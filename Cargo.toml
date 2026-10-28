@@ -6,6 +6,7 @@ members = [
     "crates/omnipilot-engine",
     "crates/omnipilot-mock",
     "crates/omnipilot-ios",
+    "crates/omnipilot-android",
     "crates/omnipilot-mcp",
     "crates/omnipilot-cli",
 ]

@@ -22,9 +22,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.checker.checker import CheckReport, CheckVerdict
-from artemis.context import ArtemisContext, ExecutionSetup
-from artemis.graph.checkpoints import (
+from omnipilot.agents.checker.checker import CheckReport, CheckVerdict
+from omnipilot.context import ArtemisContext, ExecutionSetup
+from omnipilot.graph.checkpoints import (
     CheckpointRun,
     PendingCheckpoint,
     checker_note_key,
@@ -35,9 +35,9 @@ from artemis.graph.checkpoints import (
     read_ledger,
     spawn_pending_checkpoints,
 )
-from artemis.graph.graph import execution_check_node, wrap_note_tool, wrap_update_note_tool
-from artemis.graph.state import State
-from artemis.utils.plan_grammar import CheckItem, parse_plan, subgoal_hash
+from omnipilot.graph.graph import execution_check_node, wrap_note_tool, wrap_update_note_tool
+from omnipilot.graph.state import State
+from omnipilot.utils.plan_grammar import CheckItem, parse_plan, subgoal_hash
 
 GOAL_TEXT = "Create the alarm"
 GOAL_KEY = subgoal_hash(GOAL_TEXT)
@@ -215,7 +215,7 @@ ASSERT_LINE = "  - assert: a toast appeared\n"
 def _guidance_arrives(ctx, plan_text):
     """What perception_node does when a non-empty user instruction lands: the
     check lines that exist at that moment lose their machine restoration."""
-    from artemis.utils.plan_grammar import parse_plan
+    from omnipilot.utils.plan_grammar import parse_plan
 
     current = getattr(ctx, "guidance_unprotected_checks", None)
     if not isinstance(current, set):
@@ -228,7 +228,7 @@ def _guidance_arrives(ctx, plan_text):
 async def _plan_write(tmp_path, ctx, before, after):
     """One accepted task_plan write through the shared post-write pipeline;
     returns the plan text as it stands on disk afterwards."""
-    from artemis.graph.graph import _process_plan_write
+    from omnipilot.graph.graph import _process_plan_write
 
     task_plan_path = _write_plan(tmp_path, after)
     await _process_plan_write(ctx, _make_state(), task_plan_path, before, after, "ok", True)
@@ -321,8 +321,8 @@ async def test_guided_drop_records_the_retired_lines_and_the_outcome_excludes_th
     """A line dropped under guidance is remembered as retired; a verdict the
     ledger recorded for it earlier is reported as retired, not as a failure,
     while a line still declared keeps its verdict."""
-    from artemis.graph.checkpoints import compute_test_summary
-    from artemis.utils.plan_grammar import parse_plan
+    from omnipilot.graph.checkpoints import compute_test_summary
+    from omnipilot.utils.plan_grammar import parse_plan
 
     ctx = _make_ctx(tmp_path, disable_planner_validation=True)
     ctx.guidance_unprotected_checks = set()
@@ -382,7 +382,7 @@ async def test_rewording_a_milestone_keeps_its_check_lines_in_place(tmp_path):
 async def test_redeclaring_a_retired_line_reinstates_it(tmp_path):
     """Dropped under guidance, then added back: the harvest gate must see the
     line as live again, matching what compute_test_summary reports."""
-    from artemis.graph.checkpoints import reinstate_check_items
+    from omnipilot.graph.checkpoints import reinstate_check_items
 
     ctx = _make_ctx(tmp_path, disable_planner_validation=True)
     ctx.guidance_unprotected_checks = set()
@@ -405,7 +405,7 @@ async def test_redeclaring_a_retired_line_reinstates_it(tmp_path):
 async def test_rejected_plan_write_leaves_the_waiver_untouched(tmp_path):
     from langchain_core.messages import ToolMessage
 
-    from artemis.graph.graph import _process_plan_write
+    from omnipilot.graph.graph import _process_plan_write
 
     ctx = _make_ctx(tmp_path, disable_planner_validation=True)
     ctx.guidance_unprotected_checks = set()
@@ -832,7 +832,7 @@ async def test_retiring_an_item_withdraws_its_registered_headline(tmp_path):
     """A headline registered by an earlier failing attempt disappears from the
     plan when the user guidance retires the item that produced it; a headline
     that still names a live item stays."""
-    from artemis.graph.checkpoints import retire_check_items
+    from omnipilot.graph.checkpoints import retire_check_items
 
     plan_path = _write_plan(tmp_path)
     ctx = _make_ctx(tmp_path)
@@ -1065,7 +1065,7 @@ def _seg(exec_id, text, role="answer", when=1.0):
 
 
 def test_clamp_keeps_short_transcripts_verbatim():
-    from artemis.graph.checkpoints import clamp_stream_segments
+    from omnipilot.graph.checkpoints import clamp_stream_segments
 
     segs = [_seg("a", "hello", "thought"), _seg("b", "world")]
     out, dropped = clamp_stream_segments(segs, limit=20)
@@ -1074,7 +1074,7 @@ def test_clamp_keeps_short_transcripts_verbatim():
 
 
 def test_clamp_cuts_the_middle_once_and_keeps_head_and_tail():
-    from artemis.graph.checkpoints import clamp_stream_segments
+    from omnipilot.graph.checkpoints import clamp_stream_segments
 
     segs = [
         _seg("a", "A" * 40, "thought", when=1.0),
@@ -1099,7 +1099,7 @@ def test_clamp_cuts_the_middle_once_and_keeps_head_and_tail():
 
 
 def test_clamp_drops_segments_that_fall_entirely_into_the_cut():
-    from artemis.graph.checkpoints import clamp_stream_segments
+    from omnipilot.graph.checkpoints import clamp_stream_segments
 
     segs = [_seg("a", "A" * 10), _seg("mid", "M" * 100), _seg("z", "Z" * 10)]
     out, dropped = clamp_stream_segments(segs, limit=20)
@@ -1110,7 +1110,7 @@ def test_clamp_drops_segments_that_fall_entirely_into_the_cut():
 
 
 def test_clamp_single_huge_segment_keeps_both_ends():
-    from artemis.graph.checkpoints import clamp_stream_segments
+    from omnipilot.graph.checkpoints import clamp_stream_segments
 
     out, dropped = clamp_stream_segments([_seg("a", "H" * 30 + "M" * 100 + "T" * 30)], limit=60)
     assert dropped == 100
@@ -1119,7 +1119,7 @@ def test_clamp_single_huge_segment_keeps_both_ends():
 
 
 def test_stream_records_round_trip_and_carry_truncation_flags(tmp_path):
-    from artemis.graph.checkpoints import (
+    from omnipilot.graph.checkpoints import (
         STREAM_TEXT_LIMIT,
         append_attempt_stream_record,
         read_attempt_streams,

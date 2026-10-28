@@ -214,7 +214,7 @@ uv add "artemis-client @ git+https://github.com/google/artemis.git#subdirectory=
 
 ```python
 import asyncio
-from artemis_client import ArtemisClient
+from omnipilot_client import ArtemisClient
 
 
 async def main():

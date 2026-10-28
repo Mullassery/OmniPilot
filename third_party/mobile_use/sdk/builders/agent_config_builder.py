@@ -22,8 +22,8 @@ import copy
 from typing import Any, ClassVar, Self
 
 from langchain_core.callbacks.base import Callbacks
-from artemis.config import get_default_llm_config
-from artemis.sdk.constants import DEFAULT_PROFILE_NAME
+from omnipilot.config import get_default_llm_config
+from omnipilot.sdk.constants import DEFAULT_PROFILE_NAME
 from third_party.mobile_use.context import DevicePlatform
 from third_party.mobile_use.sdk.types.agent import AgentConfigBase, ServerConfig
 from third_party.mobile_use.sdk.types.task import AgentProfile, TaskRequestCommon

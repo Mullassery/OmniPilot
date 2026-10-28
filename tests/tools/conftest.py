@@ -15,8 +15,8 @@
 from pathlib import Path
 from unittest.mock import MagicMock
 
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
 import pytest
 
 INPUTS_DIR = Path(__file__).parent / "inputs"
@@ -88,7 +88,7 @@ def artemis_context(inputs_dir, mock_adb_client):
 @pytest.fixture
 def mock_state(inputs_dir):
     """Provides a dummy graph State with realistic artifact paths for tools that need state injection."""
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     state = MagicMock(spec=State)
     state.latest_screenshot = str(inputs_dir / "screenshot.jpg")

@@ -22,12 +22,12 @@ from urllib.parse import urlsplit
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from artemis.core.diagnostics import readiness_engine
-from artemis.core.diagnostics.adb_server_connection import (
+from omnipilot.core.diagnostics import readiness_engine
+from omnipilot.core.diagnostics.adb_server_connection import (
     InvalidAdbServerEndpoint,
     adb_server_connection,
 )
-from artemis.core.diagnostics.schema import SystemReadinessReport
+from omnipilot.core.diagnostics.schema import SystemReadinessReport
 
 router = APIRouter(prefix="/api/system", tags=["system"])
 
@@ -292,7 +292,7 @@ async def get_credentials():
     presence booleans only. Keys are written via POST /credentials and used
     server-side.
     """
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     providers = ("google", "openai", "anthropic", "openrouter", "ocr")
     status = {name: bool(settings.get_api_key(name)) for name in providers}
@@ -307,7 +307,7 @@ async def get_credentials():
 @router.post("/credentials/test")
 async def test_credentials(request: ValidateCredentialsRequest):
     """Test and verify whether an API key is valid and usable with the corresponding provider endpoint."""
-    from artemis.utils.credentials_validator import validate_api_key
+    from omnipilot.utils.credentials_validator import validate_api_key
 
     provider = request.provider.strip().lower()
     key = request.api_key.strip()
@@ -333,7 +333,7 @@ async def test_credentials(request: ValidateCredentialsRequest):
 @router.post("/credentials")
 async def update_credentials(request: UpdateCredentialsRequest):
     """Dynamically configure and persist LLM or Vision API key, returning updated readiness report."""
-    from artemis.utils.credentials_validator import validate_api_key
+    from omnipilot.utils.credentials_validator import validate_api_key
 
     provider = request.provider.strip().lower()
     key = request.api_key.strip()
@@ -348,7 +348,7 @@ async def update_credentials(request: UpdateCredentialsRequest):
             )
 
     try:
-        from artemis.config import settings
+        from omnipilot.config import settings
 
         settings.set_api_key(provider, key, persist_to_env=request.persist_to_env)
 
@@ -374,11 +374,11 @@ async def update_credentials(request: UpdateCredentialsRequest):
 async def get_model_config_and_env():
     """Retrieve the current active artemis.jsonc configuration and .env status for custom setup."""
     import os
-    from artemis.config.paths import get_config_path, get_env_file
-    from artemis.config import settings
+    from omnipilot.config.paths import get_config_path, get_env_file
+    from omnipilot.config import settings
     from third_party.mobile_use.utils.file import load_jsonc
 
-    from artemis.config.settings import is_placeholder_key
+    from omnipilot.config.settings import is_placeholder_key
 
     # 1. Config file resolution
     config_path = None
@@ -504,8 +504,8 @@ async def get_server_runtime_status():
     import os
     import time
 
-    from artemis.runtime.process_probe import pid_is_alive
-    from artemis.runtime.server_lifecycle import read_server_info
+    from omnipilot.runtime.process_probe import pid_is_alive
+    from omnipilot.runtime.server_lifecycle import read_server_info
 
     try:
         from apps.admin_console.core.state import state

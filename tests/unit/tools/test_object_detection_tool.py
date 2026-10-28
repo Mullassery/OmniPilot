@@ -19,10 +19,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from langchain_core.messages import ToolMessage
 
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.base import ArtemisTool
-from artemis.tools.object_detection_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.object_detection_tool import (
     ObjectDetection,
     ObjectDetectionArgs,
     ObjectDetectionTool,

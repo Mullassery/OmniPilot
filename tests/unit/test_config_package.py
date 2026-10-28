@@ -20,7 +20,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from pydantic import SecretStr
 
-from artemis.config import (
+from omnipilot.config import (
     CONFIG_DIR,
     ROOT_DIR,
     AgentGlobalConfig,
@@ -109,7 +109,7 @@ def test_settings_and_api_key_fallbacks(monkeypatch):
 
 def test_placeholder_api_key_filtering(monkeypatch):
     """Test that default template placeholders are filtered out and treated as unconfigured."""
-    from artemis.config.settings import is_placeholder_key
+    from omnipilot.config.settings import is_placeholder_key
 
     assert is_placeholder_key("your_gemini_api_key_here") is True
     assert is_placeholder_key("your_google_cloud_vision_api_key_here") is True
@@ -253,10 +253,10 @@ def test_runtime_state_and_ipc(tmp_path, monkeypatch):
 
 def test_planner_validation_builder_and_milestones():
     """Test AgentConfigBuilder methods for planner validation and milestone drift detection."""
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
-    from artemis.utils.plan_grammar import milestones_changed, parse_plan
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.utils.plan_grammar import milestones_changed, parse_plan
 
-    # Default builder inherits from artemis.jsonc (enabled=True)
+    # Default builder inherits from omnipilot.jsonc (enabled=True)
     builder = AgentConfigBuilder()
     cfg = builder.build()
     assert cfg.disable_planner_validation is False
@@ -284,9 +284,9 @@ def test_planner_validation_builder_and_milestones():
 @pytest.mark.asyncio
 async def test_committee_builder_and_graph_mounting():
     """Test AgentConfigBuilder committee methods and graph mounting."""
-    from artemis.context import ArtemisContext, DeviceContext, DevicePlatform, ExecutionSetup
-    from artemis.graph.graph import get_graph
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform, ExecutionSetup
+    from omnipilot.graph.graph import get_graph
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
     # Default: disabled
     cfg_default = AgentConfigBuilder().build()
@@ -333,11 +333,11 @@ async def test_committee_builder_and_graph_mounting():
 def test_checker_builder_and_context_propagation():
     """Test AgentConfigBuilder methods and context propagation for checker."""
     from unittest.mock import MagicMock
-    from artemis.context import ArtemisContext, DeviceContext, DevicePlatform
-    from artemis.sdk.agent import Agent
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform
+    from omnipilot.sdk.agent import Agent
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
-    # Default builder inherits from artemis.jsonc (enabled=True, midway off, final on)
+    # Default builder inherits from omnipilot.jsonc (enabled=True, midway off, final on)
     builder = AgentConfigBuilder()
     cfg = builder.build()
     assert cfg.disable_checker is False
@@ -404,9 +404,9 @@ def test_checker_builder_and_context_propagation():
 def test_factory_default_verification_layering():
     """Contract: out of the box, the verification stack is layered as
     final check ON / planner validation (ratchet) ON / midway checks OFF."""
-    from artemis.config.agent import AgentGlobalConfig, CheckerConfig, PlannerValidationConfig
-    from artemis.context import ExecutionSetup
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.config.agent import AgentGlobalConfig, CheckerConfig, PlannerValidationConfig
+    from omnipilot.context import ExecutionSetup
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
     # Config-model factory defaults
     assert CheckerConfig().enabled is True
@@ -444,14 +444,14 @@ def test_factory_default_verification_layering():
 
 def test_explorer_builder_and_resolution(monkeypatch):
     """Test AgentConfigBuilder explorer methods and multi-tier resolution logic."""
-    from artemis.context import ArtemisContext, DeviceContext, DevicePlatform
-    from artemis.sdk.agent import Agent
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
-    from artemis.tools.explorer_tool import resolve_explorer_version
+    from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform
+    from omnipilot.sdk.agent import Agent
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.tools.explorer_tool import resolve_explorer_version
 
     monkeypatch.delenv("ARTEMIS_EXPLORER_VERSION", raising=False)
 
-    # Default builder inherits from artemis.jsonc (default="flash", flash_mode="flash",
+    # Default builder inherits from omnipilot.jsonc (default="flash", flash_mode="flash",
     # pro_mode="flash", caching unset, no per-agent override).
     builder = AgentConfigBuilder()
     cfg = builder.build()
@@ -549,11 +549,11 @@ def test_explorer_builder_and_resolution(monkeypatch):
 
 def test_outputter_builder_and_context_propagation():
     """Test AgentConfigBuilder outputter methods and propagation to ExecutionSetup."""
-    from artemis.context import ArtemisContext, DeviceContext, DevicePlatform
-    from artemis.sdk.agent import Agent
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform
+    from omnipilot.sdk.agent import Agent
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
-    # Default builder inherits from artemis.jsonc (enabled=True, force_synthesis=False)
+    # Default builder inherits from omnipilot.jsonc (enabled=True, force_synthesis=False)
     builder = AgentConfigBuilder()
     cfg = builder.build()
     assert cfg.disable_outputter is False
@@ -598,8 +598,8 @@ def test_outputter_builder_and_context_propagation():
 
 def test_categorized_flash_and_pro_profile_builders():
     """Test with_flash_config and with_pro_config fluent builders and bidirectional sync."""
-    from artemis.config.agent import AgentGlobalConfig
-    from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+    from omnipilot.config.agent import AgentGlobalConfig
+    from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
     # 1. Test with_flash_config
     cfg_flash = AgentConfigBuilder().with_flash_config(max_turns=15, explorer_mode="flash").build()
@@ -648,7 +648,7 @@ def test_categorized_flash_and_pro_profile_builders():
 
 def test_agent_config_environment_variable_overrides(monkeypatch):
     """Test environment variable overrides for AgentGlobalConfig switches."""
-    from artemis.config.agent import load_agent_config
+    from omnipilot.config.agent import load_agent_config
 
     monkeypatch.setenv("ARTEMIS_CHECKER_ENABLED", "true")
     monkeypatch.setenv("ARTEMIS_COMMITTEE_ENABLED", "1")
@@ -669,8 +669,8 @@ def test_agent_config_environment_variable_overrides(monkeypatch):
 
 
 def test_consolidated_workspace_and_admin_paths():
-    """Verify consolidated workspace and admin paths exported from artemis.config."""
-    from artemis.config import (
+    """Verify consolidated workspace and admin paths exported from omnipilot.config."""
+    from omnipilot.config import (
         DB_PATH,
         IMAGES_DIR,
         PAUSE_FILE,
@@ -728,7 +728,7 @@ class TestVerificationLevelPresets:
     """The coarse Checker presets behind ``--verification-level``."""
 
     def test_every_preset_is_a_valid_checker_override(self):
-        from artemis.config import (
+        from omnipilot.config import (
             DEFAULT_VERIFICATION_LEVEL,
             VERIFICATION_LEVEL_PRESETS,
             CheckerConfig,
@@ -741,7 +741,7 @@ class TestVerificationLevelPresets:
             assert isinstance(cfg, CheckerConfig)
 
     def test_presets_form_a_monotonic_ladder(self):
-        from artemis.config import CheckerConfig, checker_overrides_for_level
+        from omnipilot.config import CheckerConfig, checker_overrides_for_level
 
         off = CheckerConfig(**checker_overrides_for_level("off"))
         final = CheckerConfig(**checker_overrides_for_level("final"))
@@ -761,7 +761,7 @@ class TestVerificationLevelPresets:
         assert strict.max_iterations > checkpoints.max_iterations
 
     def test_level_lookup_is_case_and_whitespace_insensitive(self):
-        from artemis.config import checker_overrides_for_level
+        from omnipilot.config import checker_overrides_for_level
 
         assert checker_overrides_for_level(" STRICT ") == checker_overrides_for_level("strict")
         # A copy is returned so callers cannot mutate the shared preset table.
@@ -771,15 +771,15 @@ class TestVerificationLevelPresets:
 
     @pytest.mark.parametrize("bad", [None, "", "maximum", "ultra"])
     def test_unknown_level_raises(self, bad):
-        from artemis.config import checker_overrides_for_level
+        from omnipilot.config import checker_overrides_for_level
 
         with pytest.raises(ValueError, match="Unknown verification level"):
             checker_overrides_for_level(bad)
 
     def test_level_preset_survives_explicit_master_switch(self):
         """``--verification-level strict --disable-checker`` keeps the master switch off."""
-        from artemis.config import checker_overrides_for_level
-        from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+        from omnipilot.config import checker_overrides_for_level
+        from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
         builder = AgentConfigBuilder()
         builder.with_checker(**checker_overrides_for_level("strict"))
@@ -793,7 +793,7 @@ class TestVerificationLevelPresets:
 
     @pytest.mark.parametrize("level", ["off", "final", "checkpoints", "strict"])
     def test_effective_config_classifies_back_onto_the_ladder(self, level):
-        from artemis.config import (
+        from omnipilot.config import (
             CheckerConfig,
             checker_overrides_for_level,
             verification_level_for_checker,
@@ -814,14 +814,14 @@ class TestRunTuningSummary:
     """``run_tuning_for_profile``: the per-run tuning persisted with a session."""
 
     def test_flash_has_no_tuning(self):
-        from artemis.config import CheckerConfig, ExplorerConfig, run_tuning_for_profile
+        from omnipilot.config import CheckerConfig, ExplorerConfig, run_tuning_for_profile
 
         kwargs = {"checker": CheckerConfig(), "explorer": ExplorerConfig()}
         assert run_tuning_for_profile("flash", **kwargs) is None
         assert run_tuning_for_profile(None, **kwargs) is None
 
     def test_pro_reports_both_sliders(self):
-        from artemis.config import (
+        from omnipilot.config import (
             CheckerConfig,
             ExplorerConfig,
             checker_overrides_for_level,
@@ -836,7 +836,7 @@ class TestRunTuningSummary:
         assert summary == {"verification_level": "strict", "explorer_mode": "ultra"}
 
     def test_pro_defaults_match_launcher_defaults(self):
-        from artemis.config import (
+        from omnipilot.config import (
             CheckerConfig,
             ExplorerConfig,
             run_tuning_for_profile,

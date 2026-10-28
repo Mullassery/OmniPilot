@@ -17,7 +17,7 @@
 from pathlib import Path
 from unittest.mock import patch
 
-from artemis.toolchain import ToolchainResolver, find_adb, find_ffmpeg, find_scrcpy
+from omnipilot.toolchain import ToolchainResolver, find_adb, find_ffmpeg, find_scrcpy
 
 
 def test_toolchain_env_override():

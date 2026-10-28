@@ -14,8 +14,8 @@
 
 """Tests for object_detector universal tools."""
 
-from artemis.tools.base import ArtemisTool
-from artemis.tools.object_detection_tool import (
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.object_detection_tool import (
     ObjectDetection,
     ObjectDetectionArgs,
     ObjectDetectionTool,

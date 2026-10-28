@@ -20,9 +20,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import json
 from google.genai import types
 
-from artemis.agents.explorer.explorer import Explorer
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
+from omnipilot.agents.explorer.explorer import Explorer
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
 
 MOCK_PROMPT_JSON = """{
   "IDENTITY": "You are the agentic UI Explorer designed to identify objects, scan text, and extract UI attributes on a phone screen.",
@@ -455,7 +455,7 @@ async def test_explorer_initial_visual_marking():
 
 @pytest.mark.asyncio
 async def test_explorer_initial_visual_marking_previous_screenshot():
-    from artemis.data_engine.models import ImageRecord
+    from omnipilot.data_engine.models import ImageRecord
 
     # Mock context and state
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -630,7 +630,7 @@ async def test_explorer_initial_visual_marking_previous_screenshot_no_ui_tree():
 
 @pytest.mark.asyncio
 async def test_explorer_initial_visual_marking_previous_screenshot_ocr_fusion():
-    from artemis.data_engine.models import ImageRecord
+    from omnipilot.data_engine.models import ImageRecord
 
     # Mock context and state
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -732,7 +732,7 @@ async def test_explorer_initial_visual_marking_previous_screenshot_ocr_fusion():
 
 @pytest.mark.asyncio
 async def test_explorer_initial_visual_marking_previous_screenshot_on_the_fly_ocr():
-    from artemis.data_engine.models import ImageRecord
+    from omnipilot.data_engine.models import ImageRecord
 
     # Mock context and state
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -1129,7 +1129,7 @@ async def test_explorer_ask_perception_tool():
     import numpy as np
     from unittest.mock import mock_open
 
-    from artemis.agents.explorer.screen_index import ScreenIndex
+    from omnipilot.agents.explorer.screen_index import ScreenIndex
 
     mock_ctx = MagicMock(spec=ArtemisContext)
     mock_ctx.data_engine = MagicMock()
@@ -1243,7 +1243,7 @@ async def test_explorer_ask_perception_tool():
 
 
 def test_explorer_prune_historical_images():
-    from artemis.agents.explorer.explorer import Explorer
+    from omnipilot.agents.explorer.explorer import Explorer
     from google.genai import types
 
     mock_ctx = MagicMock()
@@ -1277,8 +1277,8 @@ class _FakeGenaiError(Exception):
 
 @pytest.mark.asyncio
 async def test_generate_content_reliability_permanent_error_is_not_retried():
-    from artemis.agents.explorer.native_runner import _generate_content_with_reliability
-    from artemis.llm.reliability import LLMPermanentError
+    from omnipilot.agents.explorer.native_runner import _generate_content_with_reliability
+    from omnipilot.llm.reliability import LLMPermanentError
 
     calls = 0
 
@@ -1296,8 +1296,8 @@ async def test_generate_content_reliability_permanent_error_is_not_retried():
 
 @pytest.mark.asyncio
 async def test_generate_content_reliability_bad_request_is_not_retried():
-    from artemis.agents.explorer.native_runner import _generate_content_with_reliability
-    from artemis.llm.reliability import LLMPermanentError
+    from omnipilot.agents.explorer.native_runner import _generate_content_with_reliability
+    from omnipilot.llm.reliability import LLMPermanentError
 
     calls = 0
 
@@ -1314,7 +1314,7 @@ async def test_generate_content_reliability_bad_request_is_not_retried():
 
 @pytest.mark.asyncio
 async def test_generate_content_reliability_retries_transient_then_succeeds():
-    from artemis.agents.explorer import native_runner as native_runner_module
+    from omnipilot.agents.explorer import native_runner as native_runner_module
 
     calls = 0
     sentinel = object()
@@ -1335,8 +1335,8 @@ async def test_generate_content_reliability_retries_transient_then_succeeds():
 
 @pytest.mark.asyncio
 async def test_generate_content_reliability_exhausts_to_typed_error():
-    from artemis.agents.explorer import native_runner as native_runner_module
-    from artemis.llm.reliability import (
+    from omnipilot.agents.explorer import native_runner as native_runner_module
+    from omnipilot.llm.reliability import (
         FailureCategory,
         LLMExhaustedError,
         retry_policy_for,

@@ -16,7 +16,7 @@
 
 import pytest
 
-from artemis.agents.explorer.screen_index import (
+from omnipilot.agents.explorer.screen_index import (
     ScreenElement,
     ScreenIndex,
     normalize_text,

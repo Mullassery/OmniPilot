@@ -15,10 +15,10 @@
 from unittest.mock import AsyncMock, Mock, patch
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.tools import StructuredTool
-from artemis.agents.diagnoser.diagnoser import Diagnoser
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
-from artemis.graph.state import State
+from omnipilot.agents.diagnoser.diagnoser import Diagnoser
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
+from omnipilot.graph.state import State
 import pytest
 
 
@@ -272,7 +272,7 @@ async def test_diagnoser_background_job_lifecycle(
     agent = Diagnoser(ctx)
 
     # We want to use the actual video analyzer tool so it triggers the background task
-    from artemis.tools.video_tool import get_video_analyzer_tool
+    from omnipilot.tools.video_tool import get_video_analyzer_tool
 
     real_video_tool = get_video_analyzer_tool(ctx, role="diagnoser")
 

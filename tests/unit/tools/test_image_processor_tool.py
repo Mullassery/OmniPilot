@@ -14,9 +14,9 @@
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.image_processor_tool import get_ask_image_processor_tool
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.image_processor_tool import get_ask_image_processor_tool
 import pytest
 
 
@@ -66,8 +66,8 @@ async def test_ask_vision_coder_success():
 
 def test_ask_image_processor_tool_subclass():
     """Verify AskImageProcessorTool is an ArtemisTool subclass."""
-    from artemis.tools.base import ArtemisTool
-    from artemis.tools.image_processor_tool import (
+    from omnipilot.tools.base import ArtemisTool
+    from omnipilot.tools.image_processor_tool import (
         AskImageProcessor,
         AskImageProcessorTool,
         AskVisionCoderArgs,

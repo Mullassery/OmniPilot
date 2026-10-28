@@ -20,14 +20,14 @@ from unittest.mock import patch
 
 import pytest
 
-from artemis.memory.context_policy import (
+from omnipilot.memory.context_policy import (
     CONTEXT_POLICIES,
     DIGEST_LEDGER_MARKER_TEMPLATE,
     build_history_for,
     load_chunk_blocks,
     resolve_policy,
 )
-from artemis.utils.task_tree import build_plan_and_history
+from omnipilot.utils.task_tree import build_plan_and_history
 
 HASH_A = "hash-a"
 HASH_B = "hash-b"

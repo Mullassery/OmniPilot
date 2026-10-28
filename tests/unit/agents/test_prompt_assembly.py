@@ -20,12 +20,12 @@ import re
 from jinja2 import Template
 import pytest
 
-from artemis.agents.operator.prompts import load_operator_prompts
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.operator.prompts import load_operator_prompts
+from omnipilot.agents.operator.prompts import (
     OPERATOR_PROMPT_TOOLSET,
     apply_operator_prompt_contract,
 )
-from artemis.agents.prompt_assembly import gate_segment, render_tool_enum
+from omnipilot.agents.prompt_assembly import gate_segment, render_tool_enum
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 

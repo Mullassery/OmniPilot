@@ -8,8 +8,8 @@ knobs in one call; both resolve through the single preset table in
 
 import pytest
 
-from artemis.config import VERIFICATION_LEVEL_PRESETS, checker_overrides_for_level
-from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+from omnipilot.config import VERIFICATION_LEVEL_PRESETS, checker_overrides_for_level
+from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 
 
 def test_with_verification_level_off_disables_the_checker():

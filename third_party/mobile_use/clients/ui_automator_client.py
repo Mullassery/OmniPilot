@@ -35,9 +35,9 @@ from PIL import Image
 from pydantic import BaseModel
 import uiautomator2 as u2
 
-from artemis.runtime.adb_endpoint import adb_command
-from artemis.runtime.awake_service import ensure_device_awake
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.runtime.adb_endpoint import adb_command
+from omnipilot.runtime.awake_service import ensure_device_awake
+from omnipilot.utils.cython_compat import CyFunctionDetector
 from third_party.mobile_use.utils.logger import get_logger
 
 if TYPE_CHECKING:

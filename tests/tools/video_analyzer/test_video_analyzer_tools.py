@@ -16,7 +16,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer
 
 
 @pytest.mark.asyncio
@@ -68,7 +68,7 @@ async def test_video_analyzer_tools(artemis_context, mock_state, inputs_dir, tmp
     )
 
     import google.genai as genai
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     agent.client = genai.Client(
         api_key=settings.GOOGLE_API_KEY.get_secret_value() if settings.GOOGLE_API_KEY else None

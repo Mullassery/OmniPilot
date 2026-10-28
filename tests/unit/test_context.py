@@ -14,7 +14,7 @@
 
 import asyncio
 import pytest
-from artemis.context import ArtemisContext, DeviceContext, DevicePlatform
+from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform
 
 
 @pytest.mark.asyncio

@@ -24,7 +24,7 @@ from httpx import ASGITransport, AsyncClient
 
 from apps.admin_console import server as server_module
 from apps.admin_console.server import LIFECYCLE_TOKEN, app
-from artemis.runtime.server_lifecycle import (
+from omnipilot.runtime.server_lifecycle import (
     clear_server_info,
     find_server_pids,
     get_server_status,

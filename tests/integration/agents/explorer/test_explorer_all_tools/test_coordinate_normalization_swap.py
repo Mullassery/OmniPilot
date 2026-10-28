@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from unittest.mock import AsyncMock, patch
-from artemis.agents.object_detector.object_detector import _run_object_detection
+from omnipilot.agents.object_detector.object_detector import _run_object_detection
 import pytest
 
 

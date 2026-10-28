@@ -31,7 +31,7 @@ from mcp_server.tools import (
     mobile_manage_task,
     mobile_run_task,
 )
-from artemis.runtime import trace_store
+from omnipilot.runtime import trace_store
 
 
 @pytest.fixture
@@ -514,13 +514,13 @@ def _seed_trace(temp_dir: str, trace_id: str, *, with_image: bool = True) -> str
 
     from PIL import Image
 
-    from artemis.data_engine.models import (
+    from omnipilot.data_engine.models import (
         ImageRecord,
         SessionMetadata,
         StepRecord,
         TraceRecord,
     )
-    from artemis.data_engine.storage import StorageManager
+    from omnipilot.data_engine.storage import StorageManager
 
     storage = StorageManager(os.path.join(temp_dir, "data_engine.db"), temp_dir)
     storage.create_session(

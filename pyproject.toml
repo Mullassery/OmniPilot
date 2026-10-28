@@ -13,9 +13,9 @@
 # limitations under the License.
 
 [project]
-name = "artemis"
-version = "1.0"
-description = "Autonomous AI Assistant for Mobile Automation"
+name = "omnipilot"
+version = "1.1.0"
+description = "OmniPilot - verification-first mobile automation for iOS and Android"
 
 authors = [
     { name = "Farley Wang", email="farleyw@google.com" },
@@ -25,7 +25,7 @@ requires-python = ">=3.12"
 
 dependencies = [
     # Remote Python SDK (kept as a zero-dependency workspace package)
-    "artemis-client>=0.1.0",
+    "omnipilot-client>=0.1.0",
     # Orchestration & Framework
     "langgraph>=1.0.2,<2.0.0",
     "langchain>=1.0.0",
@@ -88,8 +88,8 @@ dev = [
 ]
 
 [project.scripts]
-artemis = "artemis.interfaces.cli.main:cli"
-artemis-admin = "apps.admin_console.server:main"
+omnipilot = "omnipilot.interfaces.cli.main:cli"
+omnipilot-admin = "apps.admin_console.server:main"
 
 
 [build-system]
@@ -99,10 +99,10 @@ requires = ["setuptools>=61.0", "Cython"]
 build-backend = "setuptools.build_meta"
 
 [tool.uv.workspace]
-members = ["packages/artemis-client"]
+members = ["packages/omnipilot-client"]
 
 [tool.uv.sources]
-artemis-client = { workspace = true }
+omnipilot-client = { workspace = true }
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -195,7 +195,7 @@ pythonpath = [
 testpaths = [
     "tests/unit",
     "tests/tools",
-    "packages/artemis-client/tests",
+    "packages/omnipilot-client/tests",
 ]
 python_files = [
     "*.test.py",

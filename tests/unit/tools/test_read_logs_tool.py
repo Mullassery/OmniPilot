@@ -14,9 +14,9 @@
 
 from unittest.mock import MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.tools.base import ArtemisTool
-from artemis.tools.mobile.read_logs import (
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.mobile.read_logs import (
     ReadLogs,
     ReadLogsArgs,
     ReadLogsTool,

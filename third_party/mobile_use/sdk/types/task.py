@@ -23,12 +23,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Generic, Literal, TypeVar, overload
 
-from artemis.config import LLMConfig, get_default_llm_config
-from artemis.constants import RECURSION_LIMIT
-from artemis.context import DeviceContext
-from artemis.sdk.utils import load_llm_config_override
+from omnipilot.config import LLMConfig, get_default_llm_config
+from omnipilot.constants import RECURSION_LIMIT
+from omnipilot.context import DeviceContext
+from omnipilot.sdk.utils import load_llm_config_override
 from pydantic import BaseModel, Field
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.utils.cython_compat import CyFunctionDetector
 
 TaskRunStatus = Literal["pending", "running", "completed", "failed", "cancelled"]
 

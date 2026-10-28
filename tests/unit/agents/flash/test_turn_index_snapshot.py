@@ -28,11 +28,11 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from langchain_core.messages import ToolMessage
 
-from artemis.agents.flash.runner import FlashRunner, _TurnRecord
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.mcp.action_executor import McpActionExecutor, _ArgError
-from artemis.mcp.action_types import ActionResult, ObserveResult
+from omnipilot.agents.flash.runner import FlashRunner, _TurnRecord
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.mcp.action_executor import McpActionExecutor, _ArgError
+from omnipilot.mcp.action_types import ActionResult, ObserveResult
 
 
 def _el(index: int, text: str, cx: int, cy: int) -> dict:

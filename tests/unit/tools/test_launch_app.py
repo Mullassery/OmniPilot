@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from unittest.mock import MagicMock, patch
-from artemis.context import ArtemisContext
-from artemis.tools.mobile.launch_app import find_package
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.mobile.launch_app import find_package
 from third_party.mobile_use.agents.hopper.hopper import HopperOutput
 import pytest
 

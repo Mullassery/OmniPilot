@@ -39,7 +39,7 @@ from pathlib import Path
 
 import pytest
 
-from artemis.mcp.action_specs import ACTION_SPECS, ParamSpec
+from omnipilot.mcp.action_specs import ACTION_SPECS, ParamSpec
 
 FIXTURES = Path(__file__).resolve().parents[2] / "fixtures" / "action_surfaces"
 
@@ -104,7 +104,7 @@ def _wire_param(action: str, name: str) -> ParamSpec:
 
 
 async def _adb_server_tools() -> dict:
-    from artemis.mcp import adb_server
+    from omnipilot.mcp import adb_server
 
     tools = await adb_server.mcp.list_tools()
     return {t.name: t for t in tools}

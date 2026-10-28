@@ -23,7 +23,7 @@ import uuid
 
 import pytest
 
-from artemis_client import ArtemisClient, TaskRejectedError
+from omnipilot_client import ArtemisClient, TaskRejectedError
 
 
 def _live_client() -> tuple[ArtemisClient, str]:

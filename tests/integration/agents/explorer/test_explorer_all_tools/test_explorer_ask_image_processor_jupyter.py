@@ -24,9 +24,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from langchain_core.messages import AIMessage
 import pytest
 
-from artemis.agents.image_processor.image_processor import ImageProcessor
-from artemis.config import settings
-from artemis.utils.python_executor import PythonExecutor
+from omnipilot.agents.image_processor.image_processor import ImageProcessor
+from omnipilot.config import settings
+from omnipilot.utils.python_executor import PythonExecutor
 from tests.integration.agents.explorer.test_explorer_all_tools.helpers import (
     create_mock_context,
     get_or_create_test_screenshot,
@@ -116,7 +116,7 @@ async def _run_scenario(test_name: str) -> None:
     # passed in as a literal path.
     image_processor_dir = outputs_dir / "images" / "image_processor"
     sample_code = f"""
-from artemis.utils.cv_canvas import ImageCanvas
+from omnipilot.utils.cv_canvas import ImageCanvas
 import glob
 from pathlib import Path
 

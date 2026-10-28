@@ -15,8 +15,8 @@
 import json
 from unittest.mock import MagicMock
 
-from artemis.context import ArtemisContext
-from artemis.data_engine.trace import (
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.trace import (
     TraceSpan,
     smart_serialize,
 )
@@ -90,7 +90,7 @@ async def test_trace_span_failure():
 def test_data_engine_callback_handler():
     from uuid import uuid4
     from langchain_core.messages import HumanMessage, AIMessage
-    from artemis.data_engine.trace import DataEngineCallbackHandler
+    from omnipilot.data_engine.trace import DataEngineCallbackHandler
 
     mock_ctx = MagicMock(spec=ArtemisContext)
     mock_ctx.data_engine = MagicMock()
@@ -147,7 +147,7 @@ def test_data_engine_callback_handler():
 def test_callback_handler_chain_parenting():
     from uuid import uuid4
     from langchain_core.messages import HumanMessage
-    from artemis.data_engine.trace import DataEngineCallbackHandler, CURRENT_TRACE_ID
+    from omnipilot.data_engine.trace import DataEngineCallbackHandler, CURRENT_TRACE_ID
 
     mock_ctx = MagicMock(spec=ArtemisContext)
     mock_ctx.data_engine = MagicMock()

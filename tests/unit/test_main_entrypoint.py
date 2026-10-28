@@ -21,8 +21,8 @@ and root options are passed through unchanged.
 import pytest
 import typer
 
-from artemis import main as legacy_main
-from artemis.interfaces.cli.main import app
+from omnipilot import main as legacy_main
+from omnipilot.interfaces.cli.main import app
 
 
 @pytest.mark.parametrize(

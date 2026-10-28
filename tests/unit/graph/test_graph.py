@@ -16,8 +16,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from langchain_core.messages import ToolMessage
 
-from artemis.context import ArtemisContext
-from artemis.graph.graph import wrap_note_tool, wrap_update_note_tool
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.graph import wrap_note_tool, wrap_update_note_tool
 import pytest
 
 ORIGINAL_PLAN = """# Test Plan

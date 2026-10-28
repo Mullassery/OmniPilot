@@ -18,7 +18,7 @@
 
 """Resolve a natural-language app name to an installed package via the Hopper agent."""
 
-from artemis.context import ArtemisContext
+from omnipilot.context import ArtemisContext
 from third_party.mobile_use.agents.hopper.hopper import HopperOutput, hopper
 from third_party.mobile_use.controllers.platform_specific_commands_controller import (
     list_packages_async,

@@ -19,16 +19,16 @@ from uuid import uuid4
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
-from artemis.agents.flash.context_compressor import ScrubEdgeCompressor
-from artemis.agents.flash.summarizer import (
+from omnipilot.agents.flash.context_compressor import ScrubEdgeCompressor
+from omnipilot.agents.flash.summarizer import (
     FOCUS_BLOCK_HEADER,
     FOCUS_INTENT_MAX_CHARS,
     VisualStepSummarizer,
     build_focus_context,
     render_focus_block,
 )
-from artemis.context import ArtemisContext
-from artemis.sdk.builders import Builders
+from omnipilot.context import ArtemisContext
+from omnipilot.sdk.builders import Builders
 
 
 @pytest.fixture
@@ -525,7 +525,7 @@ async def test_raw_lens_call_meters_llm_usage_without_touching_context_base(mock
     """The raw-model lens bypass records an llm_usage trace, but its tiny
     prompt never overwrites the session's last_prompt_tokens (the compaction
     thresholds' live context base)."""
-    from artemis.services.token_meter import get_meter
+    from omnipilot.services.token_meter import get_meter
 
     engine = Mock()
     engine.current_session_id = "lens-meter-session"
@@ -885,7 +885,7 @@ def test_draw_action_overlay_rendering():
     """Verify that draw_action_overlay_on_image correctly renders markers on images."""
     import io
     from PIL import Image
-    from artemis.utils.visualization import draw_action_overlay_on_image
+    from omnipilot.utils.visualization import draw_action_overlay_on_image
 
     # Create a blank RGB image in memory
     img = Image.new("RGB", (1080, 2400), color="white")

@@ -18,7 +18,7 @@ import logging
 from pathlib import Path
 import sys
 from unittest.mock import AsyncMock, MagicMock, patch
-from artemis.agents.explorer.explorer import Explorer
+from omnipilot.agents.explorer.explorer import Explorer
 from tests.integration.agents.explorer.test_explorer_all_tools.helpers import (
     create_mock_context,
     create_mock_state,
@@ -95,7 +95,7 @@ async def test_explorer_ask_image_processor_tool():
     if not outputs_dir.exists():
         outputs_dir.mkdir(parents=True, exist_ok=True)
 
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     settings.TRACES_PATH = outputs_dir
 
@@ -289,7 +289,7 @@ if __name__ == "__main__":
 def test_cv_canvas_annotations(tmp_path):
     import numpy as np
     import cv2
-    from artemis.utils.cv_canvas import ImageCanvas
+    from omnipilot.utils.cv_canvas import ImageCanvas
 
     # Create a dummy image
     img_dir = tmp_path / "images"

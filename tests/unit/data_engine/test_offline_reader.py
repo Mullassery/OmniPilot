@@ -26,9 +26,9 @@ from unittest.mock import MagicMock
 import pytest
 from PIL import Image
 
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
-from artemis.data_engine.history_reader import HistoryReader, OfflineHistoryReader
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
+from omnipilot.data_engine.history_reader import HistoryReader, OfflineHistoryReader
 
 
 def _jpeg(color: str) -> bytes:

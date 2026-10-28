@@ -23,8 +23,8 @@ from collections.abc import Callable
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel
 
-from artemis.context import ArtemisContext
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.context import ArtemisContext
+from omnipilot.utils.cython_compat import CyFunctionDetector
 
 
 class ToolWrapper(BaseModel):

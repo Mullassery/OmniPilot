@@ -31,7 +31,7 @@ from cloud_service.virtualization.remote_adb import (
     RemoteAdbClient,
 )
 
-from artemis.context import ArtemisContext, DeviceContext, DevicePlatform
+from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform
 from third_party.mobile_use.controllers.platform_specific_commands_controller import (
     get_adb_device,
     list_packages,
@@ -157,8 +157,8 @@ def test_controller_factory_cloud_mode_uses_unified_controller(monkeypatch):
     monkeypatch.setenv("ARTEMIS_CLOUD_SESSION_ID", "test_cloud_session")
     monkeypatch.setenv("ADB_DEVICE_SERIAL", "emulator-5554")
 
-    from artemis.controllers.controller_factory import create_device_controller
-    from artemis.controllers.unified_controller import UnifiedMobileController
+    from omnipilot.controllers.controller_factory import create_device_controller
+    from omnipilot.controllers.unified_controller import UnifiedMobileController
 
     ctx = ArtemisContext(
         device=DeviceContext(

@@ -13,8 +13,8 @@ import subprocess
 
 import pytest
 
-from artemis.runtime import helper_manager as hm
-from artemis.runtime.helper_manager import (
+from omnipilot.runtime import helper_manager as hm
+from omnipilot.runtime.helper_manager import (
     DEVICE_PORT,
     SERVICE_NAME,
     AccessibilityHelperManager,

@@ -25,8 +25,8 @@ import re
 
 import pytest
 
-from artemis.core.tool_declaration import ToolDeclaration
-from artemis.mcp.action_manifest import (
+from omnipilot.core.tool_declaration import ToolDeclaration
+from omnipilot.mcp.action_manifest import (
     ActuatorContractError,
     AGENT_ROLES,
     ALL_KNOWN_TOOLS,

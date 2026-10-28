@@ -14,16 +14,16 @@
 
 from unittest.mock import MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.tools.base import ArtemisTool
-from artemis.tools.scratchpad import (
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.scratchpad import (
     ListNotesArgs,
     ListNotesPure,
     ListNotesPureTool,
     get_list_notes_tool_pure,
     list_notes_pure,
 )
-from artemis.utils.notes import save_note_content
+from omnipilot.utils.notes import save_note_content
 import pytest
 
 

@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from artemis.drivers.android.adb_driver import AndroidAdbDriver
+from omnipilot.drivers.android.adb_driver import AndroidAdbDriver
 from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
 

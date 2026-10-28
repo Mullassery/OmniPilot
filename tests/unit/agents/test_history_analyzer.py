@@ -17,9 +17,9 @@ from unittest.mock import MagicMock, patch
 
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import StructuredTool
-from artemis.agents.history_analyzer.history_analyzer import HistoryAnalyzer
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
+from omnipilot.agents.history_analyzer.history_analyzer import HistoryAnalyzer
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
 import pytest
 
 
@@ -294,7 +294,7 @@ def test_history_analyzer_robust_tools_behavior():
     assert "[Screen]: Action 1" in result_details
 
     # 2. Test read_note with .md suffix
-    from artemis.tools.scratchpad import get_read_note_tool_pure
+    from omnipilot.tools.scratchpad import get_read_note_tool_pure
 
     read_tool = get_read_note_tool_pure(analyzer.ctx)
 

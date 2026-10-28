@@ -16,4 +16,4 @@
 
 # artemis and these modules import each other. Import artemis first so that
 # importing one of these modules directly works the same as going through artemis.
-import artemis  # noqa: F401, E402
+import omnipilot  # noqa: F401, E402

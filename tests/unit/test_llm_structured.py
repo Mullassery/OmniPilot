@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 
-from artemis.llm.structured import (
+from omnipilot.llm.structured import (
     ParseFailure,
     content_to_text,
     extract_json_candidate,

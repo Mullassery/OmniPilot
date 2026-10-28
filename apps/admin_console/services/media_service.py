@@ -26,7 +26,7 @@ from typing import Any
 import urllib.parse
 from fastapi import HTTPException
 
-from artemis.config import IMAGES_DIR, TRACES_PATH, WORKSPACE_ROOT
+from omnipilot.config import IMAGES_DIR, TRACES_PATH, WORKSPACE_ROOT
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +99,7 @@ class MediaService:
 
     @staticmethod
     def _convert_to_mp4(p: Path, mp4_cand: Path) -> Path:
-        from artemis.utils.video import get_ffmpeg_path
+        from omnipilot.utils.video import get_ffmpeg_path
 
         ffmpeg = get_ffmpeg_path()
         # 1. Attempt fast copy remux

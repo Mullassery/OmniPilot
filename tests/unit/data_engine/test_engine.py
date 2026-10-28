@@ -16,8 +16,8 @@ import asyncio
 import json
 from unittest.mock import MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
 
 
 def test_ipc_send_reconnects_and_retries_current_event(tmp_path):
@@ -162,8 +162,8 @@ def test_get_or_create_image_updates_missing_data(tmp_path):
 
 
 def test_create_image_duplicate_handling(tmp_path):
-    from artemis.data_engine.storage import StorageManager
-    from artemis.data_engine.models import ImageRecord
+    from omnipilot.data_engine.storage import StorageManager
+    from omnipilot.data_engine.models import ImageRecord
 
     storage = StorageManager(tmp_path / "data_engine.db", tmp_path)
     image_record = ImageRecord(
@@ -187,8 +187,8 @@ def test_create_image_duplicate_handling(tmp_path):
 
 def test_video_recording_persistence(tmp_path):
     from uuid import uuid4
-    from artemis.data_engine.storage import StorageManager
-    from artemis.data_engine.models import VideoRecordingRecord
+    from omnipilot.data_engine.storage import StorageManager
+    from omnipilot.data_engine.models import VideoRecordingRecord
 
     storage = StorageManager(tmp_path / "data_engine.db", tmp_path)
     video_id = uuid4()
@@ -519,7 +519,7 @@ def test_tool_result_images_are_described_as_step_screenshots(tmp_path):
 
     from PIL import Image
 
-    from artemis.data_engine.engine import GENERIC_IMAGE_LABEL
+    from omnipilot.data_engine.engine import GENERIC_IMAGE_LABEL
 
     buf = io.BytesIO()
     Image.new("RGB", (32, 64), "red").save(buf, format="JPEG")
@@ -571,7 +571,7 @@ def test_tool_result_images_are_described_as_step_screenshots(tmp_path):
 def test_flash_normalized_record_survives_agent_friendly_steps_unchanged(tmp_path):
     """Flash records the model's 0–1000 target with an explicit space marker;
     the agent-friendly view must not normalize it a second time."""
-    from artemis.utils.coordinates import COORDINATE_SPACE_KEY, COORDINATE_SPACE_NORMALIZED
+    from omnipilot.utils.coordinates import COORDINATE_SPACE_KEY, COORDINATE_SPACE_NORMALIZED
 
     engine = _replay_engine(tmp_path)
     engine.record_step(
@@ -596,7 +596,7 @@ def test_pro_pixel_record_is_normalized_exactly_once(tmp_path):
     """Pro records physical pixels (with the frame size in extra_metadata);
     the friendly view converts them once, and the result is stamped so a
     downstream pass (MCP inspector, replay) leaves it alone."""
-    from artemis.utils.coordinates import (
+    from omnipilot.utils.coordinates import (
         COORDINATE_SPACE_KEY,
         COORDINATE_SPACE_NORMALIZED,
         COORDINATE_SPACE_PIXEL,

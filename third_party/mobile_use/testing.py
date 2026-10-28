@@ -36,8 +36,8 @@ class DummyState:
 @pytest.fixture
 def mock_context():
     """Create a properly mocked context with all required fields."""
-    from artemis.config import LLM
-    from artemis.context import ArtemisContext
+    from omnipilot.config import LLM
+    from omnipilot.context import ArtemisContext
 
     ctx = Mock(spec=ArtemisContext)
     ctx.llm_config = {

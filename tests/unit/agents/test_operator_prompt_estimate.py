@@ -26,11 +26,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.operator.operator import OperatorNode
-from artemis.config.agent import MemoryTranscriptConfig
-from artemis.context import ArtemisContext
-from artemis.memory.step_memory import StepMemoryService
-from artemis.memory.transcript import TranscriptLedger, estimate_prompt_tokens
+from omnipilot.agents.operator.operator import OperatorNode
+from omnipilot.config.agent import MemoryTranscriptConfig
+from omnipilot.context import ArtemisContext
+from omnipilot.memory.step_memory import StepMemoryService
+from omnipilot.memory.transcript import TranscriptLedger, estimate_prompt_tokens
 
 SCREENSHOT_B64 = base64.b64encode(b"fake-jpeg-bytes").decode("utf-8")
 

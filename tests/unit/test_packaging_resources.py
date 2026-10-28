@@ -16,8 +16,8 @@
 
 from importlib.metadata import version
 
-import artemis
-from artemis import resources
+import omnipilot
+from omnipilot import resources
 
 
 def test_public_version_comes_from_distribution_metadata():

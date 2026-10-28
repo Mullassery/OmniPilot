@@ -16,7 +16,7 @@
 # Originally from mobile-use (https://github.com/minitap-ai/mobile-use).
 # See third_party/mobile_use/METADATA for the upstream source and local modifications.
 
-from artemis.sdk.builders.agent_config_builder import AgentConfigBuilder
+from omnipilot.sdk.builders.agent_config_builder import AgentConfigBuilder
 from third_party.mobile_use.sdk.builders.task_request_builder import TaskRequestCommonBuilder
 
 

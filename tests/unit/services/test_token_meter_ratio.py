@@ -25,7 +25,7 @@ from uuid import uuid4
 
 from langchain_core.messages import AIMessage
 
-from artemis.services.token_meter import (
+from omnipilot.services.token_meter import (
     SessionTokenMeter,
     cached_ratio,
     format_session_summary,

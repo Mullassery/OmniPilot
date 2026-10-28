@@ -19,15 +19,15 @@ import subprocess
 
 import pytest
 
-from artemis.config import settings
-from artemis.core.diagnostics.adb_server_connection import (
+from omnipilot.config import settings
+from omnipilot.core.diagnostics.adb_server_connection import (
     AdbServerConnectionManager,
     AdbServerEndpoint,
     InvalidAdbServerEndpoint,
     adb_server_connection,
 )
-from artemis.core.diagnostics.engine import ReadinessEngine
-from artemis.runtime.adb_endpoint import ADB_ENDPOINT_ID_ENV, AdbSession
+from omnipilot.core.diagnostics.engine import ReadinessEngine
+from omnipilot.runtime.adb_endpoint import ADB_ENDPOINT_ID_ENV, AdbSession
 
 
 @pytest.mark.parametrize(

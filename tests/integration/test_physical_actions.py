@@ -22,8 +22,8 @@ if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
 from adbutils import AdbClient
-from artemis.context import DeviceContext, DevicePlatform, ArtemisContext
-from artemis.controllers.unified_controller import UnifiedMobileController
+from omnipilot.context import DeviceContext, DevicePlatform, ArtemisContext
+from omnipilot.controllers.unified_controller import UnifiedMobileController
 from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
 

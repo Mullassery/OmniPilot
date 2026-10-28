@@ -24,7 +24,7 @@ import pytest
 
 from apps.admin_console import replay_manager as rm_module
 from apps.admin_console.replay_manager import ReplayManager
-from artemis.graph.state import State
+from omnipilot.graph.state import State
 
 SESSION_ID = "11111111-2222-3333-4444-555555555555"
 REAL_DATA_DIR = Path(rm_module.TRACES_PATH) / "replay" / "data"

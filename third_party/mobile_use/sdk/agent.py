@@ -44,31 +44,31 @@ from adbutils import AdbClient
 from PIL import Image
 from pydantic import BaseModel
 
-from artemis.agents.flash.runner import FlashRunner
-from artemis.agents.outputter.outputter import outputter
-from artemis.clients.screen_client_factory import (
+from omnipilot.agents.flash.runner import FlashRunner
+from omnipilot.agents.outputter.outputter import outputter
+from omnipilot.clients.screen_client_factory import (
     ScreenClient,
     create_screen_client,
 )
-from artemis.config import (
+from omnipilot.config import (
     OutputConfig,
     record_events,
 )
-from artemis.constants import RECURSION_LIMIT
-from artemis.context import (
+from omnipilot.constants import RECURSION_LIMIT
+from omnipilot.context import (
     ArtemisContext,
     DeviceContext,
     DevicePlatform,
     ExecutionSetup,
 )
-from artemis.controllers.controller_factory import get_controller
-from artemis.data_engine.trace import DataEngineCallbackHandler
-from artemis.graph.graph import get_graph
-from artemis.graph.state import State
-from artemis.runtime import DeviceExecutionLock
-from artemis.sdk.run_outcome import attach_test_summary, resolve_trace_suffix
-from artemis.sdk.types.agent import AgentConfig
-from artemis.utils.startup_progress import publish_startup_progress
+from omnipilot.controllers.controller_factory import get_controller
+from omnipilot.data_engine.trace import DataEngineCallbackHandler
+from omnipilot.graph.graph import get_graph
+from omnipilot.graph.state import State
+from omnipilot.runtime import DeviceExecutionLock
+from omnipilot.sdk.run_outcome import attach_test_summary, resolve_trace_suffix
+from omnipilot.sdk.types.agent import AgentConfig
+from omnipilot.utils.startup_progress import publish_startup_progress
 from third_party.mobile_use.controllers.platform_specific_commands_controller import (
     get_first_device,
 )
@@ -752,7 +752,7 @@ class AgentBase:
                 try:
                     # Background ADB processes (logcat, screenrecord, ...) started
                     # by the Operator must not outlive the automation task.
-                    from artemis.tools.command_tool import shutdown_adb_background_tasks
+                    from omnipilot.tools.command_tool import shutdown_adb_background_tasks
 
                     await asyncio.wait_for(shutdown_adb_background_tasks(context), timeout=15.0)
                 except Exception as e:
@@ -1038,7 +1038,7 @@ class AgentBase:
             logger.warning("ADB client not available, using default dimensions")
             device_width, device_height = 1080, 2340
 
-        from artemis.platform import platform as pal_platform
+        from omnipilot.platform import platform as pal_platform
 
         return DeviceContext(
             host_platform=pal_platform.os_type.name,

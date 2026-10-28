@@ -26,11 +26,11 @@ import warnings
 
 from pydantic import BaseModel, Field, model_validator
 
-from artemis.config.constants import (
+from omnipilot.config.constants import (
     ENV_EVENTS_OUTPUT_PATH,
     ENV_RESULTS_OUTPUT_PATH,
 )
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.utils.cython_compat import CyFunctionDetector
 from third_party.mobile_use.utils.logger import get_logger
 
 logger = get_logger(__name__)

@@ -32,18 +32,18 @@ from unittest.mock import AsyncMock, Mock, PropertyMock, patch
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 
-from artemis.agents.flash.runner import _FINAL_TURN_WARNING, FlashRunner, _TurnRecord
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.flash.runner import _FINAL_TURN_WARNING, FlashRunner, _TurnRecord
+from omnipilot.agents.operator.prompts import (
     REASONING_REMINDER,
     USER_GUIDANCE_MARKER,
     UserGuidance,
     render_user_guidance,
     render_user_instruction,
 )
-from artemis.agents.validator.tool_declarations import ToolExecutionResult
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.memory.transcript import (
+from omnipilot.agents.validator.tool_declarations import ToolExecutionResult
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.memory.transcript import (
     EPHEMERAL_BLOCKS_KEY,
     EXECUTION_RESULT_MARKER,
     PRO_UI_LIST_MARKER,

@@ -13,11 +13,11 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from artemis.clients.accessibility_client import AccessibilityClient, HelperEmptyHierarchy
-from artemis.clients.screen_client_factory import FallbackScreenClient
-from artemis.core.diagnostics.hierarchy_parity import compare_dumps
-from artemis.utils import ui_filter
-from artemis.utils.visualization import format_minimal_list_with_elements
+from omnipilot.clients.accessibility_client import AccessibilityClient, HelperEmptyHierarchy
+from omnipilot.clients.screen_client_factory import FallbackScreenClient
+from omnipilot.core.diagnostics.hierarchy_parity import compare_dumps
+from omnipilot.utils import ui_filter
+from omnipilot.utils.visualization import format_minimal_list_with_elements
 from third_party.mobile_use.clients.ui_automator_client import (
     UIAutomatorClient,
     parse_hierarchy_xml_to_elements,

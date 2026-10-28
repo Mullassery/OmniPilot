@@ -14,8 +14,8 @@
 
 """Regression tests for source-checkout versus installed-wheel state paths."""
 
-from artemis.config import paths
-from artemis.config import runtime
+from omnipilot.config import paths
+from omnipilot.config import runtime
 
 
 def _clear_path_overrides(monkeypatch):

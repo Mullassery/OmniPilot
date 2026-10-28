@@ -14,9 +14,9 @@
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.tools.base import ArtemisTool
-from artemis.tools.video_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.video_tool import (
     VideoAnalyzerArgs,
     VideoAnalyzerPure,
     VideoAnalyzerPureTool,

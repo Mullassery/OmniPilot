@@ -19,12 +19,12 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import pytest
 from langchain_core.messages import AIMessage
 
-from artemis.agents.video_analyzer.video_analyzer import (
+from omnipilot.agents.video_analyzer.video_analyzer import (
     UNIVERSAL_MAIN_TOOLS,
     UNIVERSAL_SUBMIT_ANSWER_TOOL,
     VideoAnalyzer,
 )
-from artemis.context import ArtemisContext
+from omnipilot.context import ArtemisContext
 
 
 @pytest.fixture
@@ -48,7 +48,7 @@ def mock_context(tmp_path):
 
 def test_video_analyzer_universal_engine_detection(mock_context):
     """Test that VideoAnalyzer routes to Universal Engine when non-Gemini model is set."""
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     with patch.object(settings, "GOOGLE_API_KEY", None):
         agent = VideoAnalyzer(mock_context)
@@ -319,7 +319,7 @@ async def test_exec_single_chunk_universal_raises_without_usable_answer(
     mock_context, tmp_path, response
 ):
     """No tool call + no text, or blank-summary tool call + no text -> raise, no persistence."""
-    from artemis.agents.video_analyzer.reliability import SubAgentAnswerExhausted
+    from omnipilot.agents.video_analyzer.reliability import SubAgentAnswerExhausted
 
     agent = _universal_agent(mock_context)
     outcome, persist = await _run_chunk_with_response(agent, tmp_path, response)
@@ -409,7 +409,7 @@ async def test_exec_analyze_audio_universal_raises_without_usable_answer(
     mock_context, tmp_path, response
 ):
     """Audio path: no usable answer -> raise before anything reaches the blackboard."""
-    from artemis.agents.video_analyzer.reliability import SubAgentAnswerExhausted
+    from omnipilot.agents.video_analyzer.reliability import SubAgentAnswerExhausted
 
     agent = _universal_agent(mock_context)
     outcome, record = await _run_audio_with_response(agent, tmp_path, response)
@@ -435,7 +435,7 @@ async def test_exec_analyze_audio_universal_text_only_is_degraded_answer(mock_co
 
 def test_sub_agent_answer_exhausted_classifies_as_unknown():
     """The raise must land in the retryable / split / fallback bucket of the callers."""
-    from artemis.agents.video_analyzer.reliability import (
+    from omnipilot.agents.video_analyzer.reliability import (
         SubAgentAnswerExhausted,
         VideoFailureCategory,
         classify_video_failure,

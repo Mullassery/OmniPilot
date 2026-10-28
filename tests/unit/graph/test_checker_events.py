@@ -24,9 +24,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.checker.checker import CheckReport, CheckVerdict
-from artemis.context import ArtemisContext, ExecutionSetup
-from artemis.graph.checkpoints import (
+from omnipilot.agents.checker.checker import CheckReport, CheckVerdict
+from omnipilot.context import ArtemisContext, ExecutionSetup
+from omnipilot.graph.checkpoints import (
     CHECKER_EVENT,
     CheckpointRun,
     PendingCheckpoint,
@@ -35,9 +35,9 @@ from artemis.graph.checkpoints import (
     read_ledger,
     spawn_pending_checkpoints,
 )
-from artemis.graph.graph import exit_settlement_node
-from artemis.graph.state import State
-from artemis.utils.plan_grammar import CheckItem, subgoal_hash
+from omnipilot.graph.graph import exit_settlement_node
+from omnipilot.graph.state import State
+from omnipilot.utils.plan_grammar import CheckItem, subgoal_hash
 
 GOAL_TEXT = "Create the alarm"
 GOAL_KEY = subgoal_hash(GOAL_TEXT)
@@ -152,8 +152,8 @@ async def test_checker_entry_announces_attempt_with_trace_id(tmp_path):
     """attempt_started is published from inside the traced checker scope and
     carries the Checker's own trace id (UI routing key for its stream/tools),
     the anchor and the declared items."""
-    from artemis.agents.checker.checker import run_checkpoint_check, run_final_check
-    from artemis.graph.checkpoints import EvidenceAnchor
+    from omnipilot.agents.checker.checker import run_checkpoint_check, run_final_check
+    from omnipilot.graph.checkpoints import EvidenceAnchor
 
     _write_plan(tmp_path)
     ctx = _make_ctx(tmp_path)

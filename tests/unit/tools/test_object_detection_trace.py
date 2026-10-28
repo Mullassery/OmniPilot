@@ -14,9 +14,9 @@
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.object_detection_tool import get_operator_object_detector_tool
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.object_detection_tool import get_operator_object_detector_tool
 import pytest
 
 

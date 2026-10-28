@@ -18,18 +18,18 @@ import asyncio
 from unittest.mock import AsyncMock, Mock
 
 import pytest
-from artemis.core.diagnostics.engine import ReadinessEngine
-from artemis.core.diagnostics.probes.adb_probe import AdbDeviceProbe
-from artemis.core.diagnostics.probes.credentials_probe import (
+from omnipilot.core.diagnostics.engine import ReadinessEngine
+from omnipilot.core.diagnostics.probes.adb_probe import AdbDeviceProbe
+from omnipilot.core.diagnostics.probes.credentials_probe import (
     LLMCredentialsProbe,
     VisionOCRProbe,
 )
-from artemis.core.diagnostics.probes.runtime_probe import (
+from omnipilot.core.diagnostics.probes.runtime_probe import (
     PythonRuntimeProbe,
     SystemConfigProbe,
 )
-from artemis.core.diagnostics.probes.toolchain_probe import ToolchainProbe
-from artemis.core.diagnostics.schema import (
+from omnipilot.core.diagnostics.probes.toolchain_probe import ToolchainProbe
+from omnipilot.core.diagnostics.schema import (
     ProbeCategory,
     ProbeResult,
     ProbeStatus,
@@ -331,7 +331,7 @@ async def test_submission_probe_falls_back_to_unlocked_device(monkeypatch):
 @pytest.mark.asyncio
 async def test_adb_probe_prefers_unlocked_device_when_one_is_locked(monkeypatch):
     """When multiple ready devices exist, probe() should pick the unlocked one as active."""
-    from artemis.core.diagnostics.schema import DeviceInfo
+    from omnipilot.core.diagnostics.schema import DeviceInfo
 
     probe = AdbDeviceProbe()
     monkeypatch.setattr(probe, "_locate_adb", lambda: "/usr/bin/adb")
@@ -395,7 +395,7 @@ async def test_probe_target_serial_forwards_to_adb_probe():
 @pytest.mark.asyncio
 async def test_credentials_probe_and_dynamic_update():
     """Verify dynamic API key updates and metadata reflection."""
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     settings.set_api_key("google", "test_gemini_key_1234567890", persist_to_env=False)
 
@@ -411,7 +411,7 @@ async def test_credentials_probe_and_dynamic_update():
 @pytest.mark.asyncio
 async def test_emulator_manager_lifecycle():
     """Verify EmulatorManager status querying, validation, and dismissal."""
-    from artemis.core.diagnostics.emulator_manager import (
+    from omnipilot.core.diagnostics.emulator_manager import (
         EmulatorLaunchStage,
         EmulatorManager,
     )

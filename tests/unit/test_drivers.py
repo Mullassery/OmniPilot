@@ -20,9 +20,9 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from artemis.drivers.base import KeyCode, ScreenData, SwipeDirection
-from artemis.drivers.mock.mock_driver import MockDeviceDriver
-from artemis.drivers.android.adb_driver import AndroidAdbDriver
+from omnipilot.drivers.base import KeyCode, ScreenData, SwipeDirection
+from omnipilot.drivers.mock.mock_driver import MockDeviceDriver
+from omnipilot.drivers.android.adb_driver import AndroidAdbDriver
 from third_party.mobile_use.controllers.types import ElementQuery
 
 

@@ -17,18 +17,18 @@
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
-from artemis.agents.explorer.explorer import Explorer
-from artemis.config.settings import Settings
-from artemis.graph.perception import perception_node
-from artemis.graph.state import State
-from artemis.tools.index import get_tools_from_wrappers
-from artemis.tools.mobile.ocr import (
+from omnipilot.agents.explorer.explorer import Explorer
+from omnipilot.config.settings import Settings
+from omnipilot.graph.perception import perception_node
+from omnipilot.graph.state import State
+from omnipilot.tools.index import get_tools_from_wrappers
+from omnipilot.tools.mobile.ocr import (
     ocr_recognition,
     ocr_recognition_wrapper,
 )
-from artemis.utils.ocr_api import is_ocr_configured, perform_ocr
-from artemis.utils.ocr_xml_fusion import fuse_ocr_with_xml
-from artemis.utils.visualization import format_minimal_list_with_elements
+from omnipilot.utils.ocr_api import is_ocr_configured, perform_ocr
+from omnipilot.utils.ocr_xml_fusion import fuse_ocr_with_xml
+from omnipilot.utils.visualization import format_minimal_list_with_elements
 
 
 @pytest.mark.asyncio

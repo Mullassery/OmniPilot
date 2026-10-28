@@ -16,9 +16,9 @@ import asyncio
 import time
 from unittest.mock import AsyncMock, MagicMock
 
-from artemis.context import ArtemisContext
-from artemis.tools.base import ArtemisTool
-from artemis.tools.wait_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.wait_tool import (
     Wait,
     WaitArgs,
     WaitTool,

@@ -14,8 +14,8 @@
 
 from unittest.mock import AsyncMock, Mock, patch
 
-from artemis.context import ArtemisContext
-from artemis.utils.app_launch_utils import (
+from omnipilot.context import ArtemisContext
+from omnipilot.utils.app_launch_utils import (
     ForegroundTask,
     get_foreground_task,
     parse_foreground_task,
@@ -243,7 +243,7 @@ def test_get_foreground_task_falls_back_to_the_full_dump_without_grep(
 
 
 def test_task_header_accepts_android_11_taskrecord_form():
-    from artemis.utils.app_launch_utils import parse_foreground_task
+    from omnipilot.utils.app_launch_utils import parse_foreground_task
 
     dump = "\n".join(
         [
@@ -461,7 +461,7 @@ def test_task_affinity_alone_identifies_the_owning_app():
     """Seen on a Pixel 10: the Settings task had lost its root activity and only
     the search companion remained in its history, but the task affinity
     (``com.android.settings.root``) still named the app."""
-    from artemis.utils.app_launch_utils import ForegroundTask
+    from omnipilot.utils.app_launch_utils import ForegroundTask
 
     task = ForegroundTask(
         task_id=121,

@@ -27,7 +27,7 @@ from urllib.parse import urlparse
 from langchain_core.callbacks.base import Callbacks
 from pydantic import BaseModel
 
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.utils.cython_compat import CyFunctionDetector
 from third_party.mobile_use.context import DevicePlatform
 from third_party.mobile_use.sdk.types.task import AgentProfile, TaskRequestCommon
 

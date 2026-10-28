@@ -19,7 +19,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from artemis.utils.video import RECORDING_MANIFEST_VERSION, write_recording_manifest
+from omnipilot.utils.video import RECORDING_MANIFEST_VERSION, write_recording_manifest
 
 
 def _probe(durations: dict[str, float]):

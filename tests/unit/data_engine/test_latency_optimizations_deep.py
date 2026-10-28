@@ -21,9 +21,9 @@ from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from langchain_core.messages import HumanMessage
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
-from artemis.graph.state import State
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
+from omnipilot.graph.state import State
 from third_party.mobile_use.utils.logger import DataEngineHandler
 import pytest
 
@@ -192,7 +192,7 @@ async def test_record_step_background_image_and_step_persistence(
 @pytest.mark.asyncio
 async def test_perception_node_async_offloading(mock_artemis_ctx, tmp_path):
     """Verify perception_node offloads injected_instruction reading/unlinking and get_or_create_image to background."""
-    from artemis.graph.perception import perception_node
+    from omnipilot.graph.perception import perception_node
 
     engine = DataEngine(mock_artemis_ctx)
     engine.start_session("Test Perception Node Offloading")
@@ -256,7 +256,7 @@ async def test_perception_node_async_offloading(mock_artemis_ctx, tmp_path):
 async def test_ocr_api_persistent_http_client_singleton_and_tls_reuse():
     """Verify get_http_client returns a persistent singleton httpx.AsyncClient that reuses TLS connections across OCR calls."""
     import httpx
-    from artemis.utils import ocr_api
+    from omnipilot.utils import ocr_api
 
     # Reset singleton to test fresh creation & persistence
     ocr_api._HTTP_CLIENT = None
@@ -303,7 +303,7 @@ async def test_ui_filter_and_ui_automator_client_pre_parsed_bounds_o1_lookup():
     """Verify XML parsing pre-populates parsed_bounds and _parse_bounds hits this cache in O(1) without regex matches."""
     import re
     from third_party.mobile_use.clients.ui_automator_client import parse_hierarchy_xml_to_elements
-    from artemis.utils.ui_filter import _parse_bounds
+    from omnipilot.utils.ui_filter import _parse_bounds
 
     # 1. Test ingestion pre-parsing in parse_hierarchy_xml_to_elements
     xml_data = '<hierarchy><node text="Login Btn" bounds="[15,25][350,120]"/></hierarchy>'
@@ -344,7 +344,7 @@ async def test_validator_pre_execution_loop_reverted_to_exact_safety_contract(
     mock_artemis_ctx, tmp_path
 ):
     """Verify Validator pre-execution check runs VLM on XML failure, but retains XML error if VLM fails (reverted contract)."""
-    from artemis.agents.validator.validator import ValidatorNode, ValidationErrorCategory
+    from omnipilot.agents.validator.validator import ValidatorNode, ValidationErrorCategory
 
     # Set mock context properties required by tracing decorators
     mock_artemis_ctx.data_engine = MagicMock()
@@ -426,7 +426,7 @@ async def test_validator_pre_execution_loop_reverted_to_exact_safety_contract(
 @pytest.mark.asyncio
 async def test_record_step_pre_allocated_id_reset(mock_artemis_ctx):
     """Verify that after record_step is called, the pre-allocated current_step_id is reset to None so subsequent steps generate distinct IDs."""
-    from artemis.data_engine.engine import DataEngine
+    from omnipilot.data_engine.engine import DataEngine
 
     engine = DataEngine(mock_artemis_ctx)
     engine.start_session("Pre-allocated ID Reset Test")

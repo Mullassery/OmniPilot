@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from artemis.agents.history_analyzer.history_analyzer import HistoryAnalyzer
-from artemis.config import parse_llm_config
+from omnipilot.agents.history_analyzer.history_analyzer import HistoryAnalyzer
+from omnipilot.config import parse_llm_config
 import pytest
 
 

@@ -21,9 +21,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.checker.checker import CheckReport, CheckVerdict
-from artemis.context import ArtemisContext, ExecutionSetup
-from artemis.graph.checkpoints import (
+from omnipilot.agents.checker.checker import CheckReport, CheckVerdict
+from omnipilot.context import ArtemisContext, ExecutionSetup
+from omnipilot.graph.checkpoints import (
     CheckpointRun,
     PendingCheckpoint,
     append_ledger_record,
@@ -32,14 +32,14 @@ from artemis.graph.checkpoints import (
     resolve_item_status,
     settle_all_checkpoints,
 )
-from artemis.graph.graph import (
+from omnipilot.graph.graph import (
     convergence_gate,
     exit_settlement_gate,
     exit_settlement_node,
 )
-from artemis.graph.state import State
-from artemis.sdk.agent import attach_test_summary, resolve_trace_suffix
-from artemis.utils.plan_grammar import CheckItem, parse_plan, subgoal_hash
+from omnipilot.graph.state import State
+from omnipilot.sdk.agent import attach_test_summary, resolve_trace_suffix
+from omnipilot.utils.plan_grammar import CheckItem, parse_plan, subgoal_hash
 
 DONE_PLAN_WITH_CHECKS = (
     "- [x] Create alarm\n"

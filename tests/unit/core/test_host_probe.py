@@ -20,9 +20,9 @@ import sys
 
 import pytest
 
-from artemis.core.diagnostics import IntegrationHostProbe, ReadinessEngine
-from artemis.core.diagnostics.probes import host_probe
-from artemis.core.diagnostics.schema import ProbeCategory, ProbeStatus
+from omnipilot.core.diagnostics import IntegrationHostProbe, ReadinessEngine
+from omnipilot.core.diagnostics.probes import host_probe
+from omnipilot.core.diagnostics.schema import ProbeCategory, ProbeStatus
 
 
 #: Environment keys / prefixes any IDE might export; scrubbed so the developer's
@@ -448,7 +448,7 @@ class _FakeResponse:
     ],
 )
 def test_is_artemis_daemon_requires_the_server_status_shape(monkeypatch, status, body, expected):
-    from artemis.runtime import daemon_client
+    from omnipilot.runtime import daemon_client
 
     seen: dict[str, str] = {}
 
@@ -462,7 +462,7 @@ def test_is_artemis_daemon_requires_the_server_status_shape(monkeypatch, status,
 
 
 def test_is_artemis_daemon_is_false_when_nothing_listens(monkeypatch):
-    from artemis.runtime import daemon_client
+    from omnipilot.runtime import daemon_client
 
     def refuse(req, timeout):
         raise ConnectionRefusedError()

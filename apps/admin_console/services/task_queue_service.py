@@ -35,13 +35,13 @@ except ImportError:
     from apps.admin_console.services import worker_process_io
     from apps.admin_console.services.media_service import media_service
 
-from artemis.config import (
+from omnipilot.config import (
     PAUSE_FILE,
     TEST_DATA_DIR,
     TEST_OUTPUTS_DIR,
     WORKSPACE_ROOT,
 )
-from artemis.runtime import (
+from omnipilot.runtime import (
     AdbEndpoint,
     AdbTarget,
     DeviceExecutionLock,
@@ -971,7 +971,7 @@ class TaskQueueService:
         # the task can proceed and fail downstream with a clear no-device error.
         if device_serial:
             try:
-                from artemis.runtime import device_pool
+                from omnipilot.runtime import device_pool
 
                 rejection = await device_pool.validate_explicit_serial_async(device_serial)
             except Exception:
@@ -1082,7 +1082,7 @@ class TaskQueueService:
         single_session_id = session_id if (session_id and len(goals) == 1) else None
         if not device_serial:
             # Device enumeration may block on ADB.
-            from artemis.runtime import device_pool
+            from omnipilot.runtime import device_pool
 
             try:
                 device_serial = await device_pool.select_device_async()

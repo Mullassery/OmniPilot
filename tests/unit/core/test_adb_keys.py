@@ -18,15 +18,15 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-from artemis.core.diagnostics.adb_keys import (
+from omnipilot.core.diagnostics.adb_keys import (
     AdbKeyStatus,
     get_adb_key_paths,
     heal_adb_keys,
     inspect_adb_keys,
 )
-from artemis.core.diagnostics.engine import ReadinessEngine
-from artemis.core.diagnostics.probes.adb_probe import AdbDeviceProbe
-from artemis.core.diagnostics.schema import DeviceInfo, ProbeStatus
+from omnipilot.core.diagnostics.engine import ReadinessEngine
+from omnipilot.core.diagnostics.probes.adb_probe import AdbDeviceProbe
+from omnipilot.core.diagnostics.schema import DeviceInfo, ProbeStatus
 
 
 def test_get_adb_key_paths_default():

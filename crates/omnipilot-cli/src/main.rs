@@ -20,8 +20,9 @@ use omnipilot_core::{
 };
 use omnipilot_engine::{Policy, Runtime, RuntimeConfig, TaskRecord};
 use omnipilot_ios::{IosAdapter, IosAdapterConfig};
+use omnipilot_android::AndroidAdapter;
 use omnipilot_mock::{MockAdapter, DEMO_APP, DEMO_DEVICE_ID};
-use omnipilot_protocol::{protocol_schema, DeviceAdapter};
+use omnipilot_protocol::{protocol_schema, AdapterService, DeviceAdapter};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -360,11 +361,6 @@ async fn demo(args: DemoArgs, json: bool) -> Result<()> {
 
 async fn run(args: RunArgs, json: bool) -> Result<()> {
     let platform = parse_platform(&args.platform)?;
-    if platform == Platform::Android {
-        bail!(
-            "the Android adapter is not implemented in this build; Apple-first work is in progress"
-        );
-    }
 
     let mut spec = TaskSpec::new(args.goal, platform);
     if platform == Platform::Mock {
@@ -409,7 +405,30 @@ async fn run(args: RunArgs, json: bool) -> Result<()> {
             let _ = adapter.shutdown().await;
             result
         }
-        Platform::Android => unreachable!("Android is rejected above"),
+        Platform::Android => {
+            let mut adapter = if let Some(device) = args.device.as_deref() {
+                AndroidAdapter::with_token(
+                    "omnipilot-android-token",
+                    omnipilot_android::AndroidAdapterConfig {
+                        device_id: Some(device.to_string()),
+                        adb_path: None,
+                    },
+                )
+            } else {
+                AndroidAdapter::new()
+            };
+            // DeviceAdapter in-process API does not require explicit initialize call here.
+            let adapter_arc: Arc<dyn omnipilot_protocol::DeviceAdapter> = Arc::new(adapter.clone());
+            let runtime = Arc::new(Runtime::new(vec![adapter_arc.clone()], runtime_config()));
+            if let Some(id) = args.device.as_deref() {
+                spec.device_id = Some(DeviceId::new(id.to_string()));
+            } else {
+                spec.device_id = Some(adapter.info().id.clone());
+            }
+            let result = runtime.run_task(spec).await;
+            let _ = DeviceAdapter::shutdown(&adapter).await;
+            result
+        }
     };
 
     print_result(&result, json, args.report.junit.as_deref())?;

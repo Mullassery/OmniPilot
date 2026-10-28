@@ -23,14 +23,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.operator.operator import OperatorNode
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.operator.operator import OperatorNode
+from omnipilot.agents.operator.prompts import (
     REASONING_REMINDER,
     apply_operator_prompt_contract,
     load_operator_prompts,
 )
-from artemis.config.agent import MemoryTranscriptConfig
-from artemis.context import ArtemisContext
+from omnipilot.config.agent import MemoryTranscriptConfig
+from omnipilot.context import ArtemisContext
 
 LEGACY_TRANSCRIPT = MemoryTranscriptConfig(enabled=False)
 
@@ -120,7 +120,7 @@ async def test_reminder_follows_a_silent_turn_and_costs_no_extra_call(tmp_path):
 def test_ledger_silence_verdict_outranks_the_local_flag(tmp_path):
     """With a transcript ledger, the ledger's own judgment of the previous
     turn is authoritative; the local flag only serves the legacy path."""
-    from artemis.memory import TranscriptLedger
+    from omnipilot.memory import TranscriptLedger
 
     node, _ = _make_node(tmp_path)
     node._previous_turn_silent = True

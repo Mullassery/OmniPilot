@@ -18,27 +18,27 @@ import json
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.agents.video_analyzer import chunk_agentic
-from artemis.agents.video_analyzer.chunk_agentic import (
+from omnipilot.agents.video_analyzer import chunk_agentic
+from omnipilot.agents.video_analyzer.chunk_agentic import (
     _drive_agentic_loop,
     build_interactions_submit_tool,
     run_agentic_chunk_conversation,
 )
-from artemis.agents.video_analyzer.chunk_conversation import (
+from omnipilot.agents.video_analyzer.chunk_conversation import (
     _MISSING_SUMMARY_ERROR,
     _NO_TOOL_CALL_ERROR,
     _WRONG_TOOL_ERROR,
     SubAgentAnswerExhausted,
     _ChunkMedia,
 )
-from artemis.agents.video_analyzer.reliability import (
+from omnipilot.agents.video_analyzer.reliability import (
     AgenticVideoDegraded,
     VideoFailureCategory,
     classify_video_failure,
     is_agentic_rejection,
 )
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer
-from artemis.context import ArtemisContext
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer
+from omnipilot.context import ArtemisContext
 from pydantic import SecretStr
 import pytest
 

@@ -28,7 +28,7 @@ from mcp_server.notifiers import (
     WebhookNotifier,
     notify,
 )
-from artemis.runtime import trace_store
+from omnipilot.runtime import trace_store
 
 
 class DummyNotifier(BaseNotifier):

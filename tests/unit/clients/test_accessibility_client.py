@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 from PIL import Image
 import pytest
 
-from artemis.clients.accessibility_client import (
+from omnipilot.clients.accessibility_client import (
     TOKEN_HEADER,
     AccessibilityClient,
     HelperEmptyHierarchy,
@@ -19,7 +19,7 @@ from artemis.clients.accessibility_client import (
     HelperUnavailable,
     normalize_helper_elements,
 )
-from artemis.runtime.helper_manager import HelperSession
+from omnipilot.runtime.helper_manager import HelperSession
 from third_party.mobile_use.clients.ui_automator_client import parse_hierarchy_xml_to_elements
 
 XML = (

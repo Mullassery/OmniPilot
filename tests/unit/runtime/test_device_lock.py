@@ -18,7 +18,7 @@ import time
 
 import pytest
 
-from artemis.runtime.device_lock import DeviceBusyError, DeviceExecutionLock
+from omnipilot.runtime.device_lock import DeviceBusyError, DeviceExecutionLock
 
 
 @pytest.fixture(autouse=True)
@@ -368,7 +368,7 @@ def test_global_concurrency_serial_mode_blocks_other_devices(monkeypatch):
 
 def test_owner_is_alive_guards_against_recycled_pid():
     from unittest.mock import MagicMock, patch
-    from artemis.runtime.device_lock import DeviceLockOwner
+    from omnipilot.runtime.device_lock import DeviceLockOwner
 
     owner = DeviceLockOwner(
         pid=99999,

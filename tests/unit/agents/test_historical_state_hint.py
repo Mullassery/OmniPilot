@@ -28,8 +28,8 @@ from unittest.mock import MagicMock, patch
 import pytest
 from PIL import Image, ImageDraw
 
-from artemis.agents.operator.prompts import HistoricalStateHintPromptComponent, PromptBuilder
-from artemis.utils.image_hash import dhash_hex
+from omnipilot.agents.operator.prompts import HistoricalStateHintPromptComponent, PromptBuilder
+from omnipilot.utils.image_hash import dhash_hex
 
 
 def _jpeg(draw_fn) -> bytes:
@@ -164,8 +164,8 @@ async def test_steps_without_hashes_are_skipped():
 
 
 def test_record_step_stamps_perceptual_hashes(tmp_path):
-    from artemis.context import ArtemisContext
-    from artemis.data_engine.engine import DataEngine
+    from omnipilot.context import ArtemisContext
+    from omnipilot.data_engine.engine import DataEngine
 
     mock_ctx = MagicMock(spec=ArtemisContext)
     setup = MagicMock()

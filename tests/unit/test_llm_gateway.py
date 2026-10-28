@@ -6,9 +6,9 @@ from types import SimpleNamespace
 from langchain_core.messages import AIMessage, AIMessageChunk
 import pytest
 
-from artemis.llm.reliability import LLMExhaustedError, LLMPermanentError
-from artemis.services import llm as llm_service
-from artemis.services.llm import (
+from omnipilot.llm.reliability import LLMExhaustedError, LLMPermanentError
+from omnipilot.services import llm as llm_service
+from omnipilot.services.llm import (
     RobustChatModelWrapper,
     acomplete,
     acomplete_structured,

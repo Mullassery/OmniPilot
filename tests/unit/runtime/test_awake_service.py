@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock, patch
 
-from artemis.runtime.awake_service import (
+from omnipilot.runtime.awake_service import (
     AWAKE_STRATEGY_HEARTBEAT,
     AWAKE_STRATEGY_USB,
     ScreenAwakeService,

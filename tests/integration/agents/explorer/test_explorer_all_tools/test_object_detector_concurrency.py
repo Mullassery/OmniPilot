@@ -16,7 +16,7 @@ import asyncio
 import time
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.agents.object_detector.object_detector import _run_object_detection
+from omnipilot.agents.object_detector.object_detector import _run_object_detection
 from tests.integration.agents.explorer.test_explorer_all_tools.helpers import create_mock_context
 import pytest
 

@@ -20,9 +20,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
-from artemis.tools.committee_tool import get_ask_committee_tool
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
+from omnipilot.tools.committee_tool import get_ask_committee_tool
 
 
 class TestCommitteeTool(unittest.IsolatedAsyncioTestCase):
@@ -138,7 +138,7 @@ class TestCommitteeTool(unittest.IsolatedAsyncioTestCase):
                 tool = get_ask_committee_tool(mock_ctx)
 
                 # Invoke tool with avatar_directive
-                from artemis.data_engine.trace import CURRENT_TRACE_ID
+                from omnipilot.data_engine.trace import CURRENT_TRACE_ID
 
                 token = CURRENT_TRACE_ID.set("test_trace_id")
                 try:
@@ -173,8 +173,8 @@ class TestCommitteeTool(unittest.IsolatedAsyncioTestCase):
 
     def test_ask_committee_tool_subclass(self):
         """Verify AskCommitteeTool is a subclass of ArtemisTool."""
-        from artemis.tools.base import ArtemisTool
-        from artemis.tools.committee_tool import (
+        from omnipilot.tools.base import ArtemisTool
+        from omnipilot.tools.committee_tool import (
             AskCommittee,
             AskCommitteeArgs,
             AskCommitteeTool,
@@ -205,7 +205,7 @@ class TestCommitteeTool(unittest.IsolatedAsyncioTestCase):
 
     async def test_ask_committee_no_ctx(self):
         """Verify executing without ctx returns an error message."""
-        from artemis.tools.committee_tool import ask_committee
+        from omnipilot.tools.committee_tool import ask_committee
 
         result = await ask_committee.execute(avatar_directive="Test")
         self.assertEqual(result, "Error: ArtemisContext is required for ask_committee.")
@@ -297,7 +297,7 @@ async def _run_committee_with_history_tool(tmp_path, history_tool):
         patch("artemis.tools.committee_tool.trace_langchain_tool", side_effect=lambda t, ctx: t),
     ):
         tool = get_ask_committee_tool(ctx)
-        from artemis.data_engine.trace import CURRENT_TRACE_ID
+        from omnipilot.data_engine.trace import CURRENT_TRACE_ID
 
         token = CURRENT_TRACE_ID.set("test_trace_id")
         try:

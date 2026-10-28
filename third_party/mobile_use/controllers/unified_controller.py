@@ -24,9 +24,9 @@ with scrcpy video recording and timeline segment extraction.
 
 from typing import Any
 
-from artemis.context import ArtemisContext
-from artemis.controllers.device_controller import ScreenDataResponse
-from artemis.drivers.base import BaseDeviceDriver
+from omnipilot.context import ArtemisContext
+from omnipilot.controllers.device_controller import ScreenDataResponse
+from omnipilot.drivers.base import BaseDeviceDriver
 from third_party.mobile_use.controllers.types import ElementQuery, TapOutput
 
 

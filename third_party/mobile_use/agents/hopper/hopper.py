@@ -20,11 +20,11 @@ from pathlib import Path
 
 from jinja2 import Template
 from langchain_core.messages import HumanMessage, SystemMessage
-from artemis.context import ArtemisContext
-from artemis.data_engine.trace import trace
-from artemis.services.llm import get_llm, invoke_llm_with_timeout_message, with_fallback
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.trace import trace
+from omnipilot.services.llm import get_llm, invoke_llm_with_timeout_message, with_fallback
 from pydantic import BaseModel, Field
-from artemis.utils.cython_compat import CyFunctionDetector
+from omnipilot.utils.cython_compat import CyFunctionDetector
 from third_party.mobile_use.utils.logger import get_logger
 
 logger = get_logger(__name__)

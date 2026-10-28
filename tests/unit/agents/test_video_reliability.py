@@ -10,14 +10,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from langchain_core.messages import AIMessage, HumanMessage
 import pytest
 
-from artemis.agents.video_analyzer.reliability import (
+from omnipilot.agents.video_analyzer.reliability import (
     AgenticVideoDegraded,
     VideoCircuitBreaker,
     VideoFailureCategory,
     classify_video_failure,
 )
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer
-from artemis.context import ArtemisContext
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer
+from omnipilot.context import ArtemisContext
 
 
 def _context() -> MagicMock:
@@ -203,7 +203,7 @@ class _FakeGenaiError(Exception):
 
 @pytest.mark.asyncio
 async def test_invoke_with_retry_raises_non_retryable_immediately():
-    from artemis.agents.video_analyzer.video_analyzer import _invoke_with_retry
+    from omnipilot.agents.video_analyzer.video_analyzer import _invoke_with_retry
 
     calls = 0
 
@@ -219,7 +219,7 @@ async def test_invoke_with_retry_raises_non_retryable_immediately():
 
 @pytest.mark.asyncio
 async def test_invoke_with_retry_bad_request_never_retried():
-    from artemis.agents.video_analyzer.video_analyzer import _invoke_with_retry
+    from omnipilot.agents.video_analyzer.video_analyzer import _invoke_with_retry
 
     calls = 0
 
@@ -235,7 +235,7 @@ async def test_invoke_with_retry_bad_request_never_retried():
 
 @pytest.mark.asyncio
 async def test_invoke_with_retry_restarts_from_scratch_on_transient_failure():
-    from artemis.agents.video_analyzer import video_analyzer as va
+    from omnipilot.agents.video_analyzer import video_analyzer as va
 
     calls = 0
 
@@ -259,7 +259,7 @@ async def test_invoke_with_retry_restarts_from_scratch_on_transient_failure():
 
 @pytest.mark.asyncio
 async def test_invoke_with_retry_exhaustion_reraises_original_error():
-    from artemis.agents.video_analyzer import video_analyzer as va
+    from omnipilot.agents.video_analyzer import video_analyzer as va
 
     calls = 0
 
@@ -276,9 +276,9 @@ async def test_invoke_with_retry_exhaustion_reraises_original_error():
 
 @pytest.mark.asyncio
 async def test_invoke_with_retry_caps_unknown_failures_by_policy():
-    from artemis.llm.reliability import FailureCategory, retry_policy_for
+    from omnipilot.llm.reliability import FailureCategory, retry_policy_for
 
-    from artemis.agents.video_analyzer import video_analyzer as va
+    from omnipilot.agents.video_analyzer import video_analyzer as va
 
     calls = 0
 

@@ -14,11 +14,11 @@
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.drivers.base import BaseDeviceDriver
-from artemis.graph.state import State
-from artemis.tools.base import ArtemisTool
-from artemis.tools.mobile.launch_app import (
+from omnipilot.context import ArtemisContext
+from omnipilot.drivers.base import BaseDeviceDriver
+from omnipilot.graph.state import State
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.mobile.launch_app import (
     LaunchApp,
     LaunchAppArgs,
     LaunchAppTool,

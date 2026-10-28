@@ -21,7 +21,7 @@ from shutil import which
 import time
 from typing import Any
 
-from artemis.context import ArtemisContext, DevicePlatform
+from omnipilot.context import ArtemisContext, DevicePlatform
 from third_party.mobile_use.utils.logger import ArtemisLogger, get_logger
 from third_party.mobile_use.utils.shell_utils import run_shell_command_on_host
 
@@ -50,7 +50,7 @@ def get_first_device(
 ) -> tuple[str | None, DevicePlatform | None, None]:
     """Gets the first available device, prioritizing idle and unassigned devices."""
     try:
-        from artemis.runtime import device_pool
+        from omnipilot.runtime import device_pool
 
         chosen = device_pool.select_device()
         if chosen:

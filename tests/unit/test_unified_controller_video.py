@@ -24,10 +24,10 @@ from uuid import uuid4
 import pytest
 import cv2
 
-from artemis.context import ArtemisContext
-from artemis.controllers.unified_controller import UnifiedMobileController
-from artemis.drivers.mock.mock_driver import MockDeviceDriver
-from artemis.utils.video import (
+from omnipilot.context import ArtemisContext
+from omnipilot.controllers.unified_controller import UnifiedMobileController
+from omnipilot.drivers.mock.mock_driver import MockDeviceDriver
+from omnipilot.utils.video import (
     build_scrcpy_record_command,
     extract_frames_at_timestamps,
     get_ffmpeg_path,
@@ -450,8 +450,8 @@ async def test_segment_cache_is_scoped_to_recording_generation(mock_ctx, tmp_pat
 
 
 def test_data_engine_video_lifecycle(tmp_path):
-    from artemis.data_engine.engine import DataEngine
-    from artemis.context import ArtemisContext
+    from omnipilot.data_engine.engine import DataEngine
+    from omnipilot.context import ArtemisContext
 
     mock_c = MagicMock(spec=ArtemisContext)
     mock_c.execution_setup = MagicMock(traces_path=str(tmp_path / "traces"))
@@ -610,7 +610,7 @@ class _FakeScrcpyProcess:
 
 @pytest.mark.asyncio
 async def test_await_scrcpy_first_frame_uses_recording_started_marker():
-    from artemis.utils.video import await_scrcpy_first_frame
+    from omnipilot.utils.video import await_scrcpy_first_frame
 
     proc = _FakeScrcpyProcess(
         [
@@ -630,7 +630,7 @@ async def test_await_scrcpy_first_frame_uses_recording_started_marker():
 
 @pytest.mark.asyncio
 async def test_await_scrcpy_first_frame_never_precedes_spawn():
-    from artemis.utils.video import await_scrcpy_first_frame
+    from omnipilot.utils.video import await_scrcpy_first_frame
 
     proc = _FakeScrcpyProcess([b"INFO: Recording started to matroska file: x.mkv\n"])
     spawned_at = time.time()
@@ -640,7 +640,7 @@ async def test_await_scrcpy_first_frame_never_precedes_spawn():
 
 @pytest.mark.asyncio
 async def test_await_scrcpy_first_frame_falls_back_when_stdout_closes():
-    from artemis.utils.video import SCRCPY_STARTUP_FALLBACK_SECONDS, await_scrcpy_first_frame
+    from omnipilot.utils.video import SCRCPY_STARTUP_FALLBACK_SECONDS, await_scrcpy_first_frame
 
     proc = _FakeScrcpyProcess([b"scrcpy 4.1\n"], close=True)
     spawned_at = time.time()
@@ -653,7 +653,7 @@ async def test_await_scrcpy_first_frame_falls_back_when_stdout_closes():
 
 @pytest.mark.asyncio
 async def test_await_scrcpy_first_frame_falls_back_on_timeout():
-    from artemis.utils.video import SCRCPY_STARTUP_FALLBACK_SECONDS, await_scrcpy_first_frame
+    from omnipilot.utils.video import SCRCPY_STARTUP_FALLBACK_SECONDS, await_scrcpy_first_frame
 
     proc = _FakeScrcpyProcess([b"scrcpy 4.1\n"])  # marker never arrives, stdout stays open
     spawned_at = time.time()

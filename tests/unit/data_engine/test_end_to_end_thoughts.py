@@ -19,10 +19,10 @@ from unittest.mock import MagicMock
 from uuid import uuid4
 
 from langchain_core.messages import AIMessage, HumanMessage
-from artemis.context import ArtemisContext
-from artemis.data_engine.engine import DataEngine
-from artemis.data_engine.trace import CURRENT_TRACE_ID, DataEngineCallbackHandler
-from artemis.utils.task_tree import build_plan_and_history
+from omnipilot.context import ArtemisContext
+from omnipilot.data_engine.engine import DataEngine
+from omnipilot.data_engine.trace import CURRENT_TRACE_ID, DataEngineCallbackHandler
+from omnipilot.utils.task_tree import build_plan_and_history
 import pytest
 
 

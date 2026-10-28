@@ -21,8 +21,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.graph.perception import perception_node
-from artemis.graph.state import State
+from omnipilot.graph.perception import perception_node
+from omnipilot.graph.state import State
 
 
 async def _run_perception(ctx, payload):
@@ -49,7 +49,7 @@ PLAN = "- [/] Set the alarm\n  - verify: the alarm list shows 7:30 AM\n- [ ] Nex
 
 
 def _ctx(tmp_path):
-    from artemis.utils.notes import get_note_file_path
+    from omnipilot.utils.notes import get_note_file_path
 
     ctx = MagicMock()
     ctx.data_engine = MagicMock()

@@ -22,7 +22,7 @@ from collections.abc import Callable
 
 from langchain_core.tools import BaseTool
 
-from artemis.context import ArtemisContext
+from omnipilot.context import ArtemisContext
 from third_party.mobile_use.tools.tool_wrapper import CompositeToolWrapper, ToolWrapper
 
 

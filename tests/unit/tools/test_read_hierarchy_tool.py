@@ -14,10 +14,10 @@
 
 from unittest.mock import AsyncMock, MagicMock
 
-from artemis.context import ArtemisContext
-from artemis.drivers.base import BaseDeviceDriver
-from artemis.tools.base import ArtemisTool
-from artemis.tools.mobile.read_hierarchy import (
+from omnipilot.context import ArtemisContext
+from omnipilot.drivers.base import BaseDeviceDriver
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.mobile.read_hierarchy import (
     GetUIHierarchy,
     GetUiHierarchy,
     GetUiHierarchyArgs,

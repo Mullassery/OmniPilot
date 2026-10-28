@@ -15,7 +15,7 @@
 """Unit tests for ARTEMIS Unified CLI application."""
 
 from typer.testing import CliRunner
-from artemis.interfaces.cli.main import app
+from omnipilot.interfaces.cli.main import app
 
 runner = CliRunner()
 
@@ -179,7 +179,7 @@ def test_cli_mcp_generate_config():
 
 def test_cli_mcp_generate_config_antigravity():
     """Verify current Antigravity uses only documented, load-safe fields."""
-    from artemis.interfaces.cli.commands.mcp import _get_config_snippet
+    from omnipilot.interfaces.cli.commands.mcp import _get_config_snippet
 
     result = runner.invoke(app, ["mcp", "--generate-config", "antigravity"])
     assert result.exit_code == 0
@@ -217,7 +217,7 @@ def test_cli_mcp_generate_config_all():
 
 def test_cli_mcp_generate_config_codex():
     """Verify Codex initializes the server and enables every Artemis tool."""
-    from artemis.interfaces.cli.commands.mcp import _get_config_snippet
+    from omnipilot.interfaces.cli.commands.mcp import _get_config_snippet
 
     result = runner.invoke(app, ["mcp", "--generate-config", "codex"])
     assert result.exit_code == 0
@@ -294,7 +294,7 @@ def test_cli_mcp_install_all(tmp_path, monkeypatch):
     claude_data = json.loads((tmp_path / ".claude.json").read_text())
     assert claude_data["mcpServers"]["artemis"]["type"] == "stdio"
 
-    from artemis.interfaces.cli.commands.mcp import _get_vscode_user_dir
+    from omnipilot.interfaces.cli.commands.mcp import _get_vscode_user_dir
 
     vscode_data = json.loads((_get_vscode_user_dir() / "mcp.json").read_text())
     assert vscode_data["servers"]["artemis"]["type"] == "stdio"
@@ -553,7 +553,7 @@ def test_cli_status_help():
 
 def test_cli_status_offline(monkeypatch):
     """Verify 'artemis status' reports offline when port is unused."""
-    from artemis.runtime import server_lifecycle
+    from omnipilot.runtime import server_lifecycle
 
     monkeypatch.setattr(server_lifecycle, "is_port_in_use", lambda port, **kwargs: False)
     monkeypatch.setattr(server_lifecycle, "find_server_pids", lambda port: [])
@@ -566,7 +566,7 @@ def test_cli_status_offline(monkeypatch):
 
 def test_cli_status_online(monkeypatch):
     """Verify 'artemis status' reports online details when server is active."""
-    from artemis.runtime import server_lifecycle
+    from omnipilot.runtime import server_lifecycle
 
     monkeypatch.setattr(server_lifecycle, "is_port_in_use", lambda port, **kwargs: True)
     monkeypatch.setattr(server_lifecycle, "find_server_pids", lambda port: [12345])
@@ -584,7 +584,7 @@ def test_cli_status_online(monkeypatch):
 
 def test_cli_stop_command(monkeypatch):
     """Verify 'artemis stop' invokes stop_server with given parameters."""
-    from artemis.interfaces.cli.commands import server_lifecycle as sl_cmd
+    from omnipilot.interfaces.cli.commands import server_lifecycle as sl_cmd
 
     mock_called = {}
 
@@ -607,8 +607,8 @@ def test_cli_restart_command(monkeypatch):
     """Verify 'artemis restart' stops previous server and spawns a detached daemon by default."""
     from unittest.mock import MagicMock
 
-    from artemis.interfaces.cli.commands import server_lifecycle as sl_cmd
-    from artemis.runtime import server_lifecycle
+    from omnipilot.interfaces.cli.commands import server_lifecycle as sl_cmd
+    from omnipilot.runtime import server_lifecycle
 
     stopped = {}
     spawned = {}
@@ -640,8 +640,8 @@ def test_cli_restart_command(monkeypatch):
 
 def test_cli_restart_foreground_command(monkeypatch):
     """Verify 'artemis restart --foreground' runs the server attached via ui_command."""
-    from artemis.interfaces.cli.commands import server_lifecycle as sl_cmd
-    from artemis.runtime import server_lifecycle
+    from omnipilot.interfaces.cli.commands import server_lifecycle as sl_cmd
+    from omnipilot.runtime import server_lifecycle
 
     stopped = {}
     ui_called = {}
@@ -668,7 +668,7 @@ def test_cli_restart_foreground_command(monkeypatch):
 
 def test_cli_server_lifecycle_aliases(monkeypatch):
     """Verify 'artemis server status/stop/restart' subcommands are accessible."""
-    from artemis.runtime import server_lifecycle
+    from omnipilot.runtime import server_lifecycle
 
     monkeypatch.setattr(server_lifecycle, "is_port_in_use", lambda port, **kwargs: False)
     monkeypatch.setattr(server_lifecycle, "find_server_pids", lambda port: [])
@@ -702,7 +702,7 @@ def _probe(
     actions=(),
     metadata=None,
 ):
-    from artemis.core.diagnostics.schema import (
+    from omnipilot.core.diagnostics.schema import (
         ProbeAction,
         ProbeCategory,
         ProbeResult,
@@ -747,9 +747,9 @@ def _install_doctor_fakes(monkeypatch, probes, host=None, *, heal_result=None):
     from unittest.mock import AsyncMock
     import time
 
-    from artemis.core.diagnostics.engine import readiness_engine
-    from artemis.core.diagnostics.probes.host_probe import IntegrationHostProbe
-    from artemis.core.diagnostics.schema import ProbeStatus, SystemReadinessReport
+    from omnipilot.core.diagnostics.engine import readiness_engine
+    from omnipilot.core.diagnostics.probes.host_probe import IntegrationHostProbe
+    from omnipilot.core.diagnostics.schema import ProbeStatus, SystemReadinessReport
     import artemis.interfaces.cli.commands.doctor as doctor_module
 
     monkeypatch.setenv("COLUMNS", "200")
@@ -998,7 +998,7 @@ def test_cli_doctor_host_fail_blocks_and_uses_summary(monkeypatch):
 
 def test_cli_doctor_fix_heals_corrupted_keys_and_sweeps_locks(monkeypatch):
     """--fix heals ADB keys when the probe reports corruption and sweeps stale locks."""
-    from artemis.runtime.device_lock import DeviceExecutionLock
+    from omnipilot.runtime.device_lock import DeviceExecutionLock
 
     probes = [p for p in _all_pass_probes() if p.id != "android_adb"]
     probes.append(
@@ -1028,7 +1028,7 @@ def test_cli_doctor_fix_heals_corrupted_keys_and_sweeps_locks(monkeypatch):
 
 def test_cli_doctor_fix_skips_heal_when_keys_are_healthy(monkeypatch):
     """--fix does not touch healthy ADB keys but still sweeps stale locks."""
-    from artemis.runtime.device_lock import DeviceExecutionLock
+    from omnipilot.runtime.device_lock import DeviceExecutionLock
 
     fakes = _install_doctor_fakes(monkeypatch, _all_pass_probes())
     monkeypatch.setattr(

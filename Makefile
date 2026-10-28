@@ -24,23 +24,23 @@ start: ## One-click start Artemis Showcase UI and auto-open browser
 	@bash start.sh
 
 ui: ## Launch the unified Showcase UI & Admin Console in browser
-	@uv run artemis ui --open
+	@uv run omnipilot ui --open
 
 restart: ## Restart running Artemis Web UI & server
-	@uv run artemis restart
+	@uv run omnipilot restart
 
 stop: ## Stop running Artemis Web UI & server
-	@uv run artemis stop
+	@uv run omnipilot stop
 
 status: ## Display Artemis Web UI & server status
-	@uv run artemis status
+	@uv run omnipilot status
 
 build-ui: ## Build the Showcase UI Angular frontend
 	@echo "🎨 Building Showcase UI..."
 	@cd apps/showcase_ui && npm install && npm run build
 
 doctor: ## Run system, device, and toolchain diagnostics
-	@uv run artemis doctor
+	@uv run omnipilot doctor
 
 test: ## Run deterministic tests that need no device, credentials, or private services
 	@echo "🧪 Running deterministic tests..."
@@ -56,7 +56,7 @@ test-device: ## Run Android and end-to-end tests explicitly
 
 test-all: ## Run every test tree; external prerequisites must be available
 	@echo "🧪 Running the complete test tree..."
-	@uv run pytest tests packages/artemis-client/tests -m "integration or not integration"
+	@uv run pytest tests packages/omnipilot-client/tests -m "integration or not integration"
 
 install: ## Install python dependencies via uv
 	@echo "📦 Installing python dependencies..."

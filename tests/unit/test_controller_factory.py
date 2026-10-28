@@ -14,9 +14,9 @@
 
 from unittest.mock import MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.controllers.controller_factory import get_controller
-from artemis.controllers.unified_controller import UnifiedMobileController
+from omnipilot.context import ArtemisContext
+from omnipilot.controllers.controller_factory import get_controller
+from omnipilot.controllers.unified_controller import UnifiedMobileController
 
 
 def test_get_controller_reuses_context_scoped_controller():

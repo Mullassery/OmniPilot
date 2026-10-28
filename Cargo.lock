@@ -569,11 +569,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "omnipilot-android"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "chrono",
+ "omnipilot-core",
+ "omnipilot-protocol",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
 name = "omnipilot-cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
+ "omnipilot-android",
  "omnipilot-core",
  "omnipilot-engine",
  "omnipilot-ios",

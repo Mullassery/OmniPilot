@@ -20,11 +20,11 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import pytest
 from langchain_core.messages import AIMessage
 
-from artemis.agents.explorer.explorer import Explorer
-from artemis.agents.explorer.tool_declarations import UNIVERSAL_EXPLORER_TOOLS
-from artemis.config import settings
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
+from omnipilot.agents.explorer.explorer import Explorer
+from omnipilot.agents.explorer.tool_declarations import UNIVERSAL_EXPLORER_TOOLS
+from omnipilot.config import settings
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
 
 
 @pytest.fixture

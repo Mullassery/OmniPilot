@@ -17,8 +17,8 @@ fixture database."""
 
 import pytest
 
-from artemis.context import ArtemisContext
-from artemis.tools.history import get_history_tools
+from omnipilot.context import ArtemisContext
+from omnipilot.tools.history import get_history_tools
 
 
 @pytest.fixture

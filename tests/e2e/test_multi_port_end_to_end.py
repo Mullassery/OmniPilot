@@ -34,14 +34,14 @@ import urllib.request
 from pathlib import Path
 import pytest
 
-from artemis.config import (
+from omnipilot.config import (
     DEFAULT_MODEL,
     ROOT_DIR,
     Settings,
     settings,
     get_config_path,
 )
-from artemis.runtime.daemon_client import (
+from omnipilot.runtime.daemon_client import (
     ensure_daemon_running,
     get_daemon_session,
     get_daemon_status,
@@ -49,13 +49,13 @@ from artemis.runtime.daemon_client import (
     submit_task_to_daemon,
     stop_task_on_daemon,
 )
-from artemis.runtime.device_lock import DeviceExecutionLock
-from artemis.runtime.device_pool import device_pool
-from artemis.interfaces.sdk.client import ArtemisClient, ConcurrencyMode
+from omnipilot.runtime.device_lock import DeviceExecutionLock
+from omnipilot.runtime.device_pool import device_pool
+from omnipilot.interfaces.sdk.client import ArtemisClient, ConcurrencyMode
 from mcp_server.tools.device_state import mobile_get_device_state
 from mcp_server.tools.task_runner import mobile_run_task
 from mcp_server.tools.task_manager import mobile_manage_task
-from artemis.runtime import trace_store
+from omnipilot.runtime import trace_store
 
 
 @pytest.fixture(scope="module", autouse=True)

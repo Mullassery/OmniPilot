@@ -19,8 +19,8 @@ from typing import get_args
 from pydantic import ValidationError
 import pytest
 
-from artemis.config.agent import VideoAnalyzerConfig
-from artemis.llm.google import VideoProcessing
+from omnipilot.config.agent import VideoAnalyzerConfig
+from omnipilot.llm.google import VideoProcessing
 
 
 def test_processing_field_reuses_the_provider_literal():

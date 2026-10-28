@@ -29,8 +29,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from artemis.runtime.awake_lease import ScreenAwakeLease
-from artemis.runtime.awake_service import _run_awake_adb_command
+from omnipilot.runtime.awake_lease import ScreenAwakeLease
+from omnipilot.runtime.awake_service import _run_awake_adb_command
 from third_party.mobile_use.clients import ui_automator_client
 from third_party.mobile_use.utils.logger import get_logger
 from mcp_server.utils import device_utils, env_utils

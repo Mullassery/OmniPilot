@@ -37,8 +37,8 @@ from typing import TYPE_CHECKING, Any, Literal, Protocol, overload
 if TYPE_CHECKING:
     from langchain_core.language_models.chat_models import BaseChatModel
 
-    from artemis.config import AgentNodeWithFallback, LLMUtilsNode, LLMUtilsNodeWithFallback
-    from artemis.context import ArtemisContext
+    from omnipilot.config import AgentNodeWithFallback, LLMUtilsNode, LLMUtilsNodeWithFallback
+    from omnipilot.context import ArtemisContext
 
 _logger = logging.getLogger(__name__)
 

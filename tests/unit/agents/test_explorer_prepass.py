@@ -20,10 +20,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.explorer.explorer import Explorer
-from artemis.agents.explorer.screen_index import ScreenElement, ScreenIndex
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
+from omnipilot.agents.explorer.explorer import Explorer
+from omnipilot.agents.explorer.screen_index import ScreenElement, ScreenIndex
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
 
 RUN_SETUP = "artemis.agents.explorer.run_setup"
 PERCEPTION_TOOLS = "artemis.agents.explorer.perception_tools"

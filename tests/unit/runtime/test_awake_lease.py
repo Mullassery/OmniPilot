@@ -16,7 +16,7 @@ import json
 
 import pytest
 
-from artemis.runtime.awake_lease import ScreenAwakeLease
+from omnipilot.runtime.awake_lease import ScreenAwakeLease
 
 
 @pytest.fixture(autouse=True)

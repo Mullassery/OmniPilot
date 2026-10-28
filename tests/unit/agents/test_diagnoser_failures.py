@@ -15,10 +15,10 @@
 from unittest.mock import AsyncMock, Mock, patch
 from adbutils import AdbClient
 from langchain_core.messages import AIMessage, ToolMessage
-from artemis.agents.diagnoser.diagnoser import Diagnoser
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
-from artemis.graph.state import State
+from omnipilot.agents.diagnoser.diagnoser import Diagnoser
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
+from omnipilot.graph.state import State
 import pytest
 
 

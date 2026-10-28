@@ -15,10 +15,10 @@
 import json
 from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
-from artemis.agents.operator.operator import OperatorNode
-from artemis.config.agent import MemoryTranscriptConfig
-from artemis.context import ArtemisContext
-from artemis.core.tool_failure import ToolFailure
+from omnipilot.agents.operator.operator import OperatorNode
+from omnipilot.config.agent import MemoryTranscriptConfig
+from omnipilot.context import ArtemisContext
+from omnipilot.core.tool_failure import ToolFailure
 import pytest
 
 # These tests exercise the legacy 2-message prompt path. Since M5 the
@@ -83,9 +83,9 @@ async def test_operator_node_fast_path():
 
 @pytest.mark.asyncio
 async def test_perform_action_validation():
-    from artemis.agents.operator.operator import OperatorNode
+    from omnipilot.agents.operator.operator import OperatorNode
     from unittest.mock import MagicMock
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     mock_ctx = MagicMock()
     node = OperatorNode(mock_ctx, transcript_config=LEGACY_TRANSCRIPT)
@@ -244,9 +244,9 @@ async def test_coordinate_click_requires_and_records_the_models_description():
     tested on the model's behalf: the recorded semantics are exactly what the
     model declared, kept apart from the observed ``target_*`` fields.
     """
-    from artemis.agents.operator.operator import OperatorNode
+    from omnipilot.agents.operator.operator import OperatorNode
     from unittest.mock import MagicMock
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     mock_ctx = MagicMock()
     node = OperatorNode(mock_ctx, transcript_config=LEGACY_TRANSCRIPT)
@@ -312,9 +312,9 @@ async def test_coordinate_click_requires_and_records_the_models_description():
 
 @pytest.mark.asyncio
 async def test_coordinate_swipe_requires_description_directional_does_not():
-    from artemis.agents.operator.operator import OperatorNode
+    from omnipilot.agents.operator.operator import OperatorNode
     from unittest.mock import MagicMock
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     node = OperatorNode(MagicMock(), transcript_config=LEGACY_TRANSCRIPT)
     mock_state = MagicMock(spec=State)
@@ -346,8 +346,8 @@ async def test_coordinate_swipe_requires_description_directional_does_not():
 
 @pytest.mark.asyncio
 async def test_operator_node_multiple_actions():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
 
@@ -410,8 +410,8 @@ async def test_operator_node_multiple_actions():
 
 @pytest.mark.asyncio
 async def test_operator_node_no_record_step():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -447,8 +447,8 @@ async def test_operator_node_no_record_step():
 
 @pytest.mark.asyncio
 async def test_operator_dynamic_prompt():
-    from artemis.agents.operator.operator import OperatorNode, PromptComponent
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode, PromptComponent
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -494,8 +494,8 @@ async def test_operator_dynamic_prompt():
 
 @pytest.mark.asyncio
 async def test_operator_history_compression():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
     import hashlib
@@ -630,8 +630,8 @@ async def test_operator_history_compression():
 
 @pytest.mark.asyncio
 async def test_operator_tracks_subagent_calls():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -704,8 +704,8 @@ async def test_operator_tracks_subagent_calls():
 
 @pytest.mark.asyncio
 async def test_operator_defer_action_for_gathering():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
 
@@ -806,9 +806,9 @@ async def test_operator_defer_action_for_gathering():
 
 @pytest.mark.asyncio
 async def test_wait_actions_translation():
-    from artemis.agents.operator.operator import OperatorNode
+    from omnipilot.agents.operator.operator import OperatorNode
     from unittest.mock import MagicMock
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     mock_ctx = MagicMock()
     node = OperatorNode(mock_ctx, transcript_config=LEGACY_TRANSCRIPT)
@@ -831,9 +831,9 @@ async def test_wait_actions_translation():
 
 @pytest.mark.asyncio
 async def test_long_press_action_translation():
-    from artemis.agents.operator.operator import OperatorNode
+    from omnipilot.agents.operator.operator import OperatorNode
     from unittest.mock import MagicMock
-    from artemis.graph.state import State
+    from omnipilot.graph.state import State
 
     mock_ctx = MagicMock()
     node = OperatorNode(mock_ctx, transcript_config=LEGACY_TRANSCRIPT)
@@ -912,8 +912,8 @@ async def test_long_press_action_translation():
 
 @pytest.mark.asyncio
 async def test_operator_no_defer_for_note_updating():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
 
@@ -1003,8 +1003,8 @@ async def test_operator_no_defer_for_note_updating():
 
 @pytest.mark.asyncio
 async def test_operator_defer_for_note_reading():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
 
@@ -1103,8 +1103,8 @@ async def test_operator_defer_for_note_reading():
 
 @pytest.mark.asyncio
 async def test_operator_no_defer_for_note_appending():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     import json
 
@@ -1193,9 +1193,9 @@ async def test_operator_no_defer_for_note_appending():
 
 @pytest.mark.asyncio
 async def test_operator_background_tasks_prompt_injection():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
-    from artemis.tools.command_tool import BackgroundTask, get_adb_task_registry
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
+    from omnipilot.tools.command_tool import BackgroundTask, get_adb_task_registry
     from unittest.mock import AsyncMock, MagicMock, patch
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -1289,8 +1289,8 @@ async def test_operator_background_tasks_prompt_injection():
 
 @pytest.mark.asyncio
 async def test_operator_tool_limit_exceeded_warning():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -1358,8 +1358,8 @@ async def test_operator_tool_limit_exceeded_warning():
 
 @pytest.mark.asyncio
 async def test_operator_fallback_function_call_parsing():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import AsyncMock, MagicMock, patch
     from langchain_core.messages import AIMessage
     import json
@@ -1410,8 +1410,8 @@ async def test_operator_fallback_function_call_parsing():
 
 @pytest.mark.asyncio
 async def test_operator_swipe_translation():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import MagicMock
 
     mock_ctx = MagicMock(spec=ArtemisContext)
@@ -1477,8 +1477,8 @@ async def test_operator_swipe_translation():
 
 @pytest.mark.asyncio
 async def test_operator_press_key_translation_is_case_insensitive():
-    from artemis.agents.operator.operator import OperatorNode
-    from artemis.context import ArtemisContext
+    from omnipilot.agents.operator.operator import OperatorNode
+    from omnipilot.context import ArtemisContext
     from unittest.mock import MagicMock
 
     mock_ctx = MagicMock(spec=ArtemisContext)

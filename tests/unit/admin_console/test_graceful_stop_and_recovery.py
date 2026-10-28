@@ -22,8 +22,8 @@ import pytest
 
 from apps.admin_console.core.state import state
 from apps.admin_console.services.task_queue_service import TaskQueueService, task_queue_service
-from artemis.runtime import cancel_requests
-from artemis.runtime.device_lock import DeviceLockOwner
+from omnipilot.runtime import cancel_requests
+from omnipilot.runtime.device_lock import DeviceLockOwner
 
 TQS = "apps.admin_console.services.task_queue_service"
 

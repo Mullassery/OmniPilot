@@ -12,8 +12,8 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from artemis.mcp.action_executor import AGENT_TOOL_NAMES, McpActionExecutor
-from artemis.tools.explorer_tool import ExplorerCandidate, ExplorerOutcome
+from omnipilot.mcp.action_executor import AGENT_TOOL_NAMES, McpActionExecutor
+from omnipilot.tools.explorer_tool import ExplorerCandidate, ExplorerOutcome
 
 
 def _make_executor(**kwargs):
@@ -229,7 +229,7 @@ async def test_video_analyzer_exception_is_contained():
 
 
 def _history_tool_double(return_value=None, side_effect=None):
-    from artemis.tools.history import SearchHistoryArgs
+    from omnipilot.tools.history import SearchHistoryArgs
 
     tool = Mock()
     tool.args_schema = SearchHistoryArgs

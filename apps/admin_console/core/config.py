@@ -18,7 +18,7 @@ All configuration and path management is centralized in `artemis.config`.
 This module re-exports common constants for full backward compatibility.
 """
 
-from artemis.config import (
+from omnipilot.config import (
     DB_PATH,
     IMAGES_DIR,
     PAUSE_FILE,

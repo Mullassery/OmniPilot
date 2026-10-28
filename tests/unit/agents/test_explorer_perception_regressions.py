@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.explorer.perception_tools import PerceptionToolsMixin
-from artemis.agents.explorer.screen_index import ScreenIndex
+from omnipilot.agents.explorer.perception_tools import PerceptionToolsMixin
+from omnipilot.agents.explorer.screen_index import ScreenIndex
 
 
 def _perception_host() -> PerceptionToolsMixin:

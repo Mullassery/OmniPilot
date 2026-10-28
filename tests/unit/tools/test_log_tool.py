@@ -14,10 +14,10 @@
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.base import ArtemisTool
-from artemis.tools.log_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.log_tool import (
     AnalyzeLogs,
     AnalyzeLogsArgs,
     AnalyzeLogsTool,

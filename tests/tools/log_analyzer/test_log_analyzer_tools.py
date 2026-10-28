@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from artemis.agents.log_analyzer.log_analyzer import LogAnalyzerNode
+from omnipilot.agents.log_analyzer.log_analyzer import LogAnalyzerNode
 import pytest
 
 
@@ -20,7 +20,7 @@ import pytest
 @pytest.mark.integration
 async def test_spawn_log_reader(artemis_context, mock_state):
     """Test the spawn_log_reader tool exposed by LogAnalyzerNode."""
-    from artemis.sdk.utils import load_llm_config_override
+    from omnipilot.sdk.utils import load_llm_config_override
     from pathlib import Path
 
     node = LogAnalyzerNode(ctx=artemis_context)
@@ -46,7 +46,7 @@ async def test_spawn_log_reader(artemis_context, mock_state):
 @pytest.mark.integration
 async def test_log_analyzer_run(artemis_context, mock_state):
     """Test LogAnalyzerNode.run end-to-end execution with grounding configuration."""
-    from artemis.config.llm import parse_llm_config
+    from omnipilot.config.llm import parse_llm_config
 
     node = LogAnalyzerNode(ctx=artemis_context)
     artemis_context.llm_config = parse_llm_config()

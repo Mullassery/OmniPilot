@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from artemis.clients.accessibility_client import AccessibilityClient, HelperUnavailable
-from artemis.clients.screen_client_factory import (
+from omnipilot.clients.accessibility_client import AccessibilityClient, HelperUnavailable
+from omnipilot.clients.screen_client_factory import (
     DeviceOfflineError,
     FallbackScreenClient,
     HierarchyBackend,
@@ -17,7 +17,7 @@ from artemis.clients.screen_client_factory import (
     hierarchy_backend_summary,
     resolve_backend,
 )
-from artemis.config.constants import ENV_ARTEMIS_HIERARCHY_BACKEND
+from omnipilot.config.constants import ENV_ARTEMIS_HIERARCHY_BACKEND
 from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
 
@@ -28,7 +28,7 @@ from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
 def test_resolve_backend_prefers_explicit_then_env_then_settings(monkeypatch):
     monkeypatch.delenv(ENV_ARTEMIS_HIERARCHY_BACKEND, raising=False)
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     monkeypatch.setattr(settings, "ARTEMIS_HIERARCHY_BACKEND", "uiautomator", raising=False)
     assert resolve_backend() is HierarchyBackend.UIAUTOMATOR

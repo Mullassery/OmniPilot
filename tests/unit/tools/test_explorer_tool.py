@@ -20,15 +20,15 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.explorer.constants import (
+from omnipilot.agents.explorer.constants import (
     ASK_EXPLORER_CONTEXT_FEEDBACK_DESCRIPTION,
     ASK_EXPLORER_DESCRIPTION,
     ASK_EXPLORER_QUERY_DESCRIPTION,
 )
-from artemis.context import ArtemisContext
-from artemis.graph.state import State
-from artemis.tools.base import ArtemisTool
-from artemis.tools.explorer_tool import (
+from omnipilot.context import ArtemisContext
+from omnipilot.graph.state import State
+from omnipilot.tools.base import ArtemisTool
+from omnipilot.tools.explorer_tool import (
     AskExplorerArgs,
     AskExplorerTool,
     ExplorerCandidate,

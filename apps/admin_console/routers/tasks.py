@@ -18,8 +18,8 @@ import json
 from typing import Any
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
-from artemis.core.diagnostics import readiness_engine
-from artemis.runtime import DeviceExecutionLock, device_pool
+from omnipilot.core.diagnostics import readiness_engine
+from omnipilot.runtime import DeviceExecutionLock, device_pool
 
 try:
     from admin_console.core.state import state
@@ -188,7 +188,7 @@ async def get_run_defaults():
     The launcher's sliders start here so they reflect ``artemis.jsonc`` (and the
     ``ARTEMIS_EXPLORER_VERSION`` override) instead of a hard-coded guess.
     """
-    from artemis.config import load_agent_config, verification_level_for_checker
+    from omnipilot.config import load_agent_config, verification_level_for_checker
 
     agent_cfg = load_agent_config()
     return {

@@ -18,10 +18,10 @@ from unittest.mock import AsyncMock, Mock, patch
 from pydantic import BaseModel
 import pytest
 
-from artemis.agents.outputter.outputter import outputter
-from artemis.config import LLM, OutputConfig  # noqa: E402
-from artemis.context import ArtemisContext  # noqa: E402
-from artemis.core.tool_failure import ToolFailure  # noqa: E402
+from omnipilot.agents.outputter.outputter import outputter
+from omnipilot.config import LLM, OutputConfig  # noqa: E402
+from omnipilot.context import ArtemisContext  # noqa: E402
+from omnipilot.core.tool_failure import ToolFailure  # noqa: E402
 from third_party.mobile_use import testing as agent_fixtures
 from third_party.mobile_use.utils.logger import get_logger  # noqa: E402
 

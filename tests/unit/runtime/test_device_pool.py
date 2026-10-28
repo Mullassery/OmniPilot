@@ -18,8 +18,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from artemis.runtime.device_lock import DeviceExecutionLock
-from artemis.runtime.device_pool import DevicePool, DeviceStatus
+from omnipilot.runtime.device_lock import DeviceExecutionLock
+from omnipilot.runtime.device_pool import DevicePool, DeviceStatus
 
 device_pool_module = importlib.import_module("artemis.runtime.device_pool")
 

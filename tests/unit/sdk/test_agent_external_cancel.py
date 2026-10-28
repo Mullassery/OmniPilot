@@ -18,8 +18,8 @@ import asyncio
 
 import pytest
 
-from artemis.runtime import cancel_requests
-from artemis.sdk.agent import Agent
+from omnipilot.runtime import cancel_requests
+from omnipilot.sdk.agent import Agent
 
 
 @pytest.mark.asyncio

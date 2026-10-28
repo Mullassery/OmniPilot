@@ -15,10 +15,10 @@ from unittest.mock import MagicMock, patch
 import pytest
 from typer.testing import CliRunner
 
-from artemis.clients.screen_client_factory import FallbackScreenClient
-from artemis.runtime import trace_store
-from artemis.runtime.helper_manager import HelperSession, ProvisionResult
-from artemis.sdk.agent import Agent
+from omnipilot.clients.screen_client_factory import FallbackScreenClient
+from omnipilot.runtime import trace_store
+from omnipilot.runtime.helper_manager import HelperSession, ProvisionResult
+from omnipilot.sdk.agent import Agent
 
 
 # --------------------------------------------------------------------------- #
@@ -206,7 +206,7 @@ def test_update_trace_fields_merges_and_ignores_missing(tmp_path, monkeypatch):
 
 
 def test_update_session_device_info_merges_fields():
-    from artemis.data_engine.engine import DataEngine
+    from omnipilot.data_engine.engine import DataEngine
 
     engine = object.__new__(DataEngine)
     engine.current_session_id = "s"
@@ -242,8 +242,8 @@ def test_manage_task_status_exposes_hierarchy_backend(tmp_path, monkeypatch):
 
 
 def test_run_outcome_extra_carries_environment(tmp_path):
-    from artemis.graph.checkpoints import read_run_outcome, write_run_outcome
-    from artemis.clients.screen_client_factory import hierarchy_backend_summary
+    from omnipilot.graph.checkpoints import read_run_outcome, write_run_outcome
+    from omnipilot.clients.screen_client_factory import hierarchy_backend_summary
 
     client = _composite()
     client.get_hierarchy()
@@ -284,7 +284,7 @@ def _status(**overrides):
 
 
 def test_helper_status_explains_probe_tunnel_and_newer_build(monkeypatch):
-    from artemis.interfaces.cli.commands import helper as helper_cli
+    from omnipilot.interfaces.cli.commands import helper as helper_cli
 
     monkeypatch.setattr(
         helper_cli.helper_manager,
@@ -298,7 +298,7 @@ def test_helper_status_explains_probe_tunnel_and_newer_build(monkeypatch):
 
 
 def test_helper_install_all_targets_idle_devices_only(monkeypatch):
-    from artemis.interfaces.cli.commands import helper as helper_cli
+    from omnipilot.interfaces.cli.commands import helper as helper_cli
 
     devices = [
         SimpleNamespace(serial="a", is_busy=False),
@@ -323,8 +323,8 @@ def test_helper_install_all_targets_idle_devices_only(monkeypatch):
 
 
 def test_helper_install_prints_manual_path_on_enable_failure(monkeypatch):
-    from artemis.interfaces.cli.commands import helper as helper_cli
-    from artemis.runtime.helper_manager import MANUAL_ENABLE_PATH
+    from omnipilot.interfaces.cli.commands import helper as helper_cli
+    from omnipilot.runtime.helper_manager import MANUAL_ENABLE_PATH
 
     monkeypatch.setattr(
         helper_cli.helper_manager,
@@ -356,7 +356,7 @@ def _adb_probe(serials):
 
 
 def test_doctor_row_suggests_preinstall_when_missing(monkeypatch):
-    from artemis.interfaces.cli.commands import doctor
+    from omnipilot.interfaces.cli.commands import doctor
 
     with patch(
         "artemis.runtime.helper_manager.helper_manager.status",
@@ -369,7 +369,7 @@ def test_doctor_row_suggests_preinstall_when_missing(monkeypatch):
 
 
 def test_doctor_row_ready_mentions_uninstall(monkeypatch):
-    from artemis.interfaces.cli.commands import doctor
+    from omnipilot.interfaces.cli.commands import doctor
 
     with patch("artemis.runtime.helper_manager.helper_manager.status", return_value=_status()):
         row = doctor._helper_row([_adb_probe(["dev"])])
@@ -378,7 +378,7 @@ def test_doctor_row_ready_mentions_uninstall(monkeypatch):
 
 
 def test_doctor_row_absent_for_multiple_devices_or_uiautomator_backend(monkeypatch):
-    from artemis.interfaces.cli.commands import doctor
+    from omnipilot.interfaces.cli.commands import doctor
 
     assert doctor._helper_row([_adb_probe(["a", "b"])]) is None
     monkeypatch.setenv("ARTEMIS_HIERARCHY_BACKEND", "uiautomator")

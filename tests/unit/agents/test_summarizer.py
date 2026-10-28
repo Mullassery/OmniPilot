@@ -25,8 +25,8 @@ from unittest.mock import MagicMock, Mock
 
 import pytest
 
-from artemis.agents.summarizer.summarizer import SummarizerNode
-from artemis.context import ArtemisContext
+from omnipilot.agents.summarizer.summarizer import SummarizerNode
+from omnipilot.context import ArtemisContext
 
 
 class DummyState:

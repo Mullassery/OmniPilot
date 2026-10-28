@@ -20,10 +20,10 @@
 
 import asyncio
 
-from artemis.context import AppLaunchResult, ArtemisContext
-from artemis.controllers.unified_controller import UnifiedMobileController
-from artemis.data_engine.trace import TraceSpan
-from artemis.utils.app_launch_utils import current_foreground, observe_foreground
+from omnipilot.context import AppLaunchResult, ArtemisContext
+from omnipilot.controllers.unified_controller import UnifiedMobileController
+from omnipilot.data_engine.trace import TraceSpan
+from omnipilot.utils.app_launch_utils import current_foreground, observe_foreground
 from third_party.mobile_use.utils.logger import get_logger
 
 logger = get_logger(__name__)

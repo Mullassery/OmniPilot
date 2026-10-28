@@ -19,16 +19,16 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from artemis.agents.operator.operator import OperatorNode
-from artemis.agents.operator.prompts import (
+from omnipilot.agents.operator.operator import OperatorNode
+from omnipilot.agents.operator.prompts import (
     apply_operator_prompt_contract,
     load_operator_prompts,
     render_plan_ledger_bounce,
     unwritten_action_streak,
 )
-from artemis.config.agent import MemoryTranscriptConfig
-from artemis.context import ArtemisContext
-from artemis.utils.plan_grammar import parse_plan, render_plan_grammar_spec
+from omnipilot.config.agent import MemoryTranscriptConfig
+from omnipilot.context import ArtemisContext
+from omnipilot.utils.plan_grammar import parse_plan, render_plan_grammar_spec
 
 LEGACY_TRANSCRIPT = MemoryTranscriptConfig(enabled=False)
 

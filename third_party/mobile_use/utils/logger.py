@@ -26,7 +26,7 @@ import threading
 
 from colorama import Fore, Style, init
 
-from artemis.data_engine.context_vars import CURRENT_TRACE_ID
+from omnipilot.data_engine.context_vars import CURRENT_TRACE_ID
 
 init(autoreset=True)
 

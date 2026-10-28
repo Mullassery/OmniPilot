@@ -17,8 +17,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from artemis.agents.video_analyzer import chunk_conversation
-from artemis.agents.video_analyzer.chunk_conversation import (
+from omnipilot.agents.video_analyzer import chunk_conversation
+from omnipilot.agents.video_analyzer.chunk_conversation import (
     _MISSING_SUMMARY_ERROR,
     _NO_TOOL_CALL_ERROR,
     SubAgentAnswerExhausted,
@@ -26,8 +26,8 @@ from artemis.agents.video_analyzer.chunk_conversation import (
     _drive_sub_agent_loop,
     _run_native_chunk_conversation,
 )
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer
-from artemis.context import ArtemisContext
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer
+from omnipilot.context import ArtemisContext
 from google.genai import types
 import pytest
 
