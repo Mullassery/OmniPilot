@@ -26,9 +26,9 @@ import uuid
 from mcp_server.base import mcp
 from mcp_server.notifiers import notify
 from mcp_server.utils import env_utils
-from artemis.config import ExplorerVersion, checker_overrides_for_level
-from artemis.config.runtime import read_ipc_port
-from artemis.runtime import (
+from omnipilot.config import ExplorerVersion, checker_overrides_for_level
+from omnipilot.config.runtime import read_ipc_port
+from omnipilot.runtime import (
     DeviceExecutionLock,
     device_pool,
     ensure_daemon_running,

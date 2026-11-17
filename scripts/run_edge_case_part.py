@@ -20,13 +20,13 @@ WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE_ROOT not in sys.path:
     sys.path.insert(0, WORKSPACE_ROOT)
 
-from artemis.interfaces.sdk.client import ArtemisClient
-from artemis.runtime.device_lock import DeviceExecutionLock
-from artemis.toolchain import ensure_toolchain_in_path
+from omnipilot.interfaces.sdk.client import OmniPilotClient
+from omnipilot.runtime.device_lock import DeviceExecutionLock
+from omnipilot.toolchain import ensure_toolchain_in_path
 
 ensure_toolchain_in_path()
 
-from artemis.runtime import device_pool
+from omnipilot.runtime import device_pool
 
 
 def _resolve_devices() -> tuple[str, str]:
@@ -89,7 +89,7 @@ async def run_part_1():
     print("-" * 80)
 
     DeviceExecutionLock.cleanup_stale_locks()
-    client = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
 
     async def task_1a():
         print("🚀 [Task 1A] Launching: Open Settings on physical device...")
@@ -143,8 +143,8 @@ async def run_part_2():
     print("-" * 80)
 
     DeviceExecutionLock.cleanup_stale_locks()
-    client_phone = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
-    client_emu = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client_emu = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
 
     start_t = time.time()
 
@@ -198,8 +198,8 @@ async def run_part_3():
     print("-" * 80)
 
     DeviceExecutionLock.cleanup_stale_locks()
-    client_phone_g = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="global")
-    client_emu_g = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="global")
+    client_phone_g = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="global")
+    client_emu_g = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="global")
 
     async def task_3a():
         print(f"🚀 [Task 3A - Phone] Global mode starting: Executing on {PHONE_SERIAL}...")
@@ -252,8 +252,8 @@ async def run_part_4():
     print("-" * 80)
 
     DeviceExecutionLock.cleanup_stale_locks()
-    client_phone = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
-    client_emu = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client_emu = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
 
     async def task_4a():
         print("🚀 [Task 4A - Phone] Started...")

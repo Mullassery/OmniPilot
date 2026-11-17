@@ -24,9 +24,9 @@ from uuid import UUID
 
 WORKSPACE_ROOT = Path(__file__).parent.parent.resolve()
 
-# Try to import settings from artemis
+# Try to import settings from omnipilot
 try:
-    from artemis.config import settings
+    from omnipilot.config import settings
 
     TRACES_PATH = Path(settings.TRACES_PATH)
 except ImportError:
@@ -37,8 +37,8 @@ DB_PATH = TRACES_PATH / "data_engine.db"
 IMAGES_DIR = TRACES_PATH / "images"
 
 try:
-    from artemis.context import ArtemisContext
-    from artemis.graph.state import State
+    from omnipilot.context import ArtemisContext
+    from omnipilot.graph.state import State
 except ImportError:
     ArtemisContext = Any
     State = Any
@@ -607,8 +607,8 @@ class ReplayManager:
         temp_traces_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            from artemis.data_engine.storage import StorageManager
-            from artemis.data_engine.models import (
+            from omnipilot.data_engine.storage import StorageManager
+            from omnipilot.data_engine.models import (
                 SessionMetadata,
                 ImageRecord,
                 StepRecord,
@@ -1670,13 +1670,13 @@ class ReplayManager:
             print(f"Warning: Pre-emptive video clipping failed: {e}")
 
         try:
-            from artemis.context import (
+            from omnipilot.context import (
                 ArtemisContext,
                 DeviceContext,
                 DevicePlatform,
                 ExecutionSetup,
             )
-            from artemis.data_engine.engine import DataEngine
+            from omnipilot.data_engine.engine import DataEngine
 
             ArtemisContext.model_rebuild()
         except ImportError as import_err:
@@ -1714,7 +1714,7 @@ class ReplayManager:
         )
         print(f"Replay simulated device: {sim_device_id} ({sim_w}x{sim_h})")
 
-        from artemis.config import get_default_llm_config
+        from omnipilot.config import get_default_llm_config
 
         try:
             llm_cfg = get_default_llm_config()
@@ -1772,7 +1772,7 @@ class ReplayManager:
         )
 
         try:
-            from artemis.graph.state import State
+            from omnipilot.graph.state import State
         except ImportError as import_err:
             raise ImportError(f"Failed to import State module: {import_err}")
 

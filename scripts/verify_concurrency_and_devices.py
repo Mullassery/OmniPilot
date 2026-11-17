@@ -18,8 +18,8 @@ from datetime import datetime
 # Add project root to sys.path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from artemis import ArtemisClient, ConcurrencyMode, Task
-from artemis.runtime import DeviceBusyError, device_pool
+from omnipilot import OmniPilotClient, ConcurrencyMode, Task
+from omnipilot.runtime import DeviceBusyError, device_pool
 
 
 def print_header(title: str):
@@ -37,7 +37,7 @@ async def run_experiment_1_single_device_relay(real_serial: str):
     print_header("[Experiment 1] Single-Device Task Queueing & Relay (FIFO Relay on Single Device)")
     print(f"Target Device: {real_serial} (Physical Pixel 11 Pro)")
 
-    client = ArtemisClient(
+    client = OmniPilotClient(
         device_serial=real_serial, default_profile="flash", concurrency_mode="per_device"
     )
     print(
@@ -118,10 +118,10 @@ async def run_experiment_2_multi_device_parallel(real_serial: str, emu_serial: s
     print(f"Device A (Physical): {real_serial}")
     print(f"Device B (Emulator): {emu_serial}")
 
-    client_a = ArtemisClient(
+    client_a = OmniPilotClient(
         device_serial=real_serial, default_profile="flash", concurrency_mode="per_device"
     )
-    client_b = ArtemisClient(
+    client_b = OmniPilotClient(
         device_serial=emu_serial, default_profile="flash", concurrency_mode="per_device"
     )
 
@@ -184,16 +184,16 @@ async def run_experiment_3_global_concurrency_serialization(real_serial: str, em
         "Mode description: concurrency_mode='global', entire system allows only 1 task across all devices."
     )
 
-    client_a = ArtemisClient(
+    client_a = OmniPilotClient(
         device_serial=real_serial, default_profile="flash", concurrency_mode="global"
     )
-    client_b = ArtemisClient(
+    client_b = OmniPilotClient(
         device_serial=emu_serial, default_profile="flash", concurrency_mode="global"
     )
 
     # 3.1 Test non-blocking mode rejection
     print("\n[Subtest 3.1: Non-blocking rejection limit]")
-    from artemis.runtime import DeviceExecutionLock
+    from omnipilot.runtime import DeviceExecutionLock
 
     lock_a = DeviceExecutionLock(real_serial, "Placeholder test lock", concurrency_mode="global")
     await asyncio.to_thread(lock_a.acquire)
@@ -258,7 +258,7 @@ async def run_experiment_4_parameters_and_utilities(real_serial: str, emu_serial
     """Experiment 4: Comprehensive SDK parameter and utility testing."""
     print_header("[Experiment 4] SDK Parameter & Utility Comprehensive Test")
 
-    client = ArtemisClient()
+    client = OmniPilotClient()
     print(f"1. Default idle device selection: client.device_serial = '{client.device_serial}'")
 
     # Chain switch device

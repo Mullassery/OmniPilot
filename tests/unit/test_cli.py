@@ -62,7 +62,7 @@ def test_cli_batch_help():
 
 def test_cli_batch_forwards_pro_tuning_in_standalone_mode(monkeypatch):
     """`artemis batch --standalone` threads both knobs into run_batch_tasks."""
-    import artemis.interfaces.cli.commands.batch as batch_module
+    import omnipilot.interfaces.cli.commands.batch as batch_module
 
     captured: dict = {}
 
@@ -94,7 +94,7 @@ def test_cli_batch_forwards_pro_tuning_in_standalone_mode(monkeypatch):
 
 def test_cli_batch_forwards_pro_tuning_to_daemon(monkeypatch):
     """Daemon-routed batches carry the knobs as /api/run JSON fields."""
-    import artemis.runtime as runtime
+    import omnipilot.runtime as runtime
 
     monkeypatch.delenv("ARTEMIS_STANDALONE", raising=False)
     captured: dict = {}
@@ -122,7 +122,7 @@ def test_run_batch_tasks_applies_pro_tuning_to_agent_config(monkeypatch):
     """The standalone batch runner applies the knobs on the AgentConfig builder."""
     from unittest.mock import AsyncMock, MagicMock
 
-    import artemis.interfaces.cli.commands.batch as batch_module
+    import omnipilot.interfaces.cli.commands.batch as batch_module
 
     fake_builder = MagicMock()
     fake_builders = MagicMock()
@@ -750,7 +750,7 @@ def _install_doctor_fakes(monkeypatch, probes, host=None, *, heal_result=None):
     from omnipilot.core.diagnostics.engine import readiness_engine
     from omnipilot.core.diagnostics.probes.host_probe import IntegrationHostProbe
     from omnipilot.core.diagnostics.schema import ProbeStatus, SystemReadinessReport
-    import artemis.interfaces.cli.commands.doctor as doctor_module
+    import omnipilot.interfaces.cli.commands.doctor as doctor_module
 
     monkeypatch.setenv("COLUMNS", "200")
     blockers = [p for p in probes if p.is_blocker]

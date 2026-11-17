@@ -30,13 +30,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from artemis.agents.video_analyzer.video_analyzer import VideoAnalyzer
-from artemis.config import initialize_llm_config, settings
-from artemis.context import ArtemisContext, DeviceContext, DevicePlatform, ExecutionSetup
-from artemis.controllers.controller_factory import get_controller
-from artemis.runtime import DeviceExecutionLock
-from artemis.sdk.builders import Builders
-from artemis.sdk.types import AgentProfile
+from omnipilot.agents.video_analyzer.video_analyzer import VideoAnalyzer
+from omnipilot.config import initialize_llm_config, settings
+from omnipilot.context import ArtemisContext, DeviceContext, DevicePlatform, ExecutionSetup
+from omnipilot.controllers.controller_factory import get_controller
+from omnipilot.runtime import DeviceExecutionLock
+from omnipilot.sdk.builders import Builders
+from omnipilot.sdk.types import AgentProfile
 from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
 

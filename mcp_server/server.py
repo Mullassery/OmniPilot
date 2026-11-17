@@ -84,7 +84,7 @@ from mcp_server.base import mcp
 
 # 2. Import tools to register them
 import mcp_server.tools  # noqa: F401
-from artemis.runtime import shutdown_awake_service, start_awake_service
+from omnipilot.runtime import shutdown_awake_service, start_awake_service
 
 
 import threading

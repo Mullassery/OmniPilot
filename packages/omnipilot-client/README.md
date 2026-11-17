@@ -1,7 +1,7 @@
-# Artemis Client
+# OmniPilot Client
 
-`artemis-client` is the remote Python SDK that runs on a developer machine. It
-communicates with the Artemis daemon on a device host over HTTP and contains no
+`omnipilot-client` is the remote Python SDK that runs on a developer machine. It
+communicates with the OmniPilot daemon on a device host over HTTP and contains no
 ADB, device-driver, agent, LLM, or image-processing code.
 
 Runtime dependencies: **zero**. HTTP, JSON, and asynchronous adapters use only
@@ -9,34 +9,36 @@ the Python standard library.
 
 ## Installation
 
-Install from a local checkout:
-
-```powershell
-uv add --editable C:\path\to\artemis\packages\artemis-client
+```sh
+pip install omnipilot-client
+# or
+uv add omnipilot-client
 ```
 
-Install from the Git repository subdirectory:
+Install from a local checkout:
 
-```powershell
-uv add "artemis-client @ git+https://github.com/google/artemis.git#subdirectory=packages/artemis-client"
+```sh
+pip install ./packages/omnipilot-client
+# or
+uv add --editable ./packages/omnipilot-client
 ```
 
 ## Connect to a Device Host
 
-The current Artemis daemon administration API does not include built-in remote
+The current OmniPilot daemon administration API does not include built-in remote
 authentication. Do not expose its port directly to the public internet. During
 the initial rollout, connect through an SSH tunnel:
 
 ```powershell
-ssh -L 8000:127.0.0.1:8000 user@artemis-host
+ssh -L 8000:127.0.0.1:8000 user@omnipilot-host
 ```
 
 Then connect the SDK to the local tunnel endpoint:
 
 ```python
-from omnipilot_client import ArtemisClient
+from omnipilot_client import OmniPilotClient
 
-client = ArtemisClient("http://127.0.0.1:8000")
+client = OmniPilotClient("http://127.0.0.1:8000")
 ```
 
 For production, place a reverse proxy in front of the daemon that enforces HTTPS
@@ -96,7 +98,7 @@ server from creating duplicate tasks.
 
 ## Compatibility
 
-Version 0.1 supports these current Artemis daemon endpoints:
+Version 0.1 supports these current OmniPilot daemon endpoints:
 
 - `POST /api/run`
 - `GET /api/sessions/{session_id}`

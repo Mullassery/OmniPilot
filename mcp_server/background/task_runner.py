@@ -30,7 +30,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 try:
-    from artemis.config.paths import get_app_dir
+    from omnipilot.config.paths import get_app_dir
 
     app_dir = str(get_app_dir())
     global_env = os.path.join(app_dir, ".env")
@@ -41,7 +41,7 @@ try:
 except Exception:
     load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
 
-from artemis.runtime import trace_store
+from omnipilot.runtime import trace_store
 from mcp_server.notifiers import notify
 from mcp_server.utils import device_utils
 
@@ -84,7 +84,7 @@ def resolve_profile_file() -> str | None:
         # Deliberate guarded import mirroring the module-level bootstrap above:
         # profile resolution must degrade to repo-relative candidates when the
         # artemis config package cannot be loaded.
-        from artemis.config.paths import get_app_dir
+        from omnipilot.config.paths import get_app_dir
 
         app_dir = str(get_app_dir())
         candidates.extend(
@@ -163,10 +163,10 @@ async def run_task(
         # converts an import-time failure into a properly recorded task
         # failure (trace status + wakeup notification) instead of a crash
         # before status.json is ever updated.
-        from artemis.config import settings
-        from artemis.sdk import Agent
-        from artemis.sdk.builders import Builders
-        from artemis.sdk.types import AgentProfile
+        from omnipilot.config import settings
+        from omnipilot.sdk import Agent
+        from omnipilot.sdk.builders import Builders
+        from omnipilot.sdk.types import AgentProfile
 
         connected_devices = device_utils.get_connected_devices(adb_path)
 
@@ -186,7 +186,7 @@ async def run_task(
                     try:
                         # Optional path: pool-based selection falls back to the
                         # first connected device on any import or query failure.
-                        from artemis.runtime import device_pool
+                        from omnipilot.runtime import device_pool
 
                         target_serial = device_pool.select_device()
                     except Exception:
@@ -205,7 +205,7 @@ async def run_task(
             trace_store.update_trace_device_serial(trace_id, target_serial)
 
         print("Initializing Artemis Agent...")
-        from artemis.config import initialize_llm_config, settings
+        from omnipilot.config import initialize_llm_config, settings
 
         profile_file = resolve_profile_file()
         if profile_file:
@@ -222,7 +222,7 @@ async def run_task(
             config_builder.with_adb_server(host=settings.ADB_HOST, port=settings.ADB_PORT)
 
         if target_serial:
-            from artemis.context import DevicePlatform
+            from omnipilot.context import DevicePlatform
 
             config_builder.for_device(DevicePlatform.ANDROID, target_serial)
 

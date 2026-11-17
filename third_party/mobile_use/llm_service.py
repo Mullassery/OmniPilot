@@ -23,7 +23,7 @@ a hard timeout. ``FallbackRunner`` retries a failed call on a fallback model.
 ``GetLLM`` is the type of ``get_llm``.
 
 Artemis passes in its own behaviour (pause detection, error classification,
-telemetry); this module does not import artemis at runtime.
+telemetry); this module does not import omnipilot at runtime.
 """
 
 from __future__ import annotations

@@ -23,15 +23,15 @@ import uuid
 
 import pytest
 
-from omnipilot_client import ArtemisClient, TaskRejectedError
+from omnipilot_client import OmniPilotClient, TaskRejectedError
 
 
-def _live_client() -> tuple[ArtemisClient, str]:
+def _live_client() -> tuple[OmniPilotClient, str]:
     serial = os.environ.get("ARTEMIS_TEST_DEVICE_SERIAL")
     if not serial:
         pytest.skip("ARTEMIS_TEST_DEVICE_SERIAL is required for the live SDK test")
     return (
-        ArtemisClient(
+        OmniPilotClient(
             os.environ.get("ARTEMIS_BASE_URL", "http://127.0.0.1:8000"),
             device_serial=serial,
             default_profile="flash",

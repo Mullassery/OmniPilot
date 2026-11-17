@@ -311,7 +311,7 @@ def _declaration_name(declaration: Any) -> str:
 
 def _extension_declaration(ext: ExtensionTool) -> Any:
     """Renders an ExtensionTool into the same ToolDeclaration shape as known tools."""
-    from artemis.core.tool_declaration import ToolDeclaration
+    from omnipilot.core.tool_declaration import ToolDeclaration
 
     return ToolDeclaration(
         name=ext.name,

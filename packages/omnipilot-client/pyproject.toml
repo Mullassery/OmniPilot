@@ -3,14 +3,14 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "artemis-client"
+name = "omnipilot-client"
 version = "0.1.0"
-description = "Zero-runtime-dependency Python client for a remote Artemis host"
+description = "Zero-runtime-dependency Python client for a remote OmniPilot host"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 authors = [
-    { name = "Artemis contributors" },
+    { name = "Georgi Mullassery", email = "mullassery@gmail.com" },
 ]
 dependencies = []
 classifiers = [

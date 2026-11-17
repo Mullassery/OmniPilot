@@ -38,7 +38,7 @@ class ModelService:
         provider = "google"
         model_id = "gemini-3.7-flash"
         try:
-            from artemis.config import parse_llm_config
+            from omnipilot.config import parse_llm_config
 
             llm_cfg = parse_llm_config()
             if llm_cfg and llm_cfg.operator:

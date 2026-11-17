@@ -47,13 +47,13 @@ def is_frozen_bundle() -> bool:
 
 
 def is_source_checkout() -> bool:
-    """Return whether ``ROOT_DIR`` is an Artemis source checkout.
+    """Return whether ``ROOT_DIR`` is an OmniPilot source checkout.
 
-    Installed wheels also contain an ``artemis`` directory, so the repository
+    Installed wheels also contain an ``omnipilot`` directory, so the repository
     metadata file is the important discriminator.  Runtime code must not treat
     a wheel's ``site-packages`` directory as writable application state.
     """
-    return (ROOT_DIR / "pyproject.toml").is_file() and (ROOT_DIR / "artemis").is_dir()
+    return (ROOT_DIR / "pyproject.toml").is_file() and (ROOT_DIR / "omnipilot").is_dir()
 
 
 def _use_user_app_dir() -> bool:

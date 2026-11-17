@@ -3,11 +3,11 @@
 import asyncio
 import os
 
-from omnipilot_client import ArtemisClient
+from omnipilot_client import OmniPilotClient
 
 
 async def main() -> None:
-    client = ArtemisClient(
+    client = OmniPilotClient(
         os.environ.get("ARTEMIS_BASE_URL", "http://127.0.0.1:8000"),
         token=os.environ.get("ARTEMIS_TOKEN"),
     )

@@ -19,7 +19,7 @@ Verifies end-to-end functionality across all entry points and ports:
 2. Daemon Server API & Multi-Device Discovery (/api/devices, /api/status)
 3. Multi-Device Detection (Physical phone + Android Emulator)
 4. MCP Server Tools (mobile_get_device_state, mobile_run_task, mobile_manage_task)
-5. Python SDK (ArtemisClient with device targeting & concurrency modes)
+5. Python SDK (OmniPilotClient with device targeting & concurrency modes)
 6. CLI Entry Points (artemis run, batch, status)
 7. Device Execution Lock Isolation (Multi-device concurrent execution)
 """
@@ -51,7 +51,7 @@ from omnipilot.runtime.daemon_client import (
 )
 from omnipilot.runtime.device_lock import DeviceExecutionLock
 from omnipilot.runtime.device_pool import device_pool
-from omnipilot.interfaces.sdk.client import ArtemisClient, ConcurrencyMode
+from omnipilot.interfaces.sdk.client import OmniPilotClient, ConcurrencyMode
 from mcp_server.tools.device_state import mobile_get_device_state
 from mcp_server.tools.task_runner import mobile_run_task
 from mcp_server.tools.task_manager import mobile_manage_task
@@ -160,7 +160,7 @@ def test_04_mcp_run_and_manage_task_via_daemon():
 
 
 def test_05_sdk_client_targeting_and_concurrency():
-    """Verify Python SDK ArtemisClient correctly targets specific devices."""
+    """Verify Python SDK OmniPilotClient correctly targets specific devices."""
     devices = device_pool.list_devices()
     emulator_serial = next((d.serial for d in devices if d.is_emulator), None)
     phone_serial = next((d.serial for d in devices if not d.is_emulator), None)
@@ -168,11 +168,11 @@ def test_05_sdk_client_targeting_and_concurrency():
     assert emulator_serial, "Emulator serial required"
     assert phone_serial, "Phone serial required"
 
-    client_emu = ArtemisClient(device_id=emulator_serial, concurrency_mode="per_device")
+    client_emu = OmniPilotClient(device_id=emulator_serial, concurrency_mode="per_device")
     assert client_emu.device_serial == emulator_serial
     assert client_emu.concurrency_mode == "per_device"
 
-    client_phone = ArtemisClient(device_id=phone_serial, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_id=phone_serial, concurrency_mode="per_device")
     assert client_phone.device_serial == phone_serial
 
     # Verify multi-device lock independence. acquire() returns None and raises

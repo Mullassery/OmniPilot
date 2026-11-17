@@ -26,14 +26,14 @@ from typing import Any
 from mcp_server.base import mcp
 from mcp_server.notifiers import notify
 from mcp_server.utils import env_utils
-from artemis.runtime import (
+from omnipilot.runtime import (
     DeviceExecutionLock,
     is_daemon_running,
     process_supervisor,
     stop_task_on_daemon,
     trace_store,
 )
-from artemis.runtime.process_probe import pid_is_alive
+from omnipilot.runtime.process_probe import pid_is_alive
 
 logger = logging.getLogger(__name__)
 

@@ -70,7 +70,7 @@ class TaskHandle:
     def from_payload(cls, payload: Mapping[str, Any]) -> TaskHandle:
         task_id = _string(payload.get("task_id") or payload.get("session_id") or payload.get("id"))
         if not task_id:
-            from artemis_client.errors import ProtocolError
+            from omnipilot_client.errors import ProtocolError
 
             raise ProtocolError("Task admission response did not contain a task/session ID")
         return cls(
@@ -126,7 +126,7 @@ class TaskResult:
             or task_id
         )
         if not resolved_id:
-            from artemis_client.errors import ProtocolError
+            from omnipilot_client.errors import ProtocolError
 
             raise ProtocolError("Task response did not contain a task/session ID")
 
@@ -166,7 +166,7 @@ class Device:
             payload.get("serial") or payload.get("device_serial") or payload.get("device_id")
         )
         if not serial:
-            from artemis_client.errors import ProtocolError
+            from omnipilot_client.errors import ProtocolError
 
             raise ProtocolError("Device response did not contain a serial number")
         state = (_string(payload.get("state") or payload.get("status")) or "unknown").lower()

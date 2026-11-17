@@ -52,7 +52,7 @@ async def test_run_task_applies_pro_tuning_to_agent_config(
     from types import SimpleNamespace
     from unittest.mock import patch
 
-    from artemis.runtime import trace_store
+    from omnipilot.runtime import trace_store
     from mcp_server.background import task_runner as bg
 
     monkeypatch.setattr(trace_store, "TRACES_DIR", str(tmp_path))

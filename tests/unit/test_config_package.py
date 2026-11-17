@@ -711,7 +711,7 @@ def test_admin_console_config_facade_backward_compatibility():
         WORKSPACE_ROOT,
         init_ls_address,
     )
-    import artemis.config as ac
+    import omnipilot.config as ac
 
     assert WORKSPACE_ROOT == ac.WORKSPACE_ROOT
     assert PAUSE_FILE == ac.PAUSE_FILE

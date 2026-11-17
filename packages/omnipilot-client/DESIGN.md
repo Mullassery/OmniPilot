@@ -18,9 +18,8 @@ normalization, and result models. Device discovery, task scheduling, concurrency
 control, model selection, execution, logs, videos, and artifact generation all
 belong to the server.
 
-The distribution is named `artemis-client`, while the Python import is
-`omnipilot_client`. This prevents it from shadowing the full runtime's top-level
-`artemis` package. The full runtime can depend on this package later and
+The distribution is named `omnipilot-client`, and the Python import is
+`omnipilot_client`. The full runtime can depend on this package later and
 re-export the client from `artemis` for compatibility.
 
 ## Phase 1: Compatibility Adapter

@@ -26,7 +26,7 @@ def get_project_root() -> str:
     # package (or its config bootstrap) is unavailable or broken, falling back
     # to filesystem-relative resolution below.
     try:
-        from artemis.config.paths import ROOT_DIR
+        from omnipilot.config.paths import ROOT_DIR
 
         return str(ROOT_DIR)
     except Exception:

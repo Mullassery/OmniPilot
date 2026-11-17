@@ -131,7 +131,7 @@ def resolve_policy(agent: str) -> ContextPolicy:
 
     overrides: dict[str, Any] = {}
     try:
-        from artemis.config import load_agent_config
+        from omnipilot.config import load_agent_config
 
         configured = (load_agent_config().memory.policies or {}).get(agent) or {}
         overrides = {k: v for k, v in configured.items() if k in _POLICY_FIELDS}
@@ -163,7 +163,7 @@ def load_chunk_blocks(engine: Any, view: str | None) -> list[dict] | None:
     if engine is None or view not in ("full", "digest"):
         return None
     try:
-        from artemis.config import load_agent_config
+        from omnipilot.config import load_agent_config
 
         if not load_agent_config().memory.transcript.enabled:
             return None
@@ -206,7 +206,7 @@ def build_history_for(
         engine: DataEngine handing chunks to the compiled view; omit at call
             sites that must never receive chunk blocks.
     """
-    from artemis.utils.task_tree import build_plan_and_history
+    from omnipilot.utils.task_tree import build_plan_and_history
 
     policy = resolve_policy(agent)
     kwargs: dict[str, Any] = {

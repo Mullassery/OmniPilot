@@ -14,7 +14,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from omnipilot_client import (
-    ArtemisClient,
+    OmniPilotClient,
     NotFoundError,
     ProtocolError,
     TaskRejectedError,
@@ -47,10 +47,10 @@ class FakeTransport:
         return response
 
 
-class ArtemisClientTests(unittest.IsolatedAsyncioTestCase):
+class OmniPilotClientTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self) -> None:
         self.transport = FakeTransport()
-        self.client = ArtemisClient(
+        self.client = OmniPilotClient(
             "https://artemis.example.test",
             poll_interval=0.001,
             transport=self.transport,
@@ -201,7 +201,7 @@ class ArtemisClientTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(result.done)
 
     async def test_wait_for_task_times_out(self) -> None:
-        class LaunchingClient(ArtemisClient):
+        class LaunchingClient(OmniPilotClient):
             async def get_task(self, task_id: str):  # type: ignore[override]
                 from omnipilot_client import TaskResult
 

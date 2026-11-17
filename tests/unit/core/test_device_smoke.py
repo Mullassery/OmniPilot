@@ -359,7 +359,7 @@ def test_fix_for_error_generic_fallback_uses_serial():
 
 
 def test_smoke_test_is_exported_from_diagnostics_package():
-    import artemis.core.diagnostics as diagnostics
+    import omnipilot.core.diagnostics as diagnostics
 
     assert "smoke_test_device" in diagnostics.__all__
     assert diagnostics.smoke_test_device is device_smoke.smoke_test_device

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""☕ ARTEMIS: Autonomous Multimodal Android Agent & Testing Framework."""
+"""☕ OmniPilot: verification-first mobile automation for iOS and Android."""
 
 from omnipilot._version import __version__
 from omnipilot import _legacy_imports

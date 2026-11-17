@@ -166,7 +166,7 @@ def compare_dumps(helper_xml: str, uiautomator_xml: str, width: int, height: int
 
 def compare_backends(serial: str, rounds: int = 3) -> dict[str, Any]:
     """Dump the current screen of ``serial`` with both backends and compare (device required)."""
-    from artemis.clients.accessibility_client import AccessibilityClient
+    from omnipilot.clients.accessibility_client import AccessibilityClient
     from third_party.mobile_use.clients.ui_automator_client import UIAutomatorClient
 
     helper = AccessibilityClient(serial)

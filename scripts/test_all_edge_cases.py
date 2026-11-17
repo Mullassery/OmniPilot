@@ -18,13 +18,13 @@ WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if WORKSPACE_ROOT not in sys.path:
     sys.path.insert(0, WORKSPACE_ROOT)
 
-from artemis.interfaces.sdk.client import ArtemisClient
-from artemis.runtime.device_lock import DeviceExecutionLock
-from artemis.toolchain import ensure_toolchain_in_path
+from omnipilot.interfaces.sdk.client import OmniPilotClient
+from omnipilot.runtime.device_lock import DeviceExecutionLock
+from omnipilot.toolchain import ensure_toolchain_in_path
 
 ensure_toolchain_in_path()
 
-from artemis.runtime import device_pool
+from omnipilot.runtime import device_pool
 
 
 def _resolve_devices() -> tuple[str, str]:
@@ -73,7 +73,7 @@ async def stage_1_single_device_queueing():
     print(f"Target Device: {PHONE_SERIAL} (Pixel 11 Pro)")
     print("=" * 80)
 
-    client_phone = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
 
     t1_started = False
     t2_queued = False
@@ -117,8 +117,8 @@ async def stage_2_multi_device_parallel():
     print("Concurrency Mode: per_device (Should run simultaneously!)")
     print("=" * 80)
 
-    client_phone = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
-    client_emu = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client_emu = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
 
     start_time = time.time()
 
@@ -156,8 +156,8 @@ async def stage_3_global_concurrency_mode():
     print("Concurrency Mode: global (max 1 task system-wide even across different devices)")
     print("=" * 80)
 
-    client_phone_global = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="global")
-    client_emu_global = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="global")
+    client_phone_global = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="global")
+    client_emu_global = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="global")
 
     async def task_phone_g():
         print(f"📱 [Task 3A - Phone] Acquiring global lock on {PHONE_SERIAL}...")
@@ -195,8 +195,8 @@ async def stage_4_mixed_queue_and_parallel():
     print("Expectation: 4A (Phone) and 4C (Emulator) run concurrently; 4B waits for Phone.")
     print("=" * 80)
 
-    client_phone = ArtemisClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
-    client_emu = ArtemisClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
+    client_phone = OmniPilotClient(device_serial=PHONE_SERIAL, concurrency_mode="per_device")
+    client_emu = OmniPilotClient(device_serial=EMULATOR_SERIAL, concurrency_mode="per_device")
 
     async def task_4a():
         print("📱 [Task 4A - Phone] Running...")

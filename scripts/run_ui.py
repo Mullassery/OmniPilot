@@ -102,7 +102,7 @@ def main() -> None:
     if str(ROOT_DIR) not in sys.path:
         sys.path.insert(0, str(ROOT_DIR))
 
-    from artemis.runtime.server_lifecycle import get_server_status, stop_server
+    from omnipilot.runtime.server_lifecycle import get_server_status, stop_server
 
     def _arm_session_reconciler() -> None:
         # Entry-layer assembly: importing the admin console session repository

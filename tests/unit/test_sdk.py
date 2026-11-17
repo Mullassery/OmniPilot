@@ -6,7 +6,7 @@
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 
-"""Compatibility tests for the single, remote-only ArtemisClient implementation."""
+"""Compatibility tests for the single, remote-only OmniPilotClient implementation."""
 
 from __future__ import annotations
 
@@ -17,8 +17,8 @@ from typing import Any
 import pytest
 
 import omnipilot
-from omnipilot import ArtemisClient, ConcurrencyMode, Task, TaskResult
-from omnipilot_client import ArtemisClient as ThinArtemisClient
+from omnipilot import OmniPilotClient, ConcurrencyMode, Task, TaskResult
+from omnipilot_client import OmniPilotClient as ThinOmniPilotClient
 from omnipilot_client import TaskResult as ThinTaskResult
 from omnipilot_client.errors import NotFoundError
 
@@ -49,13 +49,13 @@ class FakeTransport:
 
 
 def test_full_runtime_reexports_thin_client_types():
-    assert ArtemisClient is ThinArtemisClient
+    assert OmniPilotClient is ThinOmniPilotClient
     assert TaskResult is ThinTaskResult
-    assert artemis.ArtemisClient is ThinArtemisClient
+    assert artemis.OmniPilotClient is ThinOmniPilotClient
 
 
 def test_legacy_constructor_settings_are_remote_defaults():
-    client = ArtemisClient(
+    client = OmniPilotClient(
         device_serial="emulator-5554",
         default_profile="pro",
         concurrency_mode=ConcurrencyMode.PER_DEVICE,
@@ -90,7 +90,7 @@ async def test_run_uses_remote_api_and_returns_thin_result():
         "/api/status",
         {"status": "running", "queue": [{"session_id": task_id, "status": "pending"}]},
     )
-    client = ArtemisClient(
+    client = OmniPilotClient(
         device_serial="pixel-10",
         default_profile="flash",
         poll_interval=0.001,
@@ -121,7 +121,7 @@ async def test_legacy_task_object_is_forwarded_to_remote_api():
         f"/api/sessions/{task_id}",
         {"session_id": task_id, "status": "success"},
     )
-    client = ArtemisClient(transport=transport)
+    client = OmniPilotClient(transport=transport)
     task = Task(
         goal="Verify search functionality",
         profile="flash",

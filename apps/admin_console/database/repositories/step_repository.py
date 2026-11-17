@@ -385,7 +385,7 @@ class StepRepository:
                     step_dict["total_tokens"] = 0
 
                 try:
-                    from artemis.utils.coordinates import normalize_step_actions
+                    from omnipilot.utils.coordinates import normalize_step_actions
 
                     step_dict = normalize_step_actions(step_dict)
                 except ImportError:

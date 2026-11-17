@@ -32,7 +32,7 @@ def _boom(*args, **kwargs):
 
 @pytest.mark.asyncio
 async def test_server_status_answers_in_process_without_port_scans(monkeypatch):
-    from artemis.runtime import server_lifecycle
+    from omnipilot.runtime import server_lifecycle
 
     monkeypatch.setattr(server_lifecycle, "find_server_pids", _boom)
     monkeypatch.setattr(server_lifecycle, "get_server_status", _boom)
@@ -56,7 +56,7 @@ async def test_server_status_answers_in_process_without_port_scans(monkeypatch):
 @pytest.mark.asyncio
 async def test_server_status_uses_metadata_start_time(monkeypatch):
     from apps.admin_console.core.state import state
-    from artemis.runtime import server_lifecycle
+    from omnipilot.runtime import server_lifecycle
 
     monkeypatch.setattr(
         server_lifecycle,

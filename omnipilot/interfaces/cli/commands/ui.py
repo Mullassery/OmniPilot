@@ -191,8 +191,8 @@ def _run_build_step(console: Console, label: str, cmd: list[str], cwd: Path) -> 
 
 def ensure_showcase_built(console: Console) -> None:
     """Rebuild the Angular Showcase UI when its sources are newer than the dist build."""
-    from artemis.config.paths import ROOT_DIR
-    from artemis.resources import get_bundled_showcase_dist
+    from omnipilot.config.paths import ROOT_DIR
+    from omnipilot.resources import get_bundled_showcase_dist
 
     showcase_dir = ROOT_DIR / "apps" / "showcase_ui"
     # An installed wheel has no frontend source tree; its immutable build is
@@ -301,7 +301,7 @@ def ui_command(
     console = Console()
     local_url = f"http://localhost:{port}"
 
-    from artemis.runtime.server_lifecycle import (
+    from omnipilot.runtime.server_lifecycle import (
         find_server_pids,
         is_port_in_use,
         stop_server,
@@ -362,7 +362,7 @@ def ui_command(
     console.print(Panel(msg, title="🚀 Web Server Active", border_style="cyan", expand=False))
     # Ensure the canonical writable .env exists. Installed wheels must never
     # attempt to mutate their site-packages directory.
-    from artemis.config.paths import ROOT_DIR, get_env_file, is_source_checkout
+    from omnipilot.config.paths import ROOT_DIR, get_env_file, is_source_checkout
 
     env_file = get_env_file()
     env_example = ROOT_DIR / ".env.example"

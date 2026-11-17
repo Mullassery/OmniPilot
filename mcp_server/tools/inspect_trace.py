@@ -22,10 +22,10 @@ from typing import Any
 
 from mcp_server.base import mcp
 from mcp_server.utils import env_utils
-from artemis.data_engine.history_reader import OfflineHistoryReader
-from artemis.runtime import trace_store
-from artemis.tools.history import load_step_screenshot, replay_steps_text, search_history_text
-from artemis.utils.task_tree import build_plan_and_history
+from omnipilot.data_engine.history_reader import OfflineHistoryReader
+from omnipilot.runtime import trace_store
+from omnipilot.tools.history import load_step_screenshot, replay_steps_text, search_history_text
+from omnipilot.utils.task_tree import build_plan_and_history
 
 
 def _write_overlay(annotated_bytes: bytes, output_path: str) -> bool:
@@ -42,7 +42,7 @@ def _write_overlay(annotated_bytes: bytes, output_path: str) -> bool:
 
 def _recall_config() -> Any:
     try:
-        from artemis.config import load_agent_config
+        from omnipilot.config import load_agent_config
 
         return load_agent_config().memory.recall
     except Exception:

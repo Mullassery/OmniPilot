@@ -34,18 +34,18 @@ from typing import Any
 
 from mcp_server.base import mcp
 from mcp_server.utils import env_utils
-from artemis.core.diagnostics import readiness_engine
-from artemis.core.diagnostics.device_smoke import smoke_test_device
-from artemis.core.diagnostics.readiness import (
+from omnipilot.core.diagnostics import readiness_engine
+from omnipilot.core.diagnostics.device_smoke import smoke_test_device
+from omnipilot.core.diagnostics.readiness import (
     adb_keys_corrupted,
     base_verdict,
     collect_readiness,
     sort_by_fix_order,
 )
-from artemis.core.diagnostics.schema import ProbeResult, ProbeStatus, SystemReadinessReport
-from artemis.runtime import DeviceExecutionLock, trace_store
-from artemis.runtime.helper_manager import helper_manager
-from artemis.utils.credentials_validator import validate_api_key
+from omnipilot.core.diagnostics.schema import ProbeResult, ProbeStatus, SystemReadinessReport
+from omnipilot.runtime import DeviceExecutionLock, trace_store
+from omnipilot.runtime.helper_manager import helper_manager
+from omnipilot.utils.credentials_validator import validate_api_key
 from third_party.mobile_use.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -509,7 +509,7 @@ def _device_probe_steps(device_probe: dict[str, Any] | None) -> list[str]:
 
 def _hierarchy_backend() -> str:
     try:
-        from artemis.clients.screen_client_factory import resolve_backend
+        from omnipilot.clients.screen_client_factory import resolve_backend
 
         return resolve_backend().value
     except (ImportError, ValueError):
@@ -645,7 +645,7 @@ def _helper_steps(status: dict[str, Any] | None, *, attempt_fix: bool) -> list[s
     if problem.startswith("is installed but"):
         # Enabling from adb was already attempted once by whoever installed it;
         # on ROMs that reject it only a person can flip the switch.
-        from artemis.runtime.helper_manager import MANUAL_ENABLE_PATH
+        from omnipilot.runtime.helper_manager import MANUAL_ENABLE_PATH
 
         steps.append(
             "  Guidance: if the command reports that this device rejected enabling the "

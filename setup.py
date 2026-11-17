@@ -31,7 +31,7 @@ def _showcase_dist(source_root: Path) -> Path | None:
         base_dist / "browser",
         base_dist / "frontend",
         base_dist,
-        source_root / "artemis" / "resources" / "showcase_ui",
+        source_root / "omnipilot" / "resources" / "showcase_ui",
     )
     return next((path for path in candidates if (path / "index.html").is_file()), None)
 
@@ -40,16 +40,17 @@ def _copy_release_resources(source_root: Path, resource_root: Path) -> None:
     """Stage immutable runtime resources into a wheel or source distribution."""
     config_candidates = (
         source_root / "config" / "artemis.jsonc",
-        source_root / "artemis" / "resources" / "config" / "artemis.jsonc",
+        source_root / "config" / "omnipilot.jsonc",
+        source_root / "omnipilot" / "resources" / "config" / "artemis.jsonc",
     )
     config_source = next((path for path in config_candidates if path.is_file()), None)
     if config_source is None:
-        raise RuntimeError("Cannot build Artemis: config/artemis.jsonc is missing.")
+        raise RuntimeError("Cannot build OmniPilot: config/artemis.jsonc is missing.")
 
     showcase_source = _showcase_dist(source_root)
     if showcase_source is None:
         raise RuntimeError(
-            "Cannot build an Artemis distribution without the Showcase UI. "
+            "Cannot build an OmniPilot distribution without the Showcase UI. "
             "Run `npm ci --prefix apps/showcase_ui` and "
             "`npm run build --prefix apps/showcase_ui` first."
         )
@@ -77,7 +78,7 @@ class build_py(_build_py):
             shutil.rmtree(excluded_showcase)
         _copy_release_resources(
             Path.cwd(),
-            Path(self.build_lib) / "artemis" / "resources",
+            Path(self.build_lib) / "omnipilot" / "resources",
         )
 
 
@@ -97,7 +98,7 @@ class sdist(_sdist):
             shutil.rmtree(excluded_showcase)
         _copy_release_resources(
             Path.cwd(),
-            Path(base_dir) / "artemis" / "resources",
+            Path(base_dir) / "omnipilot" / "resources",
         )
 
 
@@ -109,20 +110,20 @@ if USE_CYTHON:
     print(f"USE_CYTHON: {USE_CYTHON}")
 
     extensions = []
-    src_dir = Path("artemis")
+    src_dir = Path("omnipilot")
 
-    # Recursively find all .py files inside the artemis/ directory for optional acceleration
+    # Recursively find all .py files inside the omnipilot/ directory for optional acceleration
     for py_file in src_dir.rglob("*.py"):
         rel_path = py_file.relative_to(src_dir)
-        mod_parts = ("artemis",) + rel_path.with_suffix("").parts
+        mod_parts = ("omnipilot",) + rel_path.with_suffix("").parts
         module_name = ".".join(mod_parts)
 
         if module_name in (
-            "artemis.__init__",
-            "artemis._legacy_imports",
-            "artemis.main",
-            "artemis.mcp.adb_server",
-            "artemis.mcp.xml_search_server",
+            "omnipilot.__init__",
+            "omnipilot._legacy_imports",
+            "omnipilot.main",
+            "omnipilot.mcp.adb_server",
+            "omnipilot.mcp.xml_search_server",
         ):
             continue
 
@@ -138,8 +139,8 @@ setup(
     # Name and version come from pyproject.toml.
     packages=find_namespace_packages(
         include=[
-            "artemis",
-            "artemis.*",
+            "omnipilot",
+            "omnipilot.*",
             "mcp_server",
             "mcp_server.*",
             "apps",
@@ -149,8 +150,8 @@ setup(
         ],
     ),
     package_data={
-        "artemis": ["**/*.json", "**/*.md"],
-        "artemis.resources": ["config/*.jsonc", "showcase_ui/*", "showcase_ui/**/*"],
+        "omnipilot": ["**/*.json", "**/*.md"],
+        "omnipilot.resources": ["config/*.jsonc", "showcase_ui/*", "showcase_ui/**/*"],
         "apps.admin_console": ["index.html"],
         # third_party has no __init__.py (namespace package), so it does not clash
         # with other distributions that also ship a third_party directory.
