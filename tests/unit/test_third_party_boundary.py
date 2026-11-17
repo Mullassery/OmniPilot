@@ -105,7 +105,7 @@ def test_first_party_files_carry_no_third_party_header():
     # Code that needs an upstream copyright header belongs in third_party/.
     offenders = [
         str(path.relative_to(ROOT))
-        for path in _py_files(ARTEMIS_DIRS + [ROOT / "tests", ROOT / "scripts"])
+        for path in _py_files(OMNIPILOT_DIRS + [ROOT / "tests", ROOT / "scripts"])
         if any(marker in _leading_comment_block(path) for marker in _THIRD_PARTY_HEADER_MARKERS)
     ]
     assert not offenders, f"third-party attribution header outside third_party/: {offenders}"
